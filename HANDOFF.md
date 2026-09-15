@@ -2,6 +2,10 @@
 
 Last verified checkpoint: 2026-09-15, after full consumer and framework checks. Update this file after each substantive step. The user explicitly requested durable, detailed progress so another model can resume when credits run out.
 
+## Release checkpoint after PR #21 merged
+
+Framework PR #21 merged on 2026-09-15 at 11:42:47 UTC. Release workflow 34964769135 completed successfully in version mode and opened https://github.com/alexpatow/matchbox/pull/22 for all three packages at 0.2.1. That release PR still needs merging before native build, verification and npm publication run. No corrected npm package has been installed here, and experiment 03 has not started. Consumer PR #1 remains open. Next: merge release PR #22, verify publication, then pin all three consumer packages to 0.2.1 and run the frozen full-clean-v1 corpus under a new experiment ID. Update the runner's recorded version before running. Do not rerun experiment 02 or alter its results.
+
 ## Read this first
 
 The working repository is `/Users/alex.patow/Developer/matchbox-lexer`, with private GitHub remote `https://github.com/alexpatow/matchbox-lexer`. The framework repository `/Users/alex.patow/Developer/matchbox` is separate. A focused fix is now on its `codex/training-dataset-validation` branch, based on origin/main at cd84d19. The consumer still uses untouched npm 0.2.0.
