@@ -1,6 +1,6 @@
 # Resume Matchbox Lexer
 
-Last verified checkpoint: 2026-09-15, after the experiment 02 reproduction. Update this file after each substantive step. The user explicitly requested durable, detailed progress so another model can resume when credits run out.
+Last verified checkpoint: 2026-09-15, after full consumer and framework checks. Update this file after each substantive step. The user explicitly requested durable, detailed progress so another model can resume when credits run out.
 
 ## Read this first
 
@@ -10,11 +10,13 @@ The working repository is `/Users/alex.patow/Developer/matchbox-lexer`, with pri
 
 **Current blocker:** The cleaned published-CLI run failed after 32.052 seconds, before optimizer training. Error: `Expected a nonempty batch of three-token windows`. Peak resident memory was 1,738,752,000 bytes; the heap limit was not reached. Published 0.2.0 source was verified against the GitHub release tag: crates/matchbox-engine/src/model.rs::validate_inputs rejects values.len() > 3_000_000, which is 1,000,000 three-token windows. crates/matchbox-engine/src/training.rs calls that same validator on the entire training dataset, then would train in batches of 128. Installed @matchbox-ai/train sends all windows in one native fit call. This is a general training-size bug, not a lexer limitation. No full-corpus model exists. No training process remains running; the running.json file is historical. The browser still uses the pilot.
 
-The public-API reproduction succeeded: 32 supervised characters trained in 62.426 ms; 1,000,002 failed with the same error after 649.940 ms. See scripts/reproduce-training-limit.ts and benchmarks/results/02-native-limit-reproduction.json. Next: prepare the narrow framework fix on a separate branch and PR. The narrow framework fix is to separate whole-training-dataset validation from prediction batch limits, preserve malformed-input checks, and give explicit limit errors. Any framework change must be a separate reviewed/published release before this consumer upgrades. Do not patch node_modules or shrink this corpus to get a result. The framework change moves the size limit into prediction, preserving dataset shape/vocabulary validation. Three Rust regression tests pass; the full framework check is running, with output at /tmp/matchbox-training-validation-check.log. No framework release has been made.
+The public-API reproduction succeeded: 32 supervised characters trained in 62.426 ms; 1,000,002 failed with the same error after 649.940 ms. See scripts/reproduce-training-limit.ts and benchmarks/results/02-native-limit-reproduction.json. Next: review and merge framework PR #21, then use its Changesets release before upgrading this consumer and attempting experiment 03. The narrow framework fix is to separate whole-training-dataset validation from prediction batch limits, preserve malformed-input checks, and give explicit limit errors. Any framework change must be a separate reviewed/published release before this consumer upgrades. Do not patch node_modules or shrink this corpus to get a result. The framework change moves the size limit into prediction, preserving dataset shape/vocabulary validation. Three Rust regression tests and the full framework check passed, with output at /tmp/matchbox-training-validation-check.log. All 18 browser tests passed; output is /tmp/matchbox-training-validation-browser.log. The fix is committed as 3351f13 and pushed in https://github.com/alexpatow/matchbox/pull/21. No training, test or preview process remains active. No framework release has been made.
 
 Defaults now resolve `CORPUS=full-clean-v1` and `EXPERIMENT=02-full-clean`. Training refuses to overwrite existing report/log files. Inspect `data/generated/logs/02-full-clean-running.json` for the active process and command, and `benchmarks/results/02-full-clean-training.json` for completion. Do not start a second training process if the recorded process is still alive.
 
 Do not rerun downloads or labeling on this machine. All full source data and converted JSONL already exist under ignored `data/generated/`. The test-priority duplicate policy is already applied and verified. Preserve all historical reports and original full-corpus hashes.
+
+The consumer checkpoint is committed as c50b21b and pushed in PR https://github.com/alexpatow/matchbox-lexer/pull/1. Historical reports remain unchanged. The new formatter exclusion keeps recorded result JSON from being reformatted.
 
 ## User intent and constraints
 
@@ -49,7 +51,7 @@ Do not rerun downloads or labeling on this machine. All full source data and con
 | Resolve duplicate ownership and freeze cleaned full data | Done.                                                  | full-clean-v1 preserves every held-out record and removes 125 overlapping train records. The new audit has zero overlaps.                         |
 | Train/evaluate/benchmark the full corpus                 | Training attempted; blocked by native dataset cap.     | 02-full-clean-training.json: 32.052 seconds, exit 1. No full-corpus accuracy, latency or optimizer time exists.                                   |
 | Reproduce the native training-size bug                   | Done.                                                  | 02-native-limit-reproduction.json uses only the public train API, with a passing small control and a failing large dataset.                       |
-| Fix framework dataset validation                         | Next.                                                  | Prepare a separate framework PR; consume only a reviewed npm release afterward.                                                                   |
+| Fix framework dataset validation                         | Next.                                                  | https://github.com/alexpatow/matchbox/pull/21; six Rust tests, 111 Bun tests and 18 browser tests pass. Consume only its published release.       |
 
 ## Versions and machine
 

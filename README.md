@@ -77,6 +77,8 @@ The backend already trains in minibatches of 128 windows. The immediate framewor
 
 **Reproduction:** Through the public training API, 32 supervised characters trained successfully in 62.426 ms. A separate dataset with 1,000,002 supervised characters failed with the same error in 649.940 ms. See [the reproduction report](benchmarks/results/02-native-limit-reproduction.json).
 
+The focused correction is in [Matchbox PR #21](https://github.com/alexpatow/matchbox/pull/21). Its full checks and 18 browser tests pass. This consumer stays on npm 0.2.0 until the corrected release is published, after which experiment 03 will reuse full-clean-v1.
+
 ## Reading the results
 
 Application agreement includes abstentions as failures. Diagnostic agreement measures pre-acceptance predictions and must not be presented as product accuracy. Shiki agreement is imitation of the teacher, not objective semantic correctness. A fast abstention is not fast successful highlighting.
