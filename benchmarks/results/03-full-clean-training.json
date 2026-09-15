@@ -1,0 +1,28 @@
+{
+  "experiment": "03-full-clean",
+  "corpus": "full-clean-v1",
+  "matchbox": "0.2.1",
+  "packages": {
+    "matchbox-ai": "0.2.1",
+    "@matchbox-ai/core": "0.2.1",
+    "@matchbox-ai/train": "0.2.1"
+  },
+  "finishedAt": "2026-09-15T12:16:38.828Z",
+  "exitCode": 1,
+  "wallMs": 522663.128458,
+  "peakResidentBytes": 1465024512,
+  "heapLimitMiB": 3072,
+  "machine": {
+    "platform": "darwin",
+    "arch": "arm64",
+    "cpu": "Apple M2",
+    "memoryBytes": 8589934592
+  },
+  "log": "data/generated/logs/03-full-clean-train.log",
+  "timing": "data/generated/logs/03-full-clean-resources.log",
+  "error": "Burn native and WASM predictions disagree.",
+  "stage": "export parity validation",
+  "nativeTrainingCompleted": true,
+  "artifactWritten": false,
+  "nativeTrainingMs": null
+}

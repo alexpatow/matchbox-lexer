@@ -1,0 +1,156 @@
+{
+  "diagnosticOnly": true,
+  "trainingRecords": 4174,
+  "supervisedTokens": 12245739,
+  "vocabulary": 1507,
+  "wallMs": 497689.996667,
+  "count": 945166,
+  "maxError": 1.537799835205078e-05,
+  "disagreements": 0,
+  "errors": [
+    {
+      "probe": 20,
+      "index": 2364,
+      "native": {
+        "label": "number",
+        "confidence": 0.6656225323677063
+      },
+      "wasm": {
+        "label": "number",
+        "confidence": 0.6656074523925781
+      },
+      "error": 1.5079975128173828e-05
+    },
+    {
+      "probe": 20,
+      "index": 2435,
+      "native": {
+        "label": "number",
+        "confidence": 0.6656225323677063
+      },
+      "wasm": {
+        "label": "number",
+        "confidence": 0.6656074523925781
+      },
+      "error": 1.5079975128173828e-05
+    },
+    {
+      "probe": 20,
+      "index": 2488,
+      "native": {
+        "label": "number",
+        "confidence": 0.6656225323677063
+      },
+      "wasm": {
+        "label": "number",
+        "confidence": 0.6656074523925781
+      },
+      "error": 1.5079975128173828e-05
+    },
+    {
+      "probe": 20,
+      "index": 2592,
+      "native": {
+        "label": "number",
+        "confidence": 0.6656225323677063
+      },
+      "wasm": {
+        "label": "number",
+        "confidence": 0.6656074523925781
+      },
+      "error": 1.5079975128173828e-05
+    },
+    {
+      "probe": 38,
+      "index": 787,
+      "native": {
+        "label": "number",
+        "confidence": 0.6656225323677063
+      },
+      "wasm": {
+        "label": "number",
+        "confidence": 0.6656074523925781
+      },
+      "error": 1.5079975128173828e-05
+    },
+    {
+      "probe": 44,
+      "index": 332,
+      "native": {
+        "label": "number",
+        "confidence": 0.6656225323677063
+      },
+      "wasm": {
+        "label": "number",
+        "confidence": 0.6656074523925781
+      },
+      "error": 1.5079975128173828e-05
+    },
+    {
+      "probe": 74,
+      "index": 4638,
+      "native": {
+        "label": "number",
+        "confidence": 0.6656225323677063
+      },
+      "wasm": {
+        "label": "number",
+        "confidence": 0.6656074523925781
+      },
+      "error": 1.5079975128173828e-05
+    },
+    {
+      "probe": 142,
+      "index": 2934,
+      "native": {
+        "label": "number",
+        "confidence": 0.6656225323677063
+      },
+      "wasm": {
+        "label": "number",
+        "confidence": 0.6656074523925781
+      },
+      "error": 1.5079975128173828e-05
+    },
+    {
+      "probe": 162,
+      "index": 2454,
+      "native": {
+        "label": "number",
+        "confidence": 0.6656225323677063
+      },
+      "wasm": {
+        "label": "number",
+        "confidence": 0.6656074523925781
+      },
+      "error": 1.5079975128173828e-05
+    },
+    {
+      "probe": 162,
+      "index": 2507,
+      "native": {
+        "label": "number",
+        "confidence": 0.6656225323677063
+      },
+      "wasm": {
+        "label": "number",
+        "confidence": 0.6656074523925781
+      },
+      "error": 1.5079975128173828e-05
+    }
+  ],
+  "frameworkDiagnosticOnly": true,
+  "packages": {
+    "@matchbox-ai/core": "0.2.1",
+    "@matchbox-ai/train": "0.2.1"
+  },
+  "replay": {
+    "diagnosticOnly": true,
+    "packageVersion": "0.2.1",
+    "tokens": 945166,
+    "maxConfidenceError": 1.537799835205078e-05,
+    "confidenceTolerance": 0.0001,
+    "labelDisagreements": 0,
+    "acceptanceDisagreements": 0
+  }
+}

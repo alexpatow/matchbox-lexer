@@ -1,10 +1,8 @@
 # Matchbox Lexer
 
-Read HANDOFF.md before resuming work. Update its step table and current blocker immediately after every substantive phase, failure, dataset change or benchmark. Record commands, exit status, outputs, active processes and next actions. Never leave the only copy of progress in a chat message. Keep README.md's evolution log aligned, while preserving historical reports.
+Treat this repository as public-facing. Keep documentation focused on setup, contracts, methodology, measured results and verified limitations. Keep session handoffs, personal paths, internal PR status, working hypotheses and run-by-run decision narratives outside the repository.
 
-This is a consumer experiment. Use exactly published Matchbox packages, with no workspace links, internal imports, modified weights, threshold overrides, or local framework patches. Propose broadly useful primitives in docs/findings.md when the public API is insufficient.
-
-Keep the README evolution log current for each meaningful change: rationale, exact package and data versions, validation, measured results, and remaining limitations. Preserve earlier results. Never tune against the test split. Changes to corpus selection require a new dataset identity and a new experiment entry.
+Use published Matchbox packages, with no workspace links, internal imports, modified weights, threshold overrides or local framework patches. Keep versioned reports with exact package versions, dataset hashes, timing and outcomes. Preserve earlier results and never tune against the test split. Changes to corpus selection require a new dataset identity.
 
 Use Bun, React, Vite, TypeScript, Oxlint and Oxfmt. Keep files focused, names kebab-case, components in separate files and directory barrels as pure re-exports. Task entry points are direct imports. Run bun run check and bun run benchmark after training. Do not publish packages or deploy automatically.
 
