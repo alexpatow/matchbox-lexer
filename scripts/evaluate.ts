@@ -5,6 +5,13 @@ import { createMetrics } from "./metrics";
 import { hash } from "./corpus";
 import { dataRoot, experiment, verifyDataset } from "./experiment";
 
+import { packageVersions } from "./package-versions";
+
+const packages = await packageVersions();
+const reportPath = `benchmarks/results/${experiment}-evaluation.json`;
+if (await Bun.file(reportPath).exists()) {
+  throw new Error(`Refusing to overwrite ${reportPath}; choose a new EXPERIMENT ID.`);
+}
 await verifyDataset();
 const { parser, inspect } = await loadArtifact("matchbox/lexer");
 const byLanguage: Record<
@@ -48,7 +55,8 @@ await mkdir("benchmarks/results", { recursive: true });
 const training = await Bun.file(".matchbox/lexer/report.json").json();
 const result = {
   experiment,
-  matchbox: "0.2.0",
+  matchbox: packages["matchbox-ai"],
+  packages,
   createdAt: new Date().toISOString(),
   data: await Bun.file(`${dataRoot}/summary.json`).json(),
   modelSha256: hash(await Bun.file(".matchbox/lexer/model.matchbox").text()),

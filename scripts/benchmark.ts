@@ -8,6 +8,13 @@ import { createMetrics } from "./metrics";
 import { hash } from "./corpus";
 import { dataRoot, experiment, verifyDataset } from "./experiment";
 
+import { packageVersions } from "./package-versions";
+
+const packages = await packageVersions();
+const reportPath = `benchmarks/results/${experiment}-browser.json`;
+if (await Bun.file(reportPath).exists()) {
+  throw new Error(`Refusing to overwrite ${reportPath}; choose a new EXPERIMENT ID.`);
+}
 await verifyDataset();
 const server = await preview({ preview: { host: "127.0.0.1", port: 4317, strictPort: true } });
 const browser = await chromium.launch({ headless: process.env.HEADED !== "1" });
@@ -74,6 +81,7 @@ try {
   }
   const report = {
     experiment,
+    packages,
     createdAt: new Date().toISOString(),
     browser: browser.version(),
     platform: process.platform,

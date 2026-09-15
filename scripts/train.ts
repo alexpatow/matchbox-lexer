@@ -2,6 +2,9 @@ import { mkdir } from "node:fs/promises";
 import { platform, arch, cpus, totalmem } from "node:os";
 import { performance } from "node:perf_hooks";
 
+import { packageVersions } from "./package-versions";
+
+const packages = await packageVersions();
 const experiment = process.env.EXPERIMENT ?? "02-full-clean";
 const corpus = process.env.CORPUS ?? "full-clean-v1";
 if (!/^[a-z0-9-]+$/.test(experiment)) {
@@ -41,6 +44,7 @@ await Bun.write(
     {
       experiment,
       corpus,
+      packages,
       pid: child.pid,
       startedAt: new Date().toISOString(),
       command:
@@ -58,7 +62,8 @@ const peak = resources.match(/(\d+)\s+maximum resident set size/);
 const result = {
   experiment,
   corpus,
-  matchbox: "0.2.0",
+  matchbox: packages["matchbox-ai"],
+  packages,
   finishedAt: new Date().toISOString(),
   exitCode,
   wallMs: performance.now() - started,

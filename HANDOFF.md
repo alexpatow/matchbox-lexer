@@ -4,7 +4,7 @@ Last verified checkpoint: 2026-09-15, after full consumer and framework checks. 
 
 ## Release checkpoint after PR #21 merged
 
-Framework PR #21 merged on 2026-09-15 at 11:42:47 UTC. Release workflow 34964769135 completed successfully in version mode and opened https://github.com/alexpatow/matchbox/pull/22 for all three packages at 0.2.1. That release PR still needs merging before native build, verification and npm publication run. No corrected npm package has been installed here, and experiment 03 has not started. Consumer PR #1 remains open. Next: merge release PR #22, verify publication, then pin all three consumer packages to 0.2.1 and run the frozen full-clean-v1 corpus under a new experiment ID. Update the runner's recorded version before running. Do not rerun experiment 02 or alter its results.
+Framework PR #22 merged on 2026-09-15 at 11:44:44 UTC. Publication run https://github.com/alexpatow/matchbox/actions/runs/34964944005 is building native packages. No corrected npm package is installed yet. Experiment 03 has not started. Consumer scripts now read exact installed package versions instead of hardcoding 0.2.0; evaluation and browser scripts refuse existing report paths. Consumer PR #1 remains open. Next: verify successful publication, pin all three packages to 0.2.1, and train full-clean-v1 under EXPERIMENT=03-full-clean. Preserve all earlier reports.
 
 ## Read this first
 
