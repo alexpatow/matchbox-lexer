@@ -2,9 +2,13 @@
 
 Last verified checkpoint: 2026-09-15, after full consumer and framework checks. Update this file after each substantive step. The user explicitly requested durable, detailed progress so another model can resume when credits run out.
 
-## Release checkpoint after PR #21 merged
+## Experiment 03, published 0.2.1
 
-Framework PR #22 merged on 2026-09-15 at 11:44:44 UTC. Publication run https://github.com/alexpatow/matchbox/actions/runs/34964944005 is building native packages. No corrected npm package is installed yet. Experiment 03 has not started. Consumer scripts now read exact installed package versions instead of hardcoding 0.2.0; evaluation and browser scripts refuse existing report paths. Consumer PR #1 remains open. Next: verify successful publication, pin all three packages to 0.2.1, and train full-clean-v1 under EXPERIMENT=03-full-clean. Preserve all earlier reports.
+Release run https://github.com/alexpatow/matchbox/actions/runs/34964944005 completed successfully. All eight native builds, packed-install tests, full checks and browser tests passed. npm propagation initially returned 404 for CLI/train, then resolved successfully. Installed all three packages at exactly 0.2.1 using Bun from npm; bun.lock is updated. No local framework patch or link is used.
+
+Full-clean-v1 train, validation and test hashes were reverified against data/full-clean-v1-lock.json. Starting `EXPERIMENT=03-full-clean bun run train` on the full 12,245,833-unit training corpus. Model settings, encoder, decoder, threshold and eval contract are unchanged. Defaults now use experiment 03. The timed process started at 12:07:56.165 UTC with PID 2570 (the time wrapper). Logs and PID are under data/generated/logs/03-full-clean-{train,resources}.log and 03-full-clean-running.json. Do not launch a duplicate process. No result is available yet.
+
+Next: wait for training to finish, record wall/native time and memory, then run evaluation, check and browser benchmark using the same ID. Training/evaluation/browser report paths refuse overwriting historical attempts. No full-corpus score may be claimed until a completed report exists.
 
 ## Read this first
 

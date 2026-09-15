@@ -4,7 +4,7 @@ An independent syntax-highlighting experiment built with published Matchbox pack
 
 **Resume work from [HANDOFF.md](HANDOFF.md).** It records exact progress, commands, local artifacts, failures and next steps. The full corpus has been cleaned of training/test overlap and frozen as full-clean-v1. Its training attempt exposed a one-million-window limit in Matchbox 0.2.0; the failure and public-API reproduction are recorded below. The browser artifact is still the explicitly labeled pilot.
 
-The experiment tests the whole consumer flow: pinned source data, offline teacher labeling, native training, independent evaluation, a packaged browser model, and a React/Vite workbench. Matchbox stays pinned to 0.2.0. No workspace dependencies, framework patches, hidden grammar fallback, or rewritten inference engine are used.
+The experiment tests the whole consumer flow: pinned source data, offline teacher labeling, native training, independent evaluation, a packaged browser model, and a React/Vite workbench. Experiments 00–02 use Matchbox 0.2.0; experiment 03 upgrades all three npm packages to 0.2.1. No workspace dependencies, framework patches, hidden grammar fallback, or rewritten inference engine are used.
 
 ## Run
 
@@ -78,6 +78,10 @@ The backend already trains in minibatches of 128 windows. The immediate framewor
 **Reproduction:** Through the public training API, 32 supervised characters trained successfully in 62.426 ms. A separate dataset with 1,000,002 supervised characters failed with the same error in 649.940 ms. See [the reproduction report](benchmarks/results/02-native-limit-reproduction.json).
 
 The focused correction is in [Matchbox PR #21](https://github.com/alexpatow/matchbox/pull/21). Its full checks and 18 browser tests pass. This consumer stays on npm 0.2.0 until the corrected release is published, after which experiment 03 will reuse full-clean-v1.
+
+### 03. Published 0.2.1 on the same full corpus
+
+Installed the published CLI, core and trainer at exactly 0.2.1 after the release passed all platform and browser checks. Full-clean-v1 hashes are unchanged. The pipeline, model settings and scoring contract remain unchanged. Training is starting; no result is available yet. Timings and results will use the 03-full-clean report prefix, preserving the earlier failures.
 
 ## Reading the results
 
