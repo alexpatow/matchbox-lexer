@@ -1,14 +1,20 @@
 # Resume Matchbox Lexer
 
-Last verified checkpoint: 2026-09-15, approximately 11:25 UTC. Update this file after each substantive step. The user explicitly requested durable, detailed progress so another model can resume when credits run out.
+Last verified checkpoint: 2026-09-15, after the experiment 02 reproduction. Update this file after each substantive step. The user explicitly requested durable, detailed progress so another model can resume when credits run out.
 
 ## Read this first
 
-The working repository is `/Users/alex.patow/Developer/matchbox-lexer`, with private GitHub remote `https://github.com/alexpatow/matchbox-lexer`. The framework repository `/Users/alex.patow/Developer/matchbox` is separate and was not changed during this experiment.
+The working repository is `/Users/alex.patow/Developer/matchbox-lexer`, with private GitHub remote `https://github.com/alexpatow/matchbox-lexer`. The framework repository `/Users/alex.patow/Developer/matchbox` is separate. A focused fix is now on its `codex/training-dataset-validation` branch, based on origin/main at cd84d19. The consumer still uses untouched npm 0.2.0.
 
-**Current blocker:** The full corpus is prepared and converted, but Matchbox 0.2.0 rejects duplicated input across train/test. No full-corpus model has trained. The browser still uses the pilot model. There are no training, data preparation or preview processes intentionally left running at this checkpoint.
+**Current checkpoint, experiment 02:** The user authorized continuation after the account reset. Branch: `codex/full-corpus-run`. Test-priority duplicate ownership is applied: 125 overlapping training records removed, validation/test unchanged. `data/generated/full-clean-v1/` contains 4,174 training records and 12,245,833 UTF-16 units. `data/full-clean-v1-lock.json` freezes the identity; original full data is untouched. A fresh overlap audit found zero overlapping groups.
 
-Do not rerun downloads or labeling on this machine. All full source data and converted JSONL already exist under ignored `data/generated/`. First inspect the overlap audit and decide a transparent duplicate ownership policy. Preserve all historical reports and original full-corpus hashes.
+**Current blocker:** The cleaned published-CLI run failed after 32.052 seconds, before optimizer training. Error: `Expected a nonempty batch of three-token windows`. Peak resident memory was 1,738,752,000 bytes; the heap limit was not reached. Published 0.2.0 source was verified against the GitHub release tag: crates/matchbox-engine/src/model.rs::validate_inputs rejects values.len() > 3_000_000, which is 1,000,000 three-token windows. crates/matchbox-engine/src/training.rs calls that same validator on the entire training dataset, then would train in batches of 128. Installed @matchbox-ai/train sends all windows in one native fit call. This is a general training-size bug, not a lexer limitation. No full-corpus model exists. No training process remains running; the running.json file is historical. The browser still uses the pilot.
+
+The public-API reproduction succeeded: 32 supervised characters trained in 62.426 ms; 1,000,002 failed with the same error after 649.940 ms. See scripts/reproduce-training-limit.ts and benchmarks/results/02-native-limit-reproduction.json. Next: prepare the narrow framework fix on a separate branch and PR. The narrow framework fix is to separate whole-training-dataset validation from prediction batch limits, preserve malformed-input checks, and give explicit limit errors. Any framework change must be a separate reviewed/published release before this consumer upgrades. Do not patch node_modules or shrink this corpus to get a result. The framework change moves the size limit into prediction, preserving dataset shape/vocabulary validation. Three Rust regression tests pass; the full framework check is running, with output at /tmp/matchbox-training-validation-check.log. No framework release has been made.
+
+Defaults now resolve `CORPUS=full-clean-v1` and `EXPERIMENT=02-full-clean`. Training refuses to overwrite existing report/log files. Inspect `data/generated/logs/02-full-clean-running.json` for the active process and command, and `benchmarks/results/02-full-clean-training.json` for completion. Do not start a second training process if the recorded process is still alive.
+
+Do not rerun downloads or labeling on this machine. All full source data and converted JSONL already exist under ignored `data/generated/`. The test-priority duplicate policy is already applied and verified. Preserve all historical reports and original full-corpus hashes.
 
 ## User intent and constraints
 
@@ -40,9 +46,10 @@ Do not rerun downloads or labeling on this machine. All full source data and con
 | Time first full CLI attempt                              | Failed before training.                                | 01-full-import-failure.json; explicit .ts consumer imports now fix the Node resolution error.                                                     |
 | Time second full CLI attempt                             | Failed at split validation.                            | 01-full-training.json; 7.739 s wall, 466,059,264 bytes max resident. No model training occurred.                                                  |
 | Audit duplicate inputs across splits                     | Done.                                                  | 01-full-overlaps.json: 30 groups, 125 train records, 279 test records; validation has zero overlap.                                               |
-| Resolve duplicate ownership and freeze cleaned full data | Not done.                                              | Requires an explicit documented policy and a new corpus identity. Do not overwrite the original lock.                                             |
-| Train/evaluate/benchmark the full corpus                 | Not done.                                              | Blocked by split overlaps. No full-corpus accuracy, latency or trainer time may be claimed.                                                       |
-| Improve Matchbox primitives                              | Not started, intentionally.                            | First preserve an honest published-package experiment and evidence.                                                                               |
+| Resolve duplicate ownership and freeze cleaned full data | Done.                                                  | full-clean-v1 preserves every held-out record and removes 125 overlapping train records. The new audit has zero overlaps.                         |
+| Train/evaluate/benchmark the full corpus                 | Training attempted; blocked by native dataset cap.     | 02-full-clean-training.json: 32.052 seconds, exit 1. No full-corpus accuracy, latency or optimizer time exists.                                   |
+| Reproduce the native training-size bug                   | Done.                                                  | 02-native-limit-reproduction.json uses only the public train API, with a passing small control and a failing large dataset.                       |
+| Fix framework dataset validation                         | Next.                                                  | Prepare a separate framework PR; consume only a reviewed npm release afterward.                                                                   |
 
 ## Versions and machine
 
@@ -70,36 +77,33 @@ Original upstream shards: `data/generated/upstream/gpu-lexer/packages/training/d
 
 `data/upstream-corpus.json` retains the full source manifest. `data/corpus.json` is the pilot manifest, not the full dataset definition. `data/full-lock.json` freezes the original full conversion. `data/generated/full/summary.json` includes upstream details and rejected/minification cases. Upstream records its own labeling/minification failures; do not silently treat these as successful labels.
 
-## Current blocker in detail
+## Dataset hygiene and native blocker
 
-Published Matchbox rejects `row.input.trim().toLowerCase()` appearing in multiple dataset splits. The guard is in the installed package's `dist/run-*.js`; there is also a sequence supervision guard. It is correct to keep these enabled.
+Published Matchbox rejects normalized inputs shared across splits. The original audit found 30 groups, affecting 125 training records and 279 test records. This has been resolved by preserving all held-out data and removing contaminated training records before looking at model scores. `scripts/clean-full.ts` verifies the original lock, produces full-clean-v1 and freezes its hashes. Its training hash is `748fa197f1bb2133a83159c1e7f8a2985438e2ba92854ce7321ac4063e55e6d3`. Validation and test hashes remain the original values above.
 
-The overlap audit hashes that exact normalized value and stores provenance without source text. All 30 cross-split groups involve training and test. There are 125 affected training records and 279 affected test records, including repeated records within the same split. Repository separation is insufficient when repositories contain identical scripts or fixtures.
-
-Recommended next decision: assign each duplicate group entirely to one split, with test priority as a conservative option. That would remove the 125 contaminated training records while preserving the full test set. This is dataset hygiene rather than size-based sampling, but it changes the original full dataset and must be named, documented and hashed. Alternatively preserve every training record and explicitly exclude the 279 contaminated test records. Do not choose whichever policy improves accuracy. No policy has been applied yet.
-
-Keep the original full conversion untouched. Prefer writing a separate cleaned dataset directory and lock, and making that dataset the frozen comparison series. Update scripts/experiment.ts and matchbox.config.ts coherently if adding a new corpus name. Currently they only support full/pilot.
+The current blocker is the native one-million-window guard described at the top. Keep the consumer on untouched 0.2.0 until a new package release is available. The full attempt and public reproduction are complete; repeating them under the same IDs is unnecessary and refuses to overwrite their reports.
 
 ## Exact commands to resume
 
 ```sh
 cd /Users/alex.patow/Developer/matchbox-lexer
 git status --short
-cat benchmarks/results/01-full-training.json
-cat data/full-lock.json
+cat benchmarks/results/02-full-clean-training.json
+cat benchmarks/results/02-native-limit-reproduction.json
+cat data/full-clean-v1-lock.json
 bun scripts/audit-splits.ts
 ```
 
-After the duplicate policy is implemented, documented and verified:
+Only after the framework fix is reviewed, published and installed, choose a new experiment ID for the next full run. Use that same ID for all commands:
 
 ```sh
-bun run train
-bun run evaluate
+EXPERIMENT=03-full-clean bun run train
+EXPERIMENT=03-full-clean bun run evaluate
 bun run check
-bun run benchmark
+EXPERIMENT=03-full-clean bun run benchmark
 ```
 
-Current defaults are `CORPUS=full` and `EXPERIMENT=01-full`. **Do not blindly rerun these and overwrite historical failure records.** Choose a new experiment ID for the next attempt and preserve or uniquely name its logs. The scripts currently write the ID's filenames directly; they do not yet enforce append-only writes.
+Current defaults are `CORPUS=full-clean-v1` and `EXPERIMENT=02-full-clean`. Training refuses existing reports/logs. Evaluation and browser reports still require care to avoid overwriting historical results. Record the newly installed package version in the runner before experiment 03; it currently records 0.2.0.
 
 The timed runner invokes:
 
@@ -139,7 +143,7 @@ The upstream checkout's corpus-summary.json is modified by its own builder. That
 
 ## Verification state and caveats
 
-`bun run check` passed for the final checkpoint, including the audit and handoff changes. It runs format, lint, TypeScript, two contract/metric tests, and a Vite production build.
+`bun run check` passed after the experiment 02 cleanup and reproduction changes (log: /tmp/matchbox-lexer-02-check.log). It runs format, lint, TypeScript, two contract/metric tests, and a Vite production build.
 
 The final browser smoke passed with desktop and mobile widths and no page errors, including the measurements table. Matchbox inference abstained as expected; Shiki reference loaded. The report is benchmarks/results/00-pilot-checkpoint-browser.json. The original pilot report remains unchanged. The benchmark uses fresh browser contexts and records unavailable WebGPU rather than forcing a software GPU. `HEADED=1` allows a future headed test, but it has not been run.
 
@@ -155,7 +159,10 @@ The workbench currently has no deployment and no persistent server. There is no 
 - `data/generated/full/`: converted full JSONL, per-record provenance and summary.
 - `data/generated/upstream/gpu-lexer/`: pinned upstream source, downloaded corpus and compressed shards.
 - `data/generated/logs/01-full-import-failure*.log`: first Node import-resolution attempt.
-- `data/generated/logs/01-full-{train,resources}.log`: current overlap-blocked attempt.
+- `data/generated/logs/01-full-{train,resources}.log`: historical overlap-blocked attempt.
+- `data/generated/full-clean-v1/`: cleaned frozen corpus.
+- `data/generated/logs/02-full-clean-{train,resources}.log`: completed native-limit failure.
+- `/tmp/matchbox-lexer-native-repro.log`: successful public-API reproduction output.
 - `/tmp/matchbox-lexer-full-data.log`: source download progress.
 - `/tmp/matchbox-lexer-full-build.log` and `...-full-build-time.log`: upstream labeling output and measured resources.
 - `/tmp/matchbox-lexer-convert-full.log`: successful converted counts and hashes.

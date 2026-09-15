@@ -2,12 +2,21 @@ import { mkdir } from "node:fs/promises";
 import { platform, arch, cpus, totalmem } from "node:os";
 import { performance } from "node:perf_hooks";
 
-const experiment = process.env.EXPERIMENT ?? "01-full";
-const corpus = process.env.CORPUS ?? "full";
+const experiment = process.env.EXPERIMENT ?? "02-full-clean";
+const corpus = process.env.CORPUS ?? "full-clean-v1";
+if (!/^[a-z0-9-]+$/.test(experiment)) {
+  throw new Error("Use a lowercase experiment ID with letters, numbers and hyphens.");
+}
 await mkdir("benchmarks/results", { recursive: true });
 await mkdir("data/generated/logs", { recursive: true });
 const log = `data/generated/logs/${experiment}-train.log`;
 const timing = `data/generated/logs/${experiment}-resources.log`;
+const reportPath = `benchmarks/results/${experiment}-training.json`;
+for (const path of [log, timing, reportPath]) {
+  if (await Bun.file(path).exists()) {
+    throw new Error(`Refusing to overwrite ${path}; choose a new EXPERIMENT ID.`);
+  }
+}
 const started = performance.now();
 const child = Bun.spawn(
   [
@@ -26,6 +35,23 @@ const child = Bun.spawn(
     stderr: Bun.file(timing),
   },
 );
+await Bun.write(
+  `data/generated/logs/${experiment}-running.json`,
+  JSON.stringify(
+    {
+      experiment,
+      corpus,
+      pid: child.pid,
+      startedAt: new Date().toISOString(),
+      command:
+        "/usr/bin/time -l node --max-old-space-size=3072 node_modules/matchbox-ai/dist/cli.js train lexer --json",
+      log,
+      timing,
+    },
+    null,
+    2,
+  ) + "\n",
+);
 const exitCode = await child.exited;
 const resources = await Bun.file(timing).text();
 const peak = resources.match(/(\d+)\s+maximum resident set size/);
@@ -42,10 +68,7 @@ const result = {
   log,
   timing,
 };
-await Bun.write(
-  `benchmarks/results/${experiment}-training.json`,
-  JSON.stringify(result, null, 2) + "\n",
-);
+await Bun.write(reportPath, JSON.stringify(result, null, 2) + "\n");
 console.log(JSON.stringify(result, null, 2));
 if (exitCode !== 0) {
   process.exitCode = exitCode;

@@ -1,0 +1,21 @@
+{
+  "experiment": "02-full-clean",
+  "corpus": "full-clean-v1",
+  "matchbox": "0.2.0",
+  "finishedAt": "2026-09-15T11:32:08.620Z",
+  "exitCode": 1,
+  "wallMs": 32052.065708,
+  "peakResidentBytes": 1738752000,
+  "heapLimitMiB": 3072,
+  "machine": {
+    "platform": "darwin",
+    "arch": "arm64",
+    "cpu": "Apple M2",
+    "memoryBytes": 8589934592
+  },
+  "log": "data/generated/logs/02-full-clean-train.log",
+  "timing": "data/generated/logs/02-full-clean-resources.log",
+  "nativeTrainingStarted": false,
+  "error": "Expected a nonempty batch of three-token windows",
+  "reason": "Whole-dataset validation rejects more than 1,000,000 three-token windows before optimizer initialization."
+}

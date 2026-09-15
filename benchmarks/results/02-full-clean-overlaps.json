@@ -1,0 +1,10 @@
+{
+  "normalization": "input.trim().toLowerCase(), as enforced by Matchbox 0.2.0",
+  "groups": 0,
+  "affected": {
+    "train": 0,
+    "validation": 0,
+    "test": 0
+  },
+  "overlaps": []
+}

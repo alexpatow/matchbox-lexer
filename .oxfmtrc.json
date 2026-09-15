@@ -1,1 +1,9 @@
-{ "ignorePatterns": ["data/generated/**", ".matchbox/**", "dist/**", "scripts/teacher/classes.js"] }
+{
+  "ignorePatterns": [
+    "data/generated/**",
+    ".matchbox/**",
+    "dist/**",
+    "scripts/teacher/classes.js",
+    "benchmarks/results/**"
+  ]
+}
