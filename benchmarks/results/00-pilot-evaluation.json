@@ -1,0 +1,1301 @@
+{
+  "experiment": "00-pilot",
+  "matchbox": "0.2.0",
+  "createdAt": "2026-09-15T10:57:20.237Z",
+  "data": {
+    "dataset": "eb9908da7cf056b1529e92c8574b67ec95958d54527ab53105b35dd9153c14ec",
+    "teacher": "shiki@4.4.3",
+    "sources": [
+      {
+        "repo": "vitejs/vite",
+        "commit": "f40efefbb3630cdb7235286bc2b51673d9fbfc27",
+        "license": "MIT",
+        "split": "train",
+        "language": "typescript",
+        "prefix": "packages/vite/src/",
+        "selected": 16
+      },
+      {
+        "repo": "psf/requests",
+        "commit": "5460f467b02e49471c0fd6cfc9ca0adab6351f98",
+        "license": "Apache-2.0",
+        "split": "train",
+        "language": "python",
+        "prefix": "src/requests/",
+        "selected": 16
+      },
+      {
+        "repo": "serde-rs/serde",
+        "commit": "a874a1b1bb1cc16cf5ee3b1b7b527af5705742bb",
+        "license": "Apache-2.0",
+        "split": "train",
+        "language": "rust",
+        "prefix": "serde/src/",
+        "selected": 4
+      },
+      {
+        "repo": "preactjs/preact",
+        "commit": "921df340a25afd1c3090fcc7b5073ab093309a75",
+        "license": "MIT",
+        "split": "validation",
+        "language": "javascript",
+        "prefix": "src/",
+        "selected": 6
+      },
+      {
+        "repo": "pallets/click",
+        "commit": "36baa15ff831b939a22bc527cd76ce653ef6f66d",
+        "license": "BSD-3-Clause",
+        "split": "validation",
+        "language": "python",
+        "prefix": "src/click/",
+        "selected": 6
+      },
+      {
+        "repo": "tokio-rs/bytes",
+        "commit": "d5c8ad3227afe459c09f1d0d85455abf00f0381a",
+        "license": "MIT",
+        "split": "validation",
+        "language": "rust",
+        "prefix": "src/",
+        "selected": 6
+      },
+      {
+        "repo": "remix-run/react-router",
+        "commit": "7aea711dd1ae2bc5a076d13ff17291829690fa74",
+        "license": "MIT",
+        "split": "test",
+        "language": "typescript",
+        "prefix": "packages/react-router/lib/",
+        "selected": 6
+      },
+      {
+        "repo": "django/django",
+        "commit": "026b005f3dc43a98557ce5a546b5e4938d06fed1",
+        "license": "BSD-3-Clause",
+        "split": "test",
+        "language": "python",
+        "prefix": "django/utils/",
+        "selected": 6
+      },
+      {
+        "repo": "rust-lang/rustlings",
+        "commit": "a650509c789da1656f813392b16aa1fa043b7f3e",
+        "license": "MIT",
+        "split": "test",
+        "language": "rust",
+        "prefix": "exercises/",
+        "selected": 6
+      }
+    ],
+    "counts": {
+      "train": {
+        "examples": 36,
+        "units": 33676,
+        "labels": {
+          "plain": 14699,
+          "comment": 4389,
+          "string": 6798,
+          "number": 121,
+          "keyword": 1534,
+          "type": 1663,
+          "function": 1758,
+          "constant": 255,
+          "operator": 2459
+        },
+        "sha256": "5e5a8e02c7763b81290891c76edda7e4a8e42af6f0b9828e682951bb4a641eba"
+      },
+      "validation": {
+        "examples": 18,
+        "units": 15447,
+        "labels": {
+          "plain": 6081,
+          "comment": 5364,
+          "string": 1206,
+          "number": 7,
+          "keyword": 899,
+          "type": 375,
+          "function": 473,
+          "constant": 211,
+          "operator": 831
+        },
+        "sha256": "b3988725cf36560c498332f91eed4cf55a2f92f3a9ff4ee87e6d857887b5dc4a"
+      },
+      "test": {
+        "examples": 18,
+        "units": 15090,
+        "labels": {
+          "plain": 5628,
+          "comment": 3411,
+          "string": 2359,
+          "number": 76,
+          "keyword": 771,
+          "type": 864,
+          "function": 872,
+          "constant": 48,
+          "operator": 1061
+        },
+        "sha256": "79bcc8bf48efb13a895be4547f056f77718903db196e907f18d1d1469f945ba5"
+      }
+    }
+  },
+  "modelSha256": "50f020605a601e16d0187cdd779b001b3e5947d07a46cc930064908aeceea70c",
+  "training": {
+    "architecture": "embedding-window-mlp",
+    "backend": "Burn native CPU",
+    "seed": 42,
+    "bytes": 7655,
+    "parameters": 1129,
+    "trainingMs": 1435.268375,
+    "supervisedTokens": 33676,
+    "datasetSha256": [
+      {
+        "source": "../../data/generated/train.jsonl",
+        "sha256": "5e5a8e02c7763b81290891c76edda7e4a8e42af6f0b9828e682951bb4a641eba"
+      },
+      {
+        "source": "../../data/generated/validation.jsonl",
+        "sha256": "b3988725cf36560c498332f91eed4cf55a2f92f3a9ff4ee87e6d857887b5dc4a"
+      },
+      {
+        "source": "../../data/generated/test.jsonl",
+        "sha256": "79bcc8bf48efb13a895be4547f056f77718903db196e907f18d1d1469f945ba5"
+      }
+    ],
+    "supervisionSha256": "aedae5cac0f9b6cef2a7f8f0de236e9cde4170ea698d7e20f4d040e60dde95e3",
+    "loss": [
+      1.4215593338012695, 1.188665747642517, 1.1505885124206543, 1.1336085796356201,
+      1.1222789287567139, 1.113314151763916, 1.105629324913025, 1.099007487297058,
+      1.0932799577713013, 1.0882664918899536, 1.0838412046432495, 1.0799249410629272,
+      1.0765116214752197, 1.0735820531845093, 1.0710089206695557, 1.0686938762664795,
+      1.0665723085403442, 1.0646075010299683, 1.0627753734588623, 1.0610458850860596,
+      1.0593785047531128, 1.0577614307403564, 1.0562189817428589, 1.05475652217865,
+      1.0533703565597534, 1.0520546436309814, 1.0507906675338745, 1.049559235572815,
+      1.0483709573745728, 1.0472450256347656, 1.0461825132369995, 1.0451726913452148,
+      1.044202208518982, 1.0432591438293457, 1.0423322916030884, 1.0414165258407593,
+      1.0405195951461792, 1.0396493673324585, 1.0388084650039673, 1.0379960536956787,
+      1.0372177362442017, 1.0364736318588257, 1.0357569456100464, 1.0350749492645264,
+      1.0344313383102417, 1.0338239669799805, 1.0332469940185547, 1.0326900482177734,
+      1.0321394205093384, 1.0316169261932373, 1.0311272144317627, 1.0306510925292969,
+      1.030186653137207, 1.0297318696975708, 1.0292848348617554
+    ]
+  },
+  "application": {
+    "snippets": 18,
+    "accepted": 0,
+    "abstentionRate": 1,
+    "exactAccuracy": 0,
+    "characters": 10946,
+    "agreement": 0,
+    "acceptedCharacterAgreement": null,
+    "styledMacroF1": 0,
+    "classes": [
+      {
+        "label": "plain",
+        "support": 2510,
+        "precision": null,
+        "recall": 0,
+        "f1": 0
+      },
+      {
+        "label": "comment",
+        "support": 2831,
+        "precision": null,
+        "recall": 0,
+        "f1": 0
+      },
+      {
+        "label": "string",
+        "support": 1957,
+        "precision": null,
+        "recall": 0,
+        "f1": 0
+      },
+      {
+        "label": "number",
+        "support": 76,
+        "precision": null,
+        "recall": 0,
+        "f1": 0
+      },
+      {
+        "label": "keyword",
+        "support": 771,
+        "precision": null,
+        "recall": 0,
+        "f1": 0
+      },
+      {
+        "label": "type",
+        "support": 864,
+        "precision": null,
+        "recall": 0,
+        "f1": 0
+      },
+      {
+        "label": "function",
+        "support": 872,
+        "precision": null,
+        "recall": 0,
+        "f1": 0
+      },
+      {
+        "label": "constant",
+        "support": 48,
+        "precision": null,
+        "recall": 0,
+        "f1": 0
+      },
+      {
+        "label": "operator",
+        "support": 1017,
+        "precision": null,
+        "recall": 0,
+        "f1": 0
+      }
+    ],
+    "confusion": [
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 2510],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 2831],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 1957],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 76],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 771],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 864],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 872],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 48],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 1017]
+    ],
+    "confusionColumns": [
+      "plain",
+      "comment",
+      "string",
+      "number",
+      "keyword",
+      "type",
+      "function",
+      "constant",
+      "operator",
+      "abstain"
+    ]
+  },
+  "diagnostic": {
+    "snippets": 18,
+    "accepted": 18,
+    "abstentionRate": 0,
+    "exactAccuracy": 0,
+    "characters": 10946,
+    "agreement": 0.40836835373652475,
+    "acceptedCharacterAgreement": 0.40836835373652475,
+    "styledMacroF1": 0.41798702239667934,
+    "classes": [
+      {
+        "label": "plain",
+        "support": 2510,
+        "precision": 0.3108480622669045,
+        "recall": 0.7637450199203187,
+        "f1": 0.44185778494871497
+      },
+      {
+        "label": "comment",
+        "support": 2831,
+        "precision": 0.5220030349013657,
+        "recall": 0.24302366654892263,
+        "f1": 0.331646179802362
+      },
+      {
+        "label": "string",
+        "support": 1957,
+        "precision": 0.4474505723204995,
+        "recall": 0.21972406745017883,
+        "f1": 0.29472241261137766
+      },
+      {
+        "label": "number",
+        "support": 76,
+        "precision": 0.7272727272727273,
+        "recall": 0.631578947368421,
+        "f1": 0.676056338028169
+      },
+      {
+        "label": "keyword",
+        "support": 771,
+        "precision": 0.4313487241798299,
+        "recall": 0.4604409857328145,
+        "f1": 0.4454203262233375
+      },
+      {
+        "label": "type",
+        "support": 864,
+        "precision": 0.30144927536231886,
+        "recall": 0.12037037037037036,
+        "f1": 0.17204301075268819
+      },
+      {
+        "label": "function",
+        "support": 872,
+        "precision": 0.495,
+        "recall": 0.11353211009174312,
+        "f1": 0.18470149253731344
+      },
+      {
+        "label": "constant",
+        "support": 48,
+        "precision": 0.38461538461538464,
+        "recall": 0.5208333333333334,
+        "f1": 0.4424778761061947
+      },
+      {
+        "label": "operator",
+        "support": 1017,
+        "precision": 0.8031968031968032,
+        "recall": 0.7905604719764012,
+        "f1": 0.796828543111992
+      }
+    ],
+    "confusion": [
+      [1917, 165, 151, 0, 92, 81, 48, 6, 50, 0],
+      [1475, 688, 255, 9, 180, 90, 24, 10, 100, 0],
+      [1006, 285, 430, 6, 140, 44, 8, 13, 25, 0],
+      [6, 10, 9, 48, 0, 1, 1, 0, 1, 0],
+      [344, 34, 20, 0, 355, 10, 8, 0, 0, 0],
+      [634, 52, 27, 0, 31, 104, 12, 4, 0, 0],
+      [658, 34, 36, 0, 12, 12, 99, 0, 21, 0],
+      [21, 2, 0, 0, 0, 0, 0, 25, 0, 0],
+      [106, 48, 33, 3, 13, 3, 0, 7, 804, 0]
+    ],
+    "confusionColumns": [
+      "plain",
+      "comment",
+      "string",
+      "number",
+      "keyword",
+      "type",
+      "function",
+      "constant",
+      "operator",
+      "abstain"
+    ]
+  },
+  "byLanguage": {
+    "typescript": {
+      "application": {
+        "snippets": 6,
+        "accepted": 0,
+        "abstentionRate": 1,
+        "exactAccuracy": 0,
+        "characters": 4138,
+        "agreement": 0,
+        "acceptedCharacterAgreement": null,
+        "styledMacroF1": 0,
+        "classes": [
+          {
+            "label": "plain",
+            "support": 958,
+            "precision": null,
+            "recall": 0,
+            "f1": 0
+          },
+          {
+            "label": "comment",
+            "support": 1167,
+            "precision": null,
+            "recall": 0,
+            "f1": 0
+          },
+          {
+            "label": "string",
+            "support": 481,
+            "precision": null,
+            "recall": 0,
+            "f1": 0
+          },
+          {
+            "label": "number",
+            "support": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null
+          },
+          {
+            "label": "keyword",
+            "support": 322,
+            "precision": null,
+            "recall": 0,
+            "f1": 0
+          },
+          {
+            "label": "type",
+            "support": 661,
+            "precision": null,
+            "recall": 0,
+            "f1": 0
+          },
+          {
+            "label": "function",
+            "support": 191,
+            "precision": null,
+            "recall": 0,
+            "f1": 0
+          },
+          {
+            "label": "constant",
+            "support": 17,
+            "precision": null,
+            "recall": 0,
+            "f1": 0
+          },
+          {
+            "label": "operator",
+            "support": 341,
+            "precision": null,
+            "recall": 0,
+            "f1": 0
+          }
+        ],
+        "confusion": [
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 958],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 1167],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 481],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 322],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 661],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 191],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 17],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 341]
+        ],
+        "confusionColumns": [
+          "plain",
+          "comment",
+          "string",
+          "number",
+          "keyword",
+          "type",
+          "function",
+          "constant",
+          "operator",
+          "abstain"
+        ]
+      },
+      "diagnostic": {
+        "snippets": 6,
+        "accepted": 6,
+        "abstentionRate": 0,
+        "exactAccuracy": 0,
+        "characters": 4138,
+        "agreement": 0.39511841469308845,
+        "acceptedCharacterAgreement": 0.39511841469308845,
+        "styledMacroF1": 0.34385677331686637,
+        "classes": [
+          {
+            "label": "plain",
+            "support": 958,
+            "precision": 0.29536208299430433,
+            "recall": 0.7578288100208769,
+            "f1": 0.42505854800936765
+          },
+          {
+            "label": "comment",
+            "support": 1167,
+            "precision": 0.5735930735930735,
+            "recall": 0.22707797772065125,
+            "f1": 0.32535297728667895
+          },
+          {
+            "label": "string",
+            "support": 481,
+            "precision": 0.39425587467362927,
+            "recall": 0.31392931392931395,
+            "f1": 0.34953703703703703
+          },
+          {
+            "label": "number",
+            "support": 0,
+            "precision": 0,
+            "recall": null,
+            "f1": 0
+          },
+          {
+            "label": "keyword",
+            "support": 322,
+            "precision": 0.421259842519685,
+            "recall": 0.33229813664596275,
+            "f1": 0.3715277777777778
+          },
+          {
+            "label": "type",
+            "support": 661,
+            "precision": 0.5909090909090909,
+            "recall": 0.13767019667170954,
+            "f1": 0.2233128834355828
+          },
+          {
+            "label": "function",
+            "support": 191,
+            "precision": 0.5531914893617021,
+            "recall": 0.13612565445026178,
+            "f1": 0.2184873949579832
+          },
+          {
+            "label": "constant",
+            "support": 17,
+            "precision": 0.2857142857142857,
+            "recall": 0.11764705882352941,
+            "f1": 0.16666666666666666
+          },
+          {
+            "label": "operator",
+            "support": 341,
+            "precision": 0.7235772357723578,
+            "recall": 0.782991202346041,
+            "f1": 0.752112676056338
+          }
+        ],
+        "confusion": [
+          [726, 59, 70, 0, 32, 16, 3, 2, 50, 0],
+          [629, 265, 102, 4, 67, 37, 9, 2, 52, 0],
+          [252, 61, 151, 0, 16, 1, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [178, 13, 14, 0, 107, 2, 8, 0, 0, 0],
+          [482, 40, 21, 0, 25, 91, 1, 1, 0, 0],
+          [147, 5, 7, 0, 2, 4, 26, 0, 0, 0],
+          [14, 1, 0, 0, 0, 0, 0, 2, 0, 0],
+          [30, 18, 18, 0, 5, 3, 0, 0, 267, 0]
+        ],
+        "confusionColumns": [
+          "plain",
+          "comment",
+          "string",
+          "number",
+          "keyword",
+          "type",
+          "function",
+          "constant",
+          "operator",
+          "abstain"
+        ]
+      }
+    },
+    "python": {
+      "application": {
+        "snippets": 6,
+        "accepted": 0,
+        "abstentionRate": 1,
+        "exactAccuracy": 0,
+        "characters": 3909,
+        "agreement": 0,
+        "acceptedCharacterAgreement": null,
+        "styledMacroF1": 0,
+        "classes": [
+          {
+            "label": "plain",
+            "support": 1149,
+            "precision": null,
+            "recall": 0,
+            "f1": 0
+          },
+          {
+            "label": "comment",
+            "support": 328,
+            "precision": null,
+            "recall": 0,
+            "f1": 0
+          },
+          {
+            "label": "string",
+            "support": 1324,
+            "precision": null,
+            "recall": 0,
+            "f1": 0
+          },
+          {
+            "label": "number",
+            "support": 18,
+            "precision": null,
+            "recall": 0,
+            "f1": 0
+          },
+          {
+            "label": "keyword",
+            "support": 329,
+            "precision": null,
+            "recall": 0,
+            "f1": 0
+          },
+          {
+            "label": "type",
+            "support": 136,
+            "precision": null,
+            "recall": 0,
+            "f1": 0
+          },
+          {
+            "label": "function",
+            "support": 228,
+            "precision": null,
+            "recall": 0,
+            "f1": 0
+          },
+          {
+            "label": "constant",
+            "support": 31,
+            "precision": null,
+            "recall": 0,
+            "f1": 0
+          },
+          {
+            "label": "operator",
+            "support": 366,
+            "precision": null,
+            "recall": 0,
+            "f1": 0
+          }
+        ],
+        "confusion": [
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 1149],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 328],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 1324],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 18],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 329],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 136],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 228],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 31],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 366]
+        ],
+        "confusionColumns": [
+          "plain",
+          "comment",
+          "string",
+          "number",
+          "keyword",
+          "type",
+          "function",
+          "constant",
+          "operator",
+          "abstain"
+        ]
+      },
+      "diagnostic": {
+        "snippets": 6,
+        "accepted": 6,
+        "abstentionRate": 0,
+        "exactAccuracy": 0,
+        "characters": 3909,
+        "agreement": 0.44768482987976466,
+        "acceptedCharacterAgreement": 0.44768482987976466,
+        "styledMacroF1": 0.41152800743124535,
+        "classes": [
+          {
+            "label": "plain",
+            "support": 1149,
+            "precision": 0.4082464884458541,
+            "recall": 0.7841601392515231,
+            "f1": 0.5369487485101311
+          },
+          {
+            "label": "comment",
+            "support": 328,
+            "precision": 0.1837837837837838,
+            "recall": 0.2073170731707317,
+            "f1": 0.19484240687679083
+          },
+          {
+            "label": "string",
+            "support": 1324,
+            "precision": 0.6675675675675675,
+            "recall": 0.1865558912386707,
+            "f1": 0.29161747343565525
+          },
+          {
+            "label": "number",
+            "support": 18,
+            "precision": 0.65,
+            "recall": 0.7222222222222222,
+            "f1": 0.6842105263157895
+          },
+          {
+            "label": "keyword",
+            "support": 329,
+            "precision": 0.4744897959183674,
+            "recall": 0.5653495440729484,
+            "f1": 0.5159500693481276
+          },
+          {
+            "label": "type",
+            "support": 136,
+            "precision": 0.059322033898305086,
+            "recall": 0.051470588235294115,
+            "f1": 0.05511811023622047
+          },
+          {
+            "label": "function",
+            "support": 228,
+            "precision": 0.36,
+            "recall": 0.11842105263157894,
+            "f1": 0.1782178217821782
+          },
+          {
+            "label": "constant",
+            "support": 31,
+            "precision": 0.42592592592592593,
+            "recall": 0.7419354838709677,
+            "f1": 0.5411764705882353
+          },
+          {
+            "label": "operator",
+            "support": 366,
+            "precision": 0.9174917491749175,
+            "recall": 0.7595628415300546,
+            "f1": 0.8310911808669657
+          }
+        ],
+        "confusion": [
+          [901, 56, 58, 0, 44, 53, 33, 4, 0, 0],
+          [172, 68, 37, 1, 21, 13, 1, 7, 8, 0],
+          [675, 203, 247, 6, 122, 37, 6, 12, 16, 0],
+          [0, 2, 2, 13, 0, 0, 0, 0, 1, 0],
+          [118, 13, 6, 0, 186, 6, 0, 0, 0, 0],
+          [109, 3, 4, 0, 4, 7, 8, 1, 0, 0],
+          [177, 5, 10, 0, 7, 2, 27, 0, 0, 0],
+          [7, 1, 0, 0, 0, 0, 0, 23, 0, 0],
+          [48, 19, 6, 0, 8, 0, 0, 7, 278, 0]
+        ],
+        "confusionColumns": [
+          "plain",
+          "comment",
+          "string",
+          "number",
+          "keyword",
+          "type",
+          "function",
+          "constant",
+          "operator",
+          "abstain"
+        ]
+      }
+    },
+    "rust": {
+      "application": {
+        "snippets": 6,
+        "accepted": 0,
+        "abstentionRate": 1,
+        "exactAccuracy": 0,
+        "characters": 2899,
+        "agreement": 0,
+        "acceptedCharacterAgreement": null,
+        "styledMacroF1": 0,
+        "classes": [
+          {
+            "label": "plain",
+            "support": 403,
+            "precision": null,
+            "recall": 0,
+            "f1": 0
+          },
+          {
+            "label": "comment",
+            "support": 1336,
+            "precision": null,
+            "recall": 0,
+            "f1": 0
+          },
+          {
+            "label": "string",
+            "support": 152,
+            "precision": null,
+            "recall": 0,
+            "f1": 0
+          },
+          {
+            "label": "number",
+            "support": 58,
+            "precision": null,
+            "recall": 0,
+            "f1": 0
+          },
+          {
+            "label": "keyword",
+            "support": 120,
+            "precision": null,
+            "recall": 0,
+            "f1": 0
+          },
+          {
+            "label": "type",
+            "support": 67,
+            "precision": null,
+            "recall": 0,
+            "f1": 0
+          },
+          {
+            "label": "function",
+            "support": 453,
+            "precision": null,
+            "recall": 0,
+            "f1": 0
+          },
+          {
+            "label": "constant",
+            "support": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null
+          },
+          {
+            "label": "operator",
+            "support": 310,
+            "precision": null,
+            "recall": 0,
+            "f1": 0
+          }
+        ],
+        "confusion": [
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 403],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 1336],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 152],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 58],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 120],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 67],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 453],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 310]
+        ],
+        "confusionColumns": [
+          "plain",
+          "comment",
+          "string",
+          "number",
+          "keyword",
+          "type",
+          "function",
+          "constant",
+          "operator",
+          "abstain"
+        ]
+      },
+      "diagnostic": {
+        "snippets": 6,
+        "accepted": 6,
+        "abstentionRate": 0,
+        "exactAccuracy": 0,
+        "characters": 2899,
+        "agreement": 0.3742669886167644,
+        "acceptedCharacterAgreement": 0.3742669886167644,
+        "styledMacroF1": 0.3935116829723076,
+        "classes": [
+          {
+            "label": "plain",
+            "support": 403,
+            "precision": 0.19307589880159787,
+            "recall": 0.7196029776674938,
+            "f1": 0.30446194225721784
+          },
+          {
+            "label": "comment",
+            "support": 1336,
+            "precision": 0.7304526748971193,
+            "recall": 0.2657185628742515,
+            "f1": 0.3896816684961581
+          },
+          {
+            "label": "string",
+            "support": 152,
+            "precision": 0.15384615384615385,
+            "recall": 0.21052631578947367,
+            "f1": 0.17777777777777778
+          },
+          {
+            "label": "number",
+            "support": 58,
+            "precision": 0.8333333333333334,
+            "recall": 0.603448275862069,
+            "f1": 0.7
+          },
+          {
+            "label": "keyword",
+            "support": 120,
+            "precision": 0.3502824858757062,
+            "recall": 0.5166666666666667,
+            "f1": 0.4175084175084175
+          },
+          {
+            "label": "type",
+            "support": 67,
+            "precision": 0.0821917808219178,
+            "recall": 0.08955223880597014,
+            "f1": 0.08571428571428572
+          },
+          {
+            "label": "function",
+            "support": 453,
+            "precision": 0.5897435897435898,
+            "recall": 0.10154525386313466,
+            "f1": 0.17325800376647835
+          },
+          {
+            "label": "constant",
+            "support": 0,
+            "precision": 0,
+            "recall": null,
+            "f1": 0
+          },
+          {
+            "label": "operator",
+            "support": 310,
+            "precision": 0.7872340425531915,
+            "recall": 0.8354838709677419,
+            "f1": 0.810641627543036
+          }
+        ],
+        "confusion": [
+          [290, 50, 23, 0, 16, 12, 12, 0, 0, 0],
+          [674, 355, 116, 4, 92, 40, 14, 1, 40, 0],
+          [79, 21, 32, 0, 2, 6, 2, 1, 9, 0],
+          [6, 8, 7, 35, 0, 1, 1, 0, 0, 0],
+          [48, 8, 0, 0, 62, 2, 0, 0, 0, 0],
+          [43, 9, 2, 0, 2, 6, 3, 2, 0, 0],
+          [334, 24, 19, 0, 3, 6, 46, 0, 21, 0],
+          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          [28, 11, 9, 3, 0, 0, 0, 0, 259, 0]
+        ],
+        "confusionColumns": [
+          "plain",
+          "comment",
+          "string",
+          "number",
+          "keyword",
+          "type",
+          "function",
+          "constant",
+          "operator",
+          "abstain"
+        ]
+      }
+    }
+  },
+  "examples": [
+    {
+      "source": {
+        "repo": "remix-run/react-router",
+        "commit": "7aea711dd1ae2bc5a076d13ff17291829690fa74",
+        "license": "MIT",
+        "split": "test",
+        "language": "typescript",
+        "prefix": "packages/react-router/lib/",
+        "path": "packages/react-router/lib/types/internal.ts",
+        "start": 66,
+        "end": 1007,
+        "sha256": "e4e62f1a58449721d57ccf837ada2ed846c4281ac64f1e9e30db620c5639f405",
+        "fullSha256": "b4ca49be4b1c65731f6124a5fc75c0284c65086c213769ca060dafcdfedd9942"
+      },
+      "status": "uncertain",
+      "confidence": 0,
+      "reason": "Input does not satisfy the supported input limits."
+    },
+    {
+      "source": {
+        "repo": "remix-run/react-router",
+        "commit": "7aea711dd1ae2bc5a076d13ff17291829690fa74",
+        "license": "MIT",
+        "split": "test",
+        "language": "typescript",
+        "prefix": "packages/react-router/lib/",
+        "path": "packages/react-router/lib/dom/ssr/data.ts",
+        "start": 99,
+        "end": 1122,
+        "sha256": "f1e86cd5e3727a447a10f5b8804780297a96282fe82282dea9c4ad0cc86718ef",
+        "fullSha256": "11ddb67dcc5fca0ff1dfb8ec1c0e676fcb789fd1fb81c2c54cb3656c9e836f87"
+      },
+      "status": "uncertain",
+      "confidence": 0,
+      "reason": "Input does not satisfy the supported input limits."
+    },
+    {
+      "source": {
+        "repo": "remix-run/react-router",
+        "commit": "7aea711dd1ae2bc5a076d13ff17291829690fa74",
+        "license": "MIT",
+        "split": "test",
+        "language": "typescript",
+        "prefix": "packages/react-router/lib/",
+        "path": "packages/react-router/lib/dom/ssr/fog-of-war.ts",
+        "start": 7526,
+        "end": 8550,
+        "sha256": "71e5d9d8991306bdd2a27e41f016b804d3770283bb5c8e86d71a635b78afe987",
+        "fullSha256": "4dc07e268e3a2432a39dd5b32321e77c990012b3122af90e63d56c5bc5979faa"
+      },
+      "status": "uncertain",
+      "confidence": 0,
+      "reason": "Input does not satisfy the supported input limits."
+    },
+    {
+      "source": {
+        "repo": "remix-run/react-router",
+        "commit": "7aea711dd1ae2bc5a076d13ff17291829690fa74",
+        "license": "MIT",
+        "split": "test",
+        "language": "typescript",
+        "prefix": "packages/react-router/lib/",
+        "path": "packages/react-router/lib/rsc/html-stream/browser.ts",
+        "start": 468,
+        "end": 1492,
+        "sha256": "58386d05875f0402c9d2a4714a801a28ee1c58ff39f229484ffbdbc66e71084c",
+        "fullSha256": "ede1bf3c5b081af29145cb0daf5ca80e604ad5b415624f207dc2e513dd31ce4c"
+      },
+      "status": "uncertain",
+      "confidence": 0,
+      "reason": "Input does not satisfy the supported input limits."
+    },
+    {
+      "source": {
+        "repo": "remix-run/react-router",
+        "commit": "7aea711dd1ae2bc5a076d13ff17291829690fa74",
+        "license": "MIT",
+        "split": "test",
+        "language": "typescript",
+        "prefix": "packages/react-router/lib/",
+        "path": "packages/react-router/lib/router/matcher.ts",
+        "start": 77,
+        "end": 954,
+        "sha256": "cf72b452bd03f1f34f6139c16809b4748625a0b918cb6a6af4757ab965e04a7c",
+        "fullSha256": "ee68e1fefa3fb79a76bd61714dc828c6f1fc627f88438acea2d2d2703fd1219e"
+      },
+      "status": "uncertain",
+      "confidence": 0,
+      "reason": "Input does not satisfy the supported input limits."
+    },
+    {
+      "source": {
+        "repo": "remix-run/react-router",
+        "commit": "7aea711dd1ae2bc5a076d13ff17291829690fa74",
+        "license": "MIT",
+        "split": "test",
+        "language": "typescript",
+        "prefix": "packages/react-router/lib/",
+        "path": "packages/react-router/lib/server-runtime/mode.ts",
+        "start": 4,
+        "end": 348,
+        "sha256": "2b75a62897d15d94fbb43ab36ecbc1a8450a9a53a674fbfa7f64a398dffb0065",
+        "fullSha256": "3593c1303a70099eaed54ef522e755f996f145e1b9d430320d311e558b85602f"
+      },
+      "status": "uncertain",
+      "confidence": 0.24904976785182953,
+      "reason": "Recognition confidence is too low."
+    },
+    {
+      "source": {
+        "repo": "django/django",
+        "commit": "026b005f3dc43a98557ce5a546b5e4938d06fed1",
+        "license": "BSD-3-Clause",
+        "split": "test",
+        "language": "python",
+        "prefix": "django/utils/",
+        "path": "django/utils/hashable.py",
+        "start": 37,
+        "end": 738,
+        "sha256": "41c929f53166f643f933f72d9eb32531555cf59aed5c0588053408ff41fb9863",
+        "fullSha256": "1f370baf860f64696cfd32edd1a42b6bb7021dc169fa1a5310e70e27f0d3423d"
+      },
+      "status": "uncertain",
+      "confidence": 0,
+      "reason": "Input does not satisfy the supported input limits."
+    },
+    {
+      "source": {
+        "repo": "django/django",
+        "commit": "026b005f3dc43a98557ce5a546b5e4938d06fed1",
+        "license": "BSD-3-Clause",
+        "split": "test",
+        "language": "python",
+        "prefix": "django/utils/",
+        "path": "django/utils/dateformat.py",
+        "start": 2093,
+        "end": 3117,
+        "sha256": "8f029a68adec83c5b47dffcf80db8833ce33ae0a2efbcb234e9e5942852103ff",
+        "fullSha256": "bb5dc7ca9f2fbcd662a925bbe6ed877983a31c9ac730c144d1938ae034014268"
+      },
+      "status": "uncertain",
+      "confidence": 0,
+      "reason": "Input does not satisfy the supported input limits."
+    },
+    {
+      "source": {
+        "repo": "django/django",
+        "commit": "026b005f3dc43a98557ce5a546b5e4938d06fed1",
+        "license": "BSD-3-Clause",
+        "split": "test",
+        "language": "python",
+        "prefix": "django/utils/",
+        "path": "django/utils/translation/trans_real.py",
+        "start": 9999,
+        "end": 11023,
+        "sha256": "53718e0fc54ff5f2058bd2b5bb06fb799ffe4ff19f40e6d2c8f94a3f82a1348c",
+        "fullSha256": "6775b7a47508827cf210f890ac00bcdc5705e14c5bf97657f5c6fdd530622726"
+      },
+      "status": "uncertain",
+      "confidence": 0,
+      "reason": "Input does not satisfy the supported input limits."
+    },
+    {
+      "source": {
+        "repo": "django/django",
+        "commit": "026b005f3dc43a98557ce5a546b5e4938d06fed1",
+        "license": "BSD-3-Clause",
+        "split": "test",
+        "language": "python",
+        "prefix": "django/utils/",
+        "path": "django/utils/xmlutils.py",
+        "start": 221,
+        "end": 1245,
+        "sha256": "ee1858044ee456a35db7497f6e88f808053c0c50b549e7781ca27291c51936b2",
+        "fullSha256": "f5a408b61d7adef6d821533bc8ed7e77583d9cee1e37104fdf2167f1547cc9b7"
+      },
+      "status": "uncertain",
+      "confidence": 0,
+      "reason": "Input does not satisfy the supported input limits."
+    },
+    {
+      "source": {
+        "repo": "django/django",
+        "commit": "026b005f3dc43a98557ce5a546b5e4938d06fed1",
+        "license": "BSD-3-Clause",
+        "split": "test",
+        "language": "python",
+        "prefix": "django/utils/",
+        "path": "django/utils/dateparse.py",
+        "start": 3519,
+        "end": 4543,
+        "sha256": "47bd78025f26a0437f9469df65155a97490fb43b8a8b215c7179fb8f12989d40",
+        "fullSha256": "ea50d8b5821e8be805f6b4bde14481c14232d8b60dd713508921873eb44f2ade"
+      },
+      "status": "uncertain",
+      "confidence": 0,
+      "reason": "Input does not satisfy the supported input limits."
+    },
+    {
+      "source": {
+        "repo": "django/django",
+        "commit": "026b005f3dc43a98557ce5a546b5e4938d06fed1",
+        "license": "BSD-3-Clause",
+        "split": "test",
+        "language": "python",
+        "prefix": "django/utils/",
+        "path": "django/utils/asyncio.py",
+        "start": 136,
+        "end": 1138,
+        "sha256": "e8a9d6d1a836dffbfe9139fbb82204038aca870a363b43a14c2d70923a04507e",
+        "fullSha256": "d2094e8377869a6b3e814bf4e19803bd9b75f4865b74f042eb83e768aa9e1837"
+      },
+      "status": "uncertain",
+      "confidence": 0,
+      "reason": "Input does not satisfy the supported input limits."
+    },
+    {
+      "source": {
+        "repo": "rust-lang/rustlings",
+        "commit": "a650509c789da1656f813392b16aa1fa043b7f3e",
+        "license": "MIT",
+        "split": "test",
+        "language": "rust",
+        "prefix": "exercises/",
+        "path": "exercises/05_vecs/vecs2.rs",
+        "start": 41,
+        "end": 501,
+        "sha256": "a315ac2d8907b83c48e29fd5147bc33e812b1c8cdccc0bfbc2b946e76cccad2f",
+        "fullSha256": "eb049f3e5e74ce319423888109aaf9f1db1234a2e751225883e5a860d3254d5c"
+      },
+      "status": "uncertain",
+      "confidence": 0.2063928097486496,
+      "reason": "Recognition confidence is too low."
+    },
+    {
+      "source": {
+        "repo": "rust-lang/rustlings",
+        "commit": "a650509c789da1656f813392b16aa1fa043b7f3e",
+        "license": "MIT",
+        "split": "test",
+        "language": "rust",
+        "prefix": "exercises/",
+        "path": "exercises/04_primitive_types/primitive_types3.rs",
+        "start": 12,
+        "end": 323,
+        "sha256": "6c6f9b6640eb4fe6726e15012173f810e04a464cfd4dbdbb3f48078cf57bd30f",
+        "fullSha256": "7d82a7879da0de56e202bb138cd4529f18dc252aed19fdbce42a0d6506f24d4a"
+      },
+      "status": "uncertain",
+      "confidence": 0.24450133740901947,
+      "reason": "Recognition confidence is too low."
+    },
+    {
+      "source": {
+        "repo": "rust-lang/rustlings",
+        "commit": "a650509c789da1656f813392b16aa1fa043b7f3e",
+        "license": "MIT",
+        "split": "test",
+        "language": "rust",
+        "prefix": "exercises/",
+        "path": "exercises/quizzes/quiz1.rs",
+        "start": 46,
+        "end": 870,
+        "sha256": "e358cd2f3c161c09a245258ede1a3fd9b79f5b5ff696f52b75071caaf4ea15f2",
+        "fullSha256": "5d9f7ed42d473bdefc9a489a901619969032aae5a906d6e66ea404c6f692c264"
+      },
+      "status": "uncertain",
+      "confidence": 0,
+      "reason": "Input does not satisfy the supported input limits."
+    },
+    {
+      "source": {
+        "repo": "rust-lang/rustlings",
+        "commit": "a650509c789da1656f813392b16aa1fa043b7f3e",
+        "license": "MIT",
+        "split": "test",
+        "language": "rust",
+        "prefix": "exercises/",
+        "path": "exercises/12_options/options2.rs",
+        "start": 12,
+        "end": 965,
+        "sha256": "047d7dbdc50d2c233bb51350f8ff86dd4532cdca10bde7a60a5a5f330259234d",
+        "fullSha256": "190f598cd9640e8ad61c94a1e39832839ed0892a25ef74b3bfae8c0625380e93"
+      },
+      "status": "uncertain",
+      "confidence": 0,
+      "reason": "Input does not satisfy the supported input limits."
+    },
+    {
+      "source": {
+        "repo": "rust-lang/rustlings",
+        "commit": "a650509c789da1656f813392b16aa1fa043b7f3e",
+        "license": "MIT",
+        "split": "test",
+        "language": "rust",
+        "prefix": "exercises/",
+        "path": "exercises/02_functions/functions4.rs",
+        "start": 80,
+        "end": 566,
+        "sha256": "a5b6f73eb8348482a39812baef9218678bddffcdb2ed90e595a71f2b5f43aa0f",
+        "fullSha256": "59a5c7cb37bb001ee8e33f68311d0a439fc80bb126b47a93de7ae75cd4b34160"
+      },
+      "status": "uncertain",
+      "confidence": 0,
+      "reason": "The model has insufficient training coverage to answer confidently."
+    },
+    {
+      "source": {
+        "repo": "rust-lang/rustlings",
+        "commit": "a650509c789da1656f813392b16aa1fa043b7f3e",
+        "license": "MIT",
+        "split": "test",
+        "language": "rust",
+        "prefix": "exercises/",
+        "path": "exercises/07_structs/structs1.rs",
+        "start": 28,
+        "end": 1052,
+        "sha256": "45db9c57ef0c47163e3ed54327137c6749b9969167d4528cfb8443bce1c28dd8",
+        "fullSha256": "af9ac7670eeceb9ffb42dc6236fa52fb1b6ec5b3e02b8b9d4d4b992f981b7703"
+      },
+      "status": "uncertain",
+      "confidence": 0,
+      "reason": "Input does not satisfy the supported input limits."
+    }
+  ]
+}

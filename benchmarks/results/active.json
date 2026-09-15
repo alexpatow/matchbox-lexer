@@ -1,0 +1,11 @@
+{
+  "experiment": "00-pilot",
+  "matchbox": "0.2.0",
+  "modelBytes": 7655,
+  "parameters": 1129,
+  "trainingMs": 1435.268375,
+  "diagnosticAgreement": 0.40836835373652475,
+  "applicationAgreement": 0,
+  "abstentionRate": 1,
+  "testExamples": 18
+}

@@ -1,0 +1,24 @@
+{
+  "upstream": "1e514fd681e31d6b19296f985fb01d8fdc0ae74f",
+  "labeler": "shiki@4.4.3",
+  "labelingWallSeconds": 407.8,
+  "labelingMaxResidentBytes": 1649721344,
+  "fetchTime": "Not separately timed on this initial run",
+  "splits": {
+    "train": {
+      "examples": 4299,
+      "units": 12255184,
+      "sha256": "f57efd6ca7ec46ece8546214fa9a48cedb3a954a432d0bef90958a6a273d329d"
+    },
+    "validation": {
+      "examples": 336,
+      "units": 843341,
+      "sha256": "659c1b8997bbaf7b3057d318aa916e9e41c7af1f8bb11d4d4f44e2b26362c1ae"
+    },
+    "test": {
+      "examples": 1915,
+      "units": 1841084,
+      "sha256": "cf1be2b37a22d581552f43e114b1dd958311e820e233f982234365f0968b46cd"
+    }
+  }
+}

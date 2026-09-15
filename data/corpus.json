@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "upstream": {
+    "repo": "vercel-labs/gpu-lexer",
+    "commit": "1e514fd681e31d6b19296f985fb01d8fdc0ae74f"
+  },
+  "shiki": "4.4.3",
+  "seed": "lexer-v1",
+  "filesPerRepository": {
+    "train": 16,
+    "validation": 6,
+    "test": 6
+  },
+  "maxUnits": 1024,
+  "sources": [
+    {
+      "repo": "vitejs/vite",
+      "commit": "f40efefbb3630cdb7235286bc2b51673d9fbfc27",
+      "license": "MIT",
+      "split": "train",
+      "language": "typescript",
+      "prefix": "packages/vite/src/"
+    },
+    {
+      "repo": "psf/requests",
+      "commit": "5460f467b02e49471c0fd6cfc9ca0adab6351f98",
+      "license": "Apache-2.0",
+      "split": "train",
+      "language": "python",
+      "prefix": "src/requests/"
+    },
+    {
+      "repo": "serde-rs/serde",
+      "commit": "a874a1b1bb1cc16cf5ee3b1b7b527af5705742bb",
+      "license": "Apache-2.0",
+      "split": "train",
+      "language": "rust",
+      "prefix": "serde/src/"
+    },
+    {
+      "repo": "preactjs/preact",
+      "commit": "921df340a25afd1c3090fcc7b5073ab093309a75",
+      "license": "MIT",
+      "split": "validation",
+      "language": "javascript",
+      "prefix": "src/"
+    },
+    {
+      "repo": "pallets/click",
+      "commit": "36baa15ff831b939a22bc527cd76ce653ef6f66d",
+      "license": "BSD-3-Clause",
+      "split": "validation",
+      "language": "python",
+      "prefix": "src/click/"
+    },
+    {
+      "repo": "tokio-rs/bytes",
+      "commit": "d5c8ad3227afe459c09f1d0d85455abf00f0381a",
+      "license": "MIT",
+      "split": "validation",
+      "language": "rust",
+      "prefix": "src/"
+    },
+    {
+      "repo": "remix-run/react-router",
+      "commit": "7aea711dd1ae2bc5a076d13ff17291829690fa74",
+      "license": "MIT",
+      "split": "test",
+      "language": "typescript",
+      "prefix": "packages/react-router/lib/"
+    },
+    {
+      "repo": "django/django",
+      "commit": "026b005f3dc43a98557ce5a546b5e4938d06fed1",
+      "license": "BSD-3-Clause",
+      "split": "test",
+      "language": "python",
+      "prefix": "django/utils/"
+    },
+    {
+      "repo": "rust-lang/rustlings",
+      "commit": "a650509c789da1656f813392b16aa1fa043b7f3e",
+      "license": "MIT",
+      "split": "test",
+      "language": "rust",
+      "prefix": "exercises/"
+    }
+  ]
+}

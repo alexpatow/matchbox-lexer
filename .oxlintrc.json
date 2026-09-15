@@ -1,0 +1,11 @@
+{
+  "plugins": ["typescript", "react", "jsx-a11y"],
+  "categories": { "correctness": "error" },
+  "rules": {
+    "no-nested-ternary": "error",
+    "curly": ["error", "all"],
+    "eqeqeq": ["error", "always", { "null": "ignore" }],
+    "no-else-return": "error"
+  },
+  "ignorePatterns": ["data/generated/**", ".matchbox/**", "dist/**", "scripts/teacher/classes.js"]
+}

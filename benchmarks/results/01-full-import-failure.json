@@ -1,0 +1,19 @@
+{
+  "experiment": "01-full",
+  "corpus": "full",
+  "matchbox": "0.2.0",
+  "finishedAt": "2026-09-15T11:07:18.522Z",
+  "exitCode": 1,
+  "wallMs": 755.6018750000001,
+  "peakResidentBytes": 118276096,
+  "heapLimitMiB": 3072,
+  "machine": {
+    "platform": "darwin",
+    "arch": "arm64",
+    "cpu": "Apple M2",
+    "memoryBytes": 8589934592
+  },
+  "log": "data/generated/logs/01-full-import-failure.log",
+  "timing": "data/generated/logs/01-full-import-failure-resources.log",
+  "reason": "Node could not resolve extensionless consumer task imports; fixed by explicit .ts imports."
+}
