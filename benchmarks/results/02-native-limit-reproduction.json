@@ -1,0 +1,18 @@
+{
+  "matchbox": "0.2.0",
+  "publicApi": "@matchbox-ai/train.train",
+  "results": [
+    {
+      "supervisedCharacters": 32,
+      "status": "trained",
+      "wallMs": 107.72208400000001,
+      "trainingMs": 62.42575000000002
+    },
+    {
+      "supervisedCharacters": 1000002,
+      "status": "failed",
+      "wallMs": 649.9398749999999,
+      "error": "Error: Expected a nonempty batch of three-token windows"
+    }
+  ]
+}

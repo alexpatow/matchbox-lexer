@@ -23,11 +23,13 @@ async function* rows(path: string) {
   }
 }
 
+const corpus = process.env.CORPUS ?? "full-clean-v1";
+const experiment = process.env.EXPERIMENT ?? "02-full-clean";
 const owners = new Map<string, { split: string; index: number; source: unknown }[]>();
 for (const split of ["train", "validation", "test"]) {
-  const sources = await Bun.file(`data/generated/full/${split}-sources.json`).json();
+  const sources = await Bun.file(`data/generated/${corpus}/${split}-sources.json`).json();
   let index = 0;
-  for await (const row of rows(`data/generated/full/${split}.jsonl`)) {
+  for await (const row of rows(`data/generated/${corpus}/${split}.jsonl`)) {
     const key = hash(row.input.trim().toLowerCase());
     const values = owners.get(key) ?? [];
     values.push({ split, index, source: sources[index] });
@@ -50,5 +52,8 @@ const result = {
   affected,
   overlaps,
 };
-await Bun.write("benchmarks/results/01-full-overlaps.json", JSON.stringify(result, null, 2) + "\n");
+await Bun.write(
+  `benchmarks/results/${experiment}-overlaps.json`,
+  JSON.stringify(result, null, 2) + "\n",
+);
 console.log(JSON.stringify({ groups: result.groups, affected }, null, 2));
