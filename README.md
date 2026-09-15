@@ -2,7 +2,7 @@
 
 An independent syntax-highlighting experiment built with published Matchbox packages. Inspired by [gpu-lexer](https://github.com/vercel-labs/gpu-lexer) by [Shu Ding](https://github.com/shuding).
 
-**Resume work from [HANDOFF.md](HANDOFF.md).** It records exact progress, commands, local artifacts, failures and next steps. The full corpus has been cleaned of training/test overlap and frozen as full-clean-v1. Its training attempt exposed a one-million-window limit in Matchbox 0.2.0; the failure and public-API reproduction are recorded below. The browser artifact is still the explicitly labeled pilot.
+**Resume work from [HANDOFF.md](HANDOFF.md).** It records exact progress, commands, local artifacts, failures and next steps. The full corpus is frozen as full-clean-v1. Version 0.2.1 fixed the dataset-size blocker, but the full run now fails export verification on a small confidence difference. The diagnostic and proposed correction are recorded below. The browser artifact is still the explicitly labeled pilot.
 
 The experiment tests the whole consumer flow: pinned source data, offline teacher labeling, native training, independent evaluation, a packaged browser model, and a React/Vite workbench. Experiments 00–02 use Matchbox 0.2.0; experiment 03 upgrades all three npm packages to 0.2.1. No workspace dependencies, framework patches, hidden grammar fallback, or rewritten inference engine are used.
 
@@ -19,7 +19,7 @@ bun run evaluate
 bun run dev
 ```
 
-The current published version fails full-corpus training at its native size guard. These commands describe the intended flow; successful full-corpus training requires the framework correction first.
+Published 0.2.1 passes the native size guard but fails the full model export check. These commands describe the intended flow; successful full-corpus training requires the framework correction first.
 
 Full corpus preparation downloads pinned upstream sources and runs upstream's unchanged selection and Shiki labeling scripts. It can take substantial time and disk space. Prepared data and models are ignored. Save them with their hashes to reproduce a run without fetching sources again.
 
@@ -77,11 +77,13 @@ The backend already trains in minibatches of 128 windows. The immediate framewor
 
 **Reproduction:** Through the public training API, 32 supervised characters trained successfully in 62.426 ms. A separate dataset with 1,000,002 supervised characters failed with the same error in 649.940 ms. See [the reproduction report](benchmarks/results/02-native-limit-reproduction.json).
 
-The focused correction is in [Matchbox PR #21](https://github.com/alexpatow/matchbox/pull/21). Its full checks and 18 browser tests pass. This consumer stays on npm 0.2.0 until the corrected release is published, after which experiment 03 will reuse full-clean-v1.
+The focused correction is in [Matchbox PR #21](https://github.com/alexpatow/matchbox/pull/21). Its full checks and 18 browser tests pass. Experiment 03 below uses its published 0.2.1 release on full-clean-v1.
 
 ### 03. Published 0.2.1 on the same full corpus
 
-Installed the published CLI, core and trainer at exactly 0.2.1 after the release passed all platform and browser checks. Full-clean-v1 hashes are unchanged. The pipeline, model settings and scoring contract remain unchanged. Training is starting; no result is available yet. Timings and results will use the 03-full-clean report prefix, preserving the earlier failures.
+Installed the published CLI, core and trainer at exactly 0.2.1 after the release passed all platform and browser checks. Full-clean-v1 hashes are unchanged. The pipeline, model settings and scoring contract remain unchanged. The native fit completed, but export verification failed with `Burn native and WASM predictions disagree.` CLI wall time was **522.663 seconds (8m43s)** with **1,465,024,512 bytes peak resident memory**. The failed CLI did not persist native-only timing or weights, and the browser remains on the pilot. No full-corpus accuracy is available. See [the preserved run](benchmarks/results/03-full-clean-training.json).
+
+A separate saved-weight framework diagnostic reproduced the failure with **zero differing labels across 945,166 tokens** and maximum confidence drift **0.00001538**, slightly above the old cutoff. The proposed guard uses an explicit 0.0001 confidence tolerance while rejecting every label difference and every acceptance-threshold crossing. Replaying the saved model passes with zero threshold crossings. This is framework diagnosis, not a successful consumer training result. See [diagnostic evidence](benchmarks/results/03-export-parity-diagnostic.json).
 
 ## Reading the results
 

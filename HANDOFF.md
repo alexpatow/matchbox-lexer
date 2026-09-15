@@ -1,182 +1,109 @@
 # Resume Matchbox Lexer
 
-Last verified checkpoint: 2026-09-15, after full consumer and framework checks. Update this file after each substantive step. The user explicitly requested durable, detailed progress so another model can resume when credits run out.
+Last verified: 2026-09-15, after experiment 03 and its export-parity diagnostic. Update this file immediately after each substantive step. The user requested enough detail to resume with another model without relying on chat history.
 
-## Experiment 03, published 0.2.1
+## Current state
 
-Release run https://github.com/alexpatow/matchbox/actions/runs/34964944005 completed successfully. All eight native builds, packed-install tests, full checks and browser tests passed. npm propagation initially returned 404 for CLI/train, then resolved successfully. Installed all three packages at exactly 0.2.1 using Bun from npm; bun.lock is updated. No local framework patch or link is used.
+The consumer is `/Users/alex.patow/Developer/matchbox-lexer`, branch `codex/full-corpus-run`, private remote https://github.com/alexpatow/matchbox-lexer. PR #1 remains open. All three installed packages are exact npm **0.2.1**, recorded in package.json and bun.lock. There are no workspace links, patched packages or internal imports in the consumer pipeline.
 
-Full-clean-v1 train, validation and test hashes were reverified against data/full-clean-v1-lock.json. Starting `EXPERIMENT=03-full-clean bun run train` on the full 12,245,833-unit training corpus. Model settings, encoder, decoder, threshold and eval contract are unchanged. Defaults now use experiment 03. The timed process started at 12:07:56.165 UTC with PID 2570 (the time wrapper). Logs and PID are under data/generated/logs/03-full-clean-{train,resources}.log and 03-full-clean-running.json. Do not launch a duplicate process. No result is available yet.
+**Experiment 03 failed after native fitting, at export parity validation.** Its CLI wall time was 522,663.128 ms (8m42.663s), exit 1, max resident memory 1,465,024,512 bytes. Error: `Burn native and WASM predictions disagree.` No full model was packaged. `.matchbox/lexer/` and the browser still use the pilot. Do not evaluate that artifact as the full model. The public CLI did not preserve optimizer-only timing or fitted weights.
 
-Next: wait for training to finish, record wall/native time and memory, then run evaluation, check and browser benchmark using the same ID. Training/evaluation/browser report paths refuse overwriting historical attempts. No full-corpus score may be claimed until a completed report exists.
+A separate framework diagnostic reproduced the failure and preserved weights. Across 945,166 probe tokens, both runtimes chose identical labels. Maximum confidence drift was 0.00001537799835205078, above the old 0.00001 guard. A proposed fix permits 0.0001 absolute confidence drift, keeps strict label equality, and rejects any acceptance-threshold crossing. Replaying the saved full model passes with zero label disagreements and zero threshold crossings. This is diagnostic evidence, not a successful consumer pipeline result or an accuracy benchmark.
 
-## Read this first
+The fix is in `/Users/alex.patow/Developer/matchbox`, branch `codex/sequence-parity-diagnostics`. Full checks passed, including five new guard tests; browser checks are completing in `/tmp/matchbox-parity-browser.log`. A changeset is included. Do not change consumer thresholds or dependencies until a corrected release is published. No training or diagnostic process remains active.
 
-The working repository is `/Users/alex.patow/Developer/matchbox-lexer`, with private GitHub remote `https://github.com/alexpatow/matchbox-lexer`. The framework repository `/Users/alex.patow/Developer/matchbox` is separate. A focused fix is now on its `codex/training-dataset-validation` branch, based on origin/main at cd84d19. The consumer still uses untouched npm 0.2.0.
+## Immediate next steps
 
-**Current checkpoint, experiment 02:** The user authorized continuation after the account reset. Branch: `codex/full-corpus-run`. Test-priority duplicate ownership is applied: 125 overlapping training records removed, validation/test unchanged. `data/generated/full-clean-v1/` contains 4,174 training records and 12,245,833 UTF-16 units. `data/full-clean-v1-lock.json` freezes the identity; original full data is untouched. A fresh overlap audit found zero overlapping groups.
-
-**Current blocker:** The cleaned published-CLI run failed after 32.052 seconds, before optimizer training. Error: `Expected a nonempty batch of three-token windows`. Peak resident memory was 1,738,752,000 bytes; the heap limit was not reached. Published 0.2.0 source was verified against the GitHub release tag: crates/matchbox-engine/src/model.rs::validate_inputs rejects values.len() > 3_000_000, which is 1,000,000 three-token windows. crates/matchbox-engine/src/training.rs calls that same validator on the entire training dataset, then would train in batches of 128. Installed @matchbox-ai/train sends all windows in one native fit call. This is a general training-size bug, not a lexer limitation. No full-corpus model exists. No training process remains running; the running.json file is historical. The browser still uses the pilot.
-
-The public-API reproduction succeeded: 32 supervised characters trained in 62.426 ms; 1,000,002 failed with the same error after 649.940 ms. See scripts/reproduce-training-limit.ts and benchmarks/results/02-native-limit-reproduction.json. Next: review and merge framework PR #21, then use its Changesets release before upgrading this consumer and attempting experiment 03. The narrow framework fix is to separate whole-training-dataset validation from prediction batch limits, preserve malformed-input checks, and give explicit limit errors. Any framework change must be a separate reviewed/published release before this consumer upgrades. Do not patch node_modules or shrink this corpus to get a result. The framework change moves the size limit into prediction, preserving dataset shape/vocabulary validation. Three Rust regression tests and the full framework check passed, with output at /tmp/matchbox-training-validation-check.log. All 18 browser tests passed; output is /tmp/matchbox-training-validation-browser.log. The fix is committed as 3351f13 and pushed in https://github.com/alexpatow/matchbox/pull/21. No training, test or preview process remains active. No framework release has been made.
-
-Defaults now resolve `CORPUS=full-clean-v1` and `EXPERIMENT=02-full-clean`. Training refuses to overwrite existing report/log files. Inspect `data/generated/logs/02-full-clean-running.json` for the active process and command, and `benchmarks/results/02-full-clean-training.json` for completion. Do not start a second training process if the recorded process is still alive.
-
-Do not rerun downloads or labeling on this machine. All full source data and converted JSONL already exist under ignored `data/generated/`. The test-priority duplicate policy is already applied and verified. Preserve all historical reports and original full-corpus hashes.
-
-The consumer checkpoint is committed as c50b21b and pushed in PR https://github.com/alexpatow/matchbox-lexer/pull/1. Historical reports remain unchanged. The new formatter exclusion keeps recorded result JSON from being reformatted.
-
-## User intent and constraints
-
-1. Build a separate consumer experiment using published packages to expose missing general primitives.
-2. Use gpu-lexer as inspiration and benchmark reference, with its README-documented source corpus.
-3. Keep Matchbox pinned to 0.2.0 unchanged for the first real experiment. No internal imports, workspace links, local package patches, changed weights, lowered inference thresholds, or syntax rules in the decoder.
-4. Use the full prepared corpus for evolution comparisons. The bounded pilot is only a wiring test.
-5. Record every meaningful evolution in README.md, including data and package identities, training time, measurements and limitations.
-6. Preserve source-disjoint evaluation and do not tune against the test split. Do not hide missing GPU results or claim diagnostic predictions were accepted.
-7. Keep TypeScript/Bun authoring and React/Vite. No Python or separate user-managed ML stack.
-
-## Step-by-step status
-
-| Step                                                     | Status                                                 | Evidence and output                                                                                                                               |
-| -------------------------------------------------------- | ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Inspect upstream data, architecture and published APIs   | Done.                                                  | Upstream commit and findings are recorded below and in docs/findings.md.                                                                          |
-| Create independent private consumer repo                 | Done.                                                  | Git remote is alexpatow/matchbox-lexer; dependencies use exact npm versions.                                                                      |
-| Install published Matchbox 0.2.0                         | Done.                                                  | bun.lock; no workspace or file dependencies.                                                                                                      |
-| Author parser, pipeline, recipe, decoder                 | Done.                                                  | matchbox/lexer/*.ts; character labels, nine classes, UTF-16 spans.                                                                                |
-| Build bounded pilot data                                 | Done.                                                  | data/generated/pilot/; source manifest data/corpus.json.                                                                                          |
-| Train pilot through published CLI                        | Done.                                                  | .matchbox/pilot/ backup and .matchbox/lexer/ active artifact. Trainer time 1.435 s.                                                               |
-| Evaluate pilot                                           | Done.                                                  | benchmarks/results/00-pilot-evaluation.json. Application abstention 18/18; diagnostic agreement 40.84%, styled macro F1 41.80%.                   |
-| Build browser workbench                                  | Done.                                                  | src/, Vite build. Latest UI adds a results table using benchmarks/results/active.json.                                                            |
-| Browser pilot benchmark                                  | Done.                                                  | benchmarks/results/00-pilot-browser.json. Node/Burn WASM path works. gpu-lexer unavailable in default headless Chromium due to no WebGPU adapter. |
-| Desktop/mobile browser smoke                             | Passed on the current UI, including the results table. | Screenshot at data/generated/workbench.png. The final checkpoint browser report is benchmarks/results/00-pilot-checkpoint-browser.json.           |
-| Download full upstream data                              | Done.                                                  | Ignored pinned checkout and source downloads under data/generated/upstream/gpu-lexer/.                                                            |
-| Run full upstream selection/labeling                     | Done.                                                  | 407.80 seconds for builder, max resident 1,649,721,344 bytes. See 01-full-preparation.json.                                                       |
-| Convert every full record into Matchbox JSONL            | Done.                                                  | data/generated/full/, data/full-lock.json. No additional sampling or file slicing.                                                                |
-| Time first full CLI attempt                              | Failed before training.                                | 01-full-import-failure.json; explicit .ts consumer imports now fix the Node resolution error.                                                     |
-| Time second full CLI attempt                             | Failed at split validation.                            | 01-full-training.json; 7.739 s wall, 466,059,264 bytes max resident. No model training occurred.                                                  |
-| Audit duplicate inputs across splits                     | Done.                                                  | 01-full-overlaps.json: 30 groups, 125 train records, 279 test records; validation has zero overlap.                                               |
-| Resolve duplicate ownership and freeze cleaned full data | Done.                                                  | full-clean-v1 preserves every held-out record and removes 125 overlapping train records. The new audit has zero overlaps.                         |
-| Train/evaluate/benchmark the full corpus                 | Training attempted; blocked by native dataset cap.     | 02-full-clean-training.json: 32.052 seconds, exit 1. No full-corpus accuracy, latency or optimizer time exists.                                   |
-| Reproduce the native training-size bug                   | Done.                                                  | 02-native-limit-reproduction.json uses only the public train API, with a passing small control and a failing large dataset.                       |
-| Fix framework dataset validation                         | Next.                                                  | https://github.com/alexpatow/matchbox/pull/21; six Rust tests, 111 Bun tests and 18 browser tests pass. Consume only its published release.       |
-
-## Versions and machine
-
-- Matchbox CLI: `matchbox-ai@0.2.0`.
-- Runtime: `@matchbox-ai/core@0.2.0`.
-- Training: `@matchbox-ai/train@0.2.0`.
-- Teacher: `shiki@4.4.3`.
-- Optional reference: `gpu-lexer@0.0.2`. Do not equate this npm package with upstream's current promoted checkpoint.
-- Upstream corpus/labeling commit: `1e514fd681e31d6b19296f985fb01d8fdc0ae74f`, vercel-labs/gpu-lexer.
-- Bun: 1.4.2. Local Node command: v26.8.1. macOS: 27.0. CPU: Apple M2, ARM64. RAM: 8 GiB.
-- The timed Node command uses `--max-old-space-size=3072`. This limits JavaScript heap, not all native allocations. No memory limit was reached in the failed attempts.
-- Disk had approximately 12 GiB free before full preparation. Check `df -h .` before additional downloads.
-
-## Full dataset and immutable identities
-
-The upstream builder selected all prepared train records, unchanged. Upstream mining becomes Matchbox validation; upstream verification becomes Matchbox test. No language metadata enters inference. The upstream promoted checkpoint has warm-start/replay history, so its README training count is not the same as the prepared train shard.
-
-| Split      | Records | UTF-16 units | SHA-256 of converted JSONL                                       |
-| ---------- | ------: | -----------: | ---------------------------------------------------------------- |
-| train      |   4,299 |   12,255,184 | f57efd6ca7ec46ece8546214fa9a48cedb3a954a432d0bef90958a6a273d329d |
-| validation |     336 |      843,341 | 659c1b8997bbaf7b3057d318aa916e9e41c7af1f8bb11d4d4f44e2b26362c1ae |
-| test       |   1,915 |    1,841,084 | cf1be2b37a22d581552f43e114b1dd958311e820e233f982234365f0968b46cd |
-
-Original upstream shards: `data/generated/upstream/gpu-lexer/packages/training/data/generated/shards/{train,mining,verification}.jsonl.gz`. Train contains 3,000,000 upstream lexical parts. Mining contains 300,000. Verification contains 464,527, including website cases. Converted records use complete prepared source and merged character labels; no mid-file clipping is added.
-
-`data/upstream-corpus.json` retains the full source manifest. `data/corpus.json` is the pilot manifest, not the full dataset definition. `data/full-lock.json` freezes the original full conversion. `data/generated/full/summary.json` includes upstream details and rejected/minification cases. Upstream records its own labeling/minification failures; do not silently treat these as successful labels.
-
-## Dataset hygiene and native blocker
-
-Published Matchbox rejects normalized inputs shared across splits. The original audit found 30 groups, affecting 125 training records and 279 test records. This has been resolved by preserving all held-out data and removing contaminated training records before looking at model scores. `scripts/clean-full.ts` verifies the original lock, produces full-clean-v1 and freezes its hashes. Its training hash is `748fa197f1bb2133a83159c1e7f8a2985438e2ba92854ce7321ac4063e55e6d3`. Validation and test hashes remain the original values above.
-
-The current blocker is the native one-million-window guard described at the top. Keep the consumer on untouched 0.2.0 until a new package release is available. The full attempt and public reproduction are complete; repeating them under the same IDs is unnecessary and refuses to overwrite their reports.
-
-## Exact commands to resume
+1. Finish and record framework browser checks; open its PR and link it here.
+2. Merge the reviewed framework fix and its Changesets version PR, then verify successful npm publication. Do not publish manually or use local packages to bypass this step.
+3. Install all three packages at the new exact version. Version 0.2.2 is anticipated, not yet published or installed.
+4. Reverify `data/full-clean-v1-lock.json`. Do not download, relabel, sample or regenerate the corpus on this machine.
+5. Start **experiment 04**, preserving all earlier reports. Use the same frozen data, pipeline and evaluation contract.
 
 ```sh
 cd /Users/alex.patow/Developer/matchbox-lexer
 git status --short
-cat benchmarks/results/02-full-clean-training.json
-cat benchmarks/results/02-native-limit-reproduction.json
+cat benchmarks/results/03-full-clean-training.json
+cat benchmarks/results/03-export-parity-diagnostic.json
 cat data/full-clean-v1-lock.json
-bun scripts/audit-splits.ts
-```
-
-Only after the framework fix is reviewed, published and installed, choose a new experiment ID for the next full run. Use that same ID for all commands:
-
-```sh
-EXPERIMENT=03-full-clean bun run train
-EXPERIMENT=03-full-clean bun run evaluate
+# Only after installing the corrected published release:
+EXPERIMENT=04-full-clean bun run train
+EXPERIMENT=04-full-clean bun run evaluate
 bun run check
-EXPERIMENT=03-full-clean bun run benchmark
+EXPERIMENT=04-full-clean bun run benchmark
 ```
 
-Current defaults are `CORPUS=full-clean-v1` and `EXPERIMENT=02-full-clean`. Training refuses existing reports/logs. Evaluation and browser reports still require care to avoid overwriting historical results. Record the newly installed package version in the runner before experiment 03; it currently records 0.2.0.
+Current script defaults are `EXPERIMENT=03-full-clean`, `CORPUS=full-clean-v1`. The scripts refuse existing training/evaluation/browser report paths. Use a new ID explicitly, or update defaults when the next run starts. `scripts/package-versions.ts` reads installed versions and requires them to match. `scripts/experiment.ts` rejects a model whose reported data hashes do not match the requested corpus.
 
-The timed runner invokes:
+## Completed steps
+
+| Step                                        | Result                                                                                                                                                       |
+| ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Publish native package distribution         | Matchbox 0.2.0 published and installed from npm.                                                                                                             |
+| Independent repo, typed task and browser UI | Done; React/Vite consumer, nine character labels, assembly-only decoder.                                                                                     |
+| Pilot train/eval/browser wiring             | Completed; model abstained on every test input. Pilot context slicing prevents scientific comparison with later runs.                                        |
+| Full upstream source preparation            | Completed; unchanged upstream builder took 407.80 s, peak resident 1,649,721,344 bytes. Fetch duration was not measured separately.                          |
+| Full JSONL conversion and original lock     | Completed; 4,299 training, 336 validation, 1,915 test records.                                                                                               |
+| Original full CLI attempt 1                 | Failed on extensionless authored imports after 0.756 s. Explicit `.ts` imports fixed consumer Node resolution.                                               |
+| Original full CLI attempt 2                 | Failed split-overlap validation after 7.739 s.                                                                                                               |
+| Clean split ownership                       | Removed 125 overlapping training records; held-out files unchanged byte-for-byte. New identity full-clean-v1, zero cross-split overlap.                      |
+| Experiment 02, npm 0.2.0                    | Failed native one-million-window guard after 32.052 s, before optimization. Public-API reproduction preserved.                                               |
+| Framework dataset limit fix                 | PR #21 merged; release PR #22 merged.                                                                                                                        |
+| Publish 0.2.1                               | Run 34964944005 passed native builds, install checks, full checks and browser tests. Registry initially returned stale metadata, then all packages resolved. |
+| Experiment 03, npm 0.2.1                    | Full fit completed, then export verification failed after 522.663 s. No consumer artifact was produced.                                                      |
+| Bounded framework diagnostics               | 64 and 512 records passed the old guard; neither reproduced the full failure.                                                                                |
+| Full framework diagnostic                   | Exact npm native/WASM binaries reproduced confidence-only drift; saved model and fit history before checking.                                                |
+| Proposed numerical parity fix               | Saved-model replay passes, preserving labels and acceptance decisions. Awaiting review/release.                                                              |
+| Full consumer evaluation/browser benchmark  | Still blocked. No full-corpus accuracy or successful browser latency may be claimed.                                                                         |
+
+## Frozen corpus
+
+Upstream: vercel-labs/gpu-lexer commit `1e514fd681e31d6b19296f985fb01d8fdc0ae74f`. Teacher: Shiki 4.4.3. Upstream mining becomes validation; verification becomes final test. The corpus builder's prepared train shard differs from upstream's promoted checkpoint training/replay history.
+
+| Split      | Records | UTF-16 units | full-clean-v1 SHA-256                                            |
+| ---------- | ------: | -----------: | ---------------------------------------------------------------- |
+| train      |   4,174 |   12,245,833 | 748fa197f1bb2133a83159c1e7f8a2985438e2ba92854ce7321ac4063e55e6d3 |
+| validation |     336 |      843,341 | 659c1b8997bbaf7b3057d318aa916e9e41c7af1f8bb11d4d4f44e2b26362c1ae |
+| test       |   1,915 |    1,841,084 | cf1be2b37a22d581552f43e114b1dd958311e820e233f982234365f0968b46cd |
+
+The original training conversion had 4,299 records, 12,255,184 units and hash `f57efd6ca7ec46ece8546214fa9a48cedb3a954a432d0bef90958a6a273d329d`. Its lock and data remain untouched. Test-priority cleanup removed 9,351 units (about 0.08%) before any model scores were examined. The audit uses Matchbox's `input.trim().toLowerCase()` normalization. All held-out records remain, including within-split duplicates. Do not select a new policy based on accuracy.
+
+`data/full-lock.json` and `data/full-clean-v1-lock.json` freeze these identities. `data/upstream-corpus.json` holds full provenance; `data/corpus.json` is only the pilot manifest. Raw JSONL, source downloads, licenses and shards remain ignored under `data/generated/`. Upstream selection/labeling failures are recorded in its summary. No extra size sampling or mid-file slicing was added to the full records.
+
+## Diagnostic evidence and replay
+
+Framework-only local files: `/Users/alex.patow/Developer/matchbox/.matchbox/parity-diagnostic/`.
+
+- `64/` preserves the first bounded weights/report: 388,499 supervised tokens; zero disagreements; max drift 0.0000017881393432617188.
+- `512/` preserves the second: 2,499,177 supervised tokens; zero disagreements; max drift 0.000003933906555175781.
+- Root `model.json`, `fit.json`, `report.json`, `replay.json` preserve the full diagnostic and revised-guard replay. The model has 12,625 parameters, vocabulary 1,507, and 12,245,739 supervised Unicode code points. UTF-16 unit counts differ because some characters use surrogate pairs.
+- The full diagnostic fit stage took 496.076 s, including argument conversion. Do not substitute this for the original public CLI's missing optimizer-only timing.
+- Root `run.ts` and `replay.ts` are the original ad hoc diagnostic runners, retained locally for exact history. Logs are `/tmp/matchbox-parity-diagnostic{,-512,-full}.log`.
+- The reusable authored runner is framework `scripts/diagnose-sequence-export.ts`. It loads a consumer's installed native binary/WASM entry point, refuses an existing output directory and saves weights before parity checks. It passed a 64-record smoke run and explicit typechecking. This runner intentionally uses internals in the framework repo; it is not consumer API guidance.
+- Framework `docs/research/sequence-export-parity.md` records the policy and reproduction command.
+
+The diagnostic probes are the first 16 training records plus all 336 validation records, matching the export check. They do not include the final test set. No model architecture, dictionaries, decoder rules, numeric representations or confidence threshold were changed.
+
+## Machine and measurements
+
+Apple M2 ARM64, 8 GiB RAM, macOS 27.0; Bun 1.4.2 and Node v26.8.1. Timed consumer command:
 
 ```sh
 /usr/bin/time -l node --max-old-space-size=3072 node_modules/matchbox-ai/dist/cli.js train lexer --json
 ```
 
-It records wall time, exit status and peak resident memory. Native trainer-reported time exists only after successful training in `.matchbox/lexer/report.json`. The artifact currently in that directory is the pilot, because failed full training did not replace it. `scripts/experiment.ts` checks dataset hashes before evaluating or benchmarking, so default full commands refuse this stale pilot model.
+The heap setting limits JavaScript heap, not native memory. Training writes process/start metadata to `data/generated/logs/<experiment>-running.json`, stdout to `<experiment>-train.log`, resource/error output to `<experiment>-resources.log`, and completion to `benchmarks/results/<experiment>-training.json`. A running.json file is historical after completion; check whether its PID still exists before assuming activity.
 
-To inspect the existing pilot without modifying data or weights:
+Experiment 03 started 12:07:56.165 UTC and finished 12:16:38.828 UTC. Its time-wrapper PID was 2570 and Node PID 2571; both exited. Full diagnostic PID 5838 also exited.
 
-```sh
-bun run dev
-```
+## Verification and artifacts
 
-To reproduce the pilot on a fresh clone, use a new report ID:
+Consumer `bun run check` passes on npm 0.2.1 (format, lint, TypeScript, two tests and Vite build), log `/tmp/matchbox-lexer-03-check.log`. The build's large-chunk warning includes optional Shiki grammars and is not a Matchbox-only size measurement.
 
-```sh
-bun run data:pilot
-CORPUS=pilot EXPERIMENT=00-pilot-reproduction bun run train
-CORPUS=pilot EXPERIMENT=00-pilot-reproduction bun run evaluate
-bun run build
-CORPUS=pilot EXPERIMENT=00-pilot-reproduction bun run benchmark
-```
+The pilot desktop/mobile browser smoke passed earlier, report `benchmarks/results/00-pilot-checkpoint-browser.json`. GPU-lexer was unavailable in default headless Chromium because no WebGPU adapter was exposed. `HEADED=1` is supported but has not been run. Some pilot timings measured early abstention, including zero at browser clock resolution; those are not successful highlighting latency. Cold initialization is one observation. The pilot's mid-file teacher context flaw prevents comparison with full results.
 
-This overwrites the active ignored `.matchbox/lexer` artifact. `.matchbox/pilot` on the current machine is a preserved original backup. Do not mistake the regenerated pilot for a full run. `benchmarks/results/active.json` drives the UI label and recorded measurements.
+`.matchbox/lexer/` is the active pilot; `.matchbox/pilot/` preserves its original backup. `benchmarks/results/active.json` still labels the UI as the pilot. Keep diagnostic models out of those paths. No deployed consumer site or persistent server exists. Source corpora, weights, native binaries, logs and generated bundles must not be committed. Inspect staged paths before pushing.
 
-## Preparation commands and caveats
+## Working constraints
 
-`bun run data:full` is the fresh-machine entry point. It clones the pinned upstream repo if absent, verifies HEAD, streams source archives through `scripts/fetch-full.ts`, runs the unchanged upstream builder, and converts the resulting shards. Full preparation was executed in separate measured steps on this first run; the aggregate fetch time was not recorded. Do not invent it.
-
-The storage adapter retains every recognized-language file eligible for upstream's max-file-size rule, plus license notices. It omits archives and unrelated large assets to fit local disk; corpus quotas/selection are unchanged. The upstream fetcher then reuses repository provenance and fetches npm sources and website examples. Files stay ignored.
-
-The first converter using readline incorrectly split one record. All 4,299 train records validated when splitting decompressed JSONL directly at LF. `scripts/read-shard.ts` now uses a streaming UTF-8 decoder and LF delimiters, and the full conversion succeeded. Do not rebuild the corpus to fix a reader problem. A dedicated read-shard regression test is still worth adding.
-
-The upstream checkout's corpus-summary.json is modified by its own builder. That checkout is ignored. Do not commit it or its source corpus into this repository.
-
-## Verification state and caveats
-
-`bun run check` passed after the experiment 02 cleanup and reproduction changes (log: /tmp/matchbox-lexer-02-check.log). It runs format, lint, TypeScript, two contract/metric tests, and a Vite production build.
-
-The final browser smoke passed with desktop and mobile widths and no page errors, including the measurements table. Matchbox inference abstained as expected; Shiki reference loaded. The report is benchmarks/results/00-pilot-checkpoint-browser.json. The original pilot report remains unchanged. The benchmark uses fresh browser contexts and records unavailable WebGPU rather than forcing a software GPU. `HEADED=1` allows a future headed test, but it has not been run.
-
-The pilot browser report's longest timing input was actually 941 units, not 1,024, because the first test snippet was shorter. Some calls measured zero at browser clock precision because the unknown-vocabulary path abstained early. They are not successful highlighting timings. Cold initialization is a single observation. The browser methodology documents these limitations.
-
-The workbench currently has no deployment and no persistent server. There is no CI workflow in this new repo yet. The total Vite build includes optional Shiki grammar chunks; its large-chunk warning is not a Matchbox-only bundle measurement. Browser resources and compressed asset sizes are recorded separately.
-
-## Local artifacts and logs
-
-- `.matchbox/lexer/`: active pilot wrapper, artifact, declarations and report.
-- `.matchbox/pilot/`: preserved original pilot model.ts, model.matchbox and report.json.
-- `data/generated/pilot/`: pilot JSONL, provenance, summary and raw source-containing evaluation backup.
-- `data/generated/full/`: converted full JSONL, per-record provenance and summary.
-- `data/generated/upstream/gpu-lexer/`: pinned upstream source, downloaded corpus and compressed shards.
-- `data/generated/logs/01-full-import-failure*.log`: first Node import-resolution attempt.
-- `data/generated/logs/01-full-{train,resources}.log`: historical overlap-blocked attempt.
-- `data/generated/full-clean-v1/`: cleaned frozen corpus.
-- `data/generated/logs/02-full-clean-{train,resources}.log`: completed native-limit failure.
-- `/tmp/matchbox-lexer-native-repro.log`: successful public-API reproduction output.
-- `/tmp/matchbox-lexer-full-data.log`: source download progress.
-- `/tmp/matchbox-lexer-full-build.log` and `...-full-build-time.log`: upstream labeling output and measured resources.
-- `/tmp/matchbox-lexer-convert-full.log`: successful converted counts and hashes.
-- `/tmp/matchbox-lexer-check.log`: latest check output.
-- `data/generated/workbench.png`: last browser screenshot.
-
-No secrets, source corpora, weights, native binaries or generated bundles should be staged. Commit only authored code, manifests/locks, sanitized measurements and documentation. Before pushing, inspect `git diff --cached --stat` and the staged paths.
+Use published Matchbox packages in the consumer, with no workspace links, internal imports, package patches or lowered thresholds. Preserve strict validation and visible abstention. Shiki is the offline teacher and an explicitly loaded reference, never a fallback. Runtime gets source without a language hint. Keep training/eval separation and record exact package versions, dataset hashes and timing at every step. General framework improvements belong in the framework repo with evidence; do not add lexer-specific syntax rules to Matchbox.
