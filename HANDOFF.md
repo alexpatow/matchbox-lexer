@@ -10,11 +10,11 @@ The consumer is `/Users/alex.patow/Developer/matchbox-lexer`, branch `codex/full
 
 A separate framework diagnostic reproduced the failure and preserved weights. Across 945,166 probe tokens, both runtimes chose identical labels. Maximum confidence drift was 0.00001537799835205078, above the old 0.00001 guard. A proposed fix permits 0.0001 absolute confidence drift, keeps strict label equality, and rejects any acceptance-threshold crossing. Replaying the saved full model passes with zero label disagreements and zero threshold crossings. This is diagnostic evidence, not a successful consumer pipeline result or an accuracy benchmark.
 
-The fix is in `/Users/alex.patow/Developer/matchbox`, branch `codex/sequence-parity-diagnostics`. Full checks passed, including five new guard tests; browser checks are completing in `/tmp/matchbox-parity-browser.log`. A changeset is included. Do not change consumer thresholds or dependencies until a corrected release is published. No training or diagnostic process remains active.
+The fix is in `/Users/alex.patow/Developer/matchbox`, branch `codex/sequence-parity-diagnostics`. Full checks passed (116 Bun tests, including five new guard tests), and all 18 browser checks passed in `/tmp/matchbox-parity-browser.log`. The fix is committed as 833edc6 and open in https://github.com/alexpatow/matchbox/pull/23. A changeset is included. Do not change consumer thresholds or dependencies until a corrected release is published. No training or diagnostic process remains active.
 
 ## Immediate next steps
 
-1. Finish and record framework browser checks; open its PR and link it here.
+1. Review framework PR #23: https://github.com/alexpatow/matchbox/pull/23. All local checks pass.
 2. Merge the reviewed framework fix and its Changesets version PR, then verify successful npm publication. Do not publish manually or use local packages to bypass this step.
 3. Install all three packages at the new exact version. Version 0.2.2 is anticipated, not yet published or installed.
 4. Reverify `data/full-clean-v1-lock.json`. Do not download, relabel, sample or regenerate the corpus on this machine.
