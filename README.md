@@ -4,7 +4,7 @@ A browser syntax-highlighting experiment built with published Matchbox packages.
 
 The project trains a small character classifier from Shiki-labeled source code and runs it locally in a React/Vite application. A deterministic decoder merges predicted labels into spans. Shiki and gpu-lexer are optional comparison engines, never inference fallbacks.
 
-**Status:** The small pilot runs in the browser but abstains on all its test examples. Full-corpus training with Matchbox 0.2.1 completes native fitting but fails export verification. No successful full-corpus model or accuracy result is available yet.
+**Status:** Full-corpus training, export and browser inference work with Matchbox 0.2.2. The current model has 44.9% diagnostic label agreement and abstains on 94.0% of test inputs. It is not yet a useful syntax highlighter.
 
 ## Run the pilot
 
@@ -29,7 +29,7 @@ EXPERIMENT=local-full bun run train
 EXPERIMENT=local-full bun run evaluate
 ```
 
-The full training command currently fails export verification on Matchbox 0.2.1. Evaluation requires a successfully packaged model matching the requested dataset.
+Evaluation requires a successfully packaged model matching the requested dataset. The pinned 0.2.2 packages complete this flow on the full corpus.
 
 Preparation downloads pinned upstream sources and uses gpu-lexer's corpus builder and Shiki labeling. The cleaned dataset preserves every validation and test record, removing 125 training records that overlap held-out inputs. It contains 4,174 training records, 336 validation records and 1,915 test records. Exact hashes are in [the dataset lock](data/full-clean-v1-lock.json).
 
@@ -44,8 +44,22 @@ The runs below used an Apple M2 with 8 GiB RAM. CLI wall time includes validatio
 | Original full corpus | 0.2.0    |       7.739 s | Split validation rejected overlapping inputs.         |
 | Cleaned full corpus  | 0.2.0    |      32.052 s | Native validation rejected the dataset size.          |
 | Cleaned full corpus  | 0.2.1    |     522.663 s | Native fitting completed; export verification failed. |
+| Cleaned full corpus  | 0.2.2    |     518.695 s | Training, export and evaluation completed.            |
 
-The pilot artifact is 7,655 bytes with 1,129 parameters. Its trainer-reported time was 1.435 seconds. All 18 test snippets produced uncertainty. Its diagnostic label agreement was 40.84%, which is not accepted application accuracy.
+The full model is **77,516 bytes**, with **12,625 parameters**. Trainer-reported duration was **506.474 seconds**; total CLI wall time was **518.695 seconds**, with **1.77 GB peak resident memory**. Shared WASM runtime size is additional.
+
+On 1,915 held-out inputs containing 1,446,363 scored characters:
+
+| Measurement                                          |          Result |
+| ---------------------------------------------------- | --------------: |
+| Diagnostic label agreement before acceptance         |          44.89% |
+| Diagnostic styled macro F1                           |          31.29% |
+| Inputs accepted by the public parser                 |     115 / 1,915 |
+| Input abstention rate                                |          93.99% |
+| Characters covered by accepted output                | 124 / 1,446,363 |
+| Correct accepted labels across all scored characters |         0.0074% |
+
+The public parser rejected 1,243 inputs for low confidence, 551 for its input limit, and 6 for vocabulary coverage. Diagnostic agreement is not application accuracy. The earlier pilot is retained in the reports but is not comparable with the full-corpus series.
 
 [Versioned reports](benchmarks/results) retain timings, package versions, memory measurements, data identities and failure details. Framework-only diagnostic reports are marked separately. Full-corpus runs are comparable only when data hashes and scoring contracts match.
 
@@ -58,6 +72,10 @@ bun run check
 bunx playwright install chromium
 CORPUS=pilot EXPERIMENT=local-pilot bun run benchmark
 ```
+
+Use `HEADED=1` to run Chromium with a visible window when headless mode has no WebGPU adapter. The full-corpus headed run measured **80.64% label agreement** and **71.08% styled macro F1** for gpu-lexer 0.0.2. The Shiki reference agreed with 99.94% of scored labels. These references have different training histories and input requirements; see the methodology before comparing quality.
+
+The headed browser measured gpu-lexer p50 at 0.9 ms for 128- and 397-unit samples. Matchbox p50 was 0.2–0.5 ms, but every timed parse abstained. Those timings do not demonstrate faster successful highlighting. The first test input is only 397 UTF-16 units, so both larger requested timing slices use that actual length. See the [headed browser report](benchmarks/results/04-full-clean-headed-browser.json).
 
 The benchmark uses a production build and fresh browser contexts. It records initialization time, inference p50/p95, output quality and resource sizes. Unavailable WebGPU is reported explicitly. A fast abstention is not successful highlighting latency.
 

@@ -1,6 +1,7 @@
 import result from "../../benchmarks/results/active.json";
 export function Measurements() {
-  const percent = (value: number) => `${(value * 100).toFixed(1)}%`;
+  const percent = (value: number) =>
+    new Intl.NumberFormat("en", { style: "percent", maximumSignificantDigits: 3 }).format(value);
   return (
     <section className="measurements">
       <h2>Recorded experiment</h2>

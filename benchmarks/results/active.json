@@ -1,11 +1,11 @@
 {
-  "experiment": "00-pilot",
-  "matchbox": "0.2.0",
-  "modelBytes": 7655,
-  "parameters": 1129,
-  "trainingMs": 1435.268375,
-  "diagnosticAgreement": 0.40836835373652475,
-  "applicationAgreement": 0,
-  "abstentionRate": 1,
-  "testExamples": 18
+  "experiment": "04-full-clean",
+  "matchbox": "0.2.2",
+  "modelBytes": 77516,
+  "parameters": 12625,
+  "trainingMs": 506474.289708,
+  "diagnosticAgreement": 0.4489066714234255,
+  "applicationAgreement": 0.00007397866234133479,
+  "abstentionRate": 0.9399477806788512,
+  "testExamples": 1915
 }
