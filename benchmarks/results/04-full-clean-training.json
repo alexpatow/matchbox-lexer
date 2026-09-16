@@ -1,0 +1,23 @@
+{
+  "experiment": "04-full-clean",
+  "corpus": "full-clean-v1",
+  "matchbox": "0.2.2",
+  "packages": {
+    "matchbox-ai": "0.2.2",
+    "@matchbox-ai/core": "0.2.2",
+    "@matchbox-ai/train": "0.2.2"
+  },
+  "finishedAt": "2026-09-16T10:50:22.591Z",
+  "exitCode": 0,
+  "wallMs": 518694.701708,
+  "peakResidentBytes": 1767735296,
+  "heapLimitMiB": 3072,
+  "machine": {
+    "platform": "darwin",
+    "arch": "arm64",
+    "cpu": "Apple M2",
+    "memoryBytes": 8589934592
+  },
+  "log": "data/generated/logs/04-full-clean-train.log",
+  "timing": "data/generated/logs/04-full-clean-resources.log"
+}

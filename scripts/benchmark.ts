@@ -84,6 +84,7 @@ try {
     packages,
     createdAt: new Date().toISOString(),
     browser: browser.version(),
+    headless: process.env.HEADED !== "1",
     platform: process.platform,
     arch: process.arch,
     modelSha256: hash(await Bun.file(".matchbox/lexer/model.matchbox").text()),
