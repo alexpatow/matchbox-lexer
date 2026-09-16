@@ -1,7 +1,8 @@
 import { createHash } from "node:crypto";
 import { mkdir } from "node:fs/promises";
 import corpus from "../data/corpus.json";
-export const hash = (input: string) => createHash("sha256").update(input).digest("hex");
+export const hash = (input: string | Uint8Array) =>
+  createHash("sha256").update(input).digest("hex");
 export type Source = (typeof corpus.sources)[number];
 
 export async function sourcePaths(source: Source): Promise<string[]> {

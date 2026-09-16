@@ -18,14 +18,24 @@ export function Measurements() {
         </thead>
         <tbody>
           <tr>
-            <td>Application agreement</td>
+            <td>Strict parser agreement</td>
             <td>{percent(result.applicationAgreement)}</td>
             <td>Accepted labels matching the teacher. Abstentions count as failures.</td>
           </tr>
           <tr>
-            <td>Abstention</td>
+            <td>Strict abstention</td>
             <td>{percent(result.abstentionRate)}</td>
             <td>Inputs for which the public parser returned no answer.</td>
+          </tr>
+          <tr>
+            <td>Partial candidate agreement</td>
+            <td>{percent(result.partialAgreement)}</td>
+            <td>Returned labels matching the teacher, including uncertain predictions.</td>
+          </tr>
+          <tr>
+            <td>Partial candidate coverage</td>
+            <td>{percent(result.partialCoverage)}</td>
+            <td>Scored characters with a returned label. This includes uncertain ranges.</td>
           </tr>
           <tr>
             <td>Diagnostic agreement</td>

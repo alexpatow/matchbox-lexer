@@ -1,0 +1,23 @@
+{
+  "experiment": "06-recurrent-040",
+  "corpus": "full-clean-v1",
+  "matchbox": "0.4.0",
+  "packages": {
+    "matchbox-ai": "0.4.0",
+    "@matchbox-ai/core": "0.4.0",
+    "@matchbox-ai/train": "0.4.0"
+  },
+  "finishedAt": "2026-09-16T22:13:41.307Z",
+  "exitCode": 0,
+  "wallMs": 940983.892166,
+  "peakResidentBytes": 980647936,
+  "heapLimitMiB": 3072,
+  "machine": {
+    "platform": "darwin",
+    "arch": "arm64",
+    "cpu": "Apple M2",
+    "memoryBytes": 8589934592
+  },
+  "log": "data/generated/logs/06-recurrent-040-train.log",
+  "timing": "data/generated/logs/06-recurrent-040-resources.log"
+}

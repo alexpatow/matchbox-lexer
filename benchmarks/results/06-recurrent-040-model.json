@@ -1,0 +1,321 @@
+{
+  "formatVersion": 2,
+  "architecture": "bidirectional-affine",
+  "backend": "Burn native CPU",
+  "seed": 42,
+  "encoding": {
+    "tokenizer": {
+      "kind": "text-parts",
+      "version": 1
+    },
+    "features": {
+      "kind": "text-features",
+      "version": 1
+    },
+    "supervision": {
+      "kind": "span-labels",
+      "whitespace": "context"
+    }
+  },
+  "artifactSha256": "eb98becfc0e7094b92b3e3858544034dffe7c92e493aea38255ccf12bda7791f",
+  "bytes": 194886,
+  "parameters": 36233,
+  "datasetSha256": [
+    {
+      "source": "../../data/generated/full-clean-v1/train.jsonl",
+      "sha256": "748fa197f1bb2133a83159c1e7f8a2985438e2ba92854ce7321ac4063e55e6d3"
+    },
+    {
+      "source": "../../data/generated/full-clean-v1/validation.jsonl",
+      "sha256": "659c1b8997bbaf7b3057d318aa916e9e41c7af1f8bb11d4d4f44e2b26362c1ae"
+    },
+    {
+      "source": "../../data/generated/full-clean-v1/test.jsonl",
+      "sha256": "cf1be2b37a22d581552f43e114b1dd958311e820e233f982234365f0968b46cd"
+    }
+  ],
+  "examples": {
+    "train": 4174,
+    "validation": 336,
+    "eval": 1915
+  },
+  "parts": {
+    "train": 4554837,
+    "validation": 369569
+  },
+  "supervisionSha256": "f5aff8afb36beaf4df4ccf639993a5ff597f13cd83bd712d47243d7803639f63",
+  "loss": [
+    0.7584050893783569,
+    0.47822508215904236,
+    0.3856467306613922,
+    0.336350679397583,
+    0.30389633774757385,
+    0.28572431206703186,
+    0.26142653822898865,
+    0.2419741153717041
+  ],
+  "validationLabelAccuracy": [
+    0.7453408530325454,
+    0.7547271442475635,
+    0.7756996386811195,
+    0.7519499220031198,
+    0.7574603682519366,
+    0.7725624308360999,
+    0.7541618335266589,
+    0.7573603722517765
+  ],
+  "selectedEpoch": 3,
+  "exportParity": {
+    "examples": 352,
+    "tokens": 409442,
+    "maxConfidenceError": 8.940696716308594e-07,
+    "confidenceTolerance": 0.0001,
+    "labelDisagreements": 0,
+    "acceptanceDisagreements": 0
+  },
+  "diagnostics": {
+    "validation": {
+      "unit": "supervised code points",
+      "labels": [
+        "plain",
+        "comment",
+        "string",
+        "number",
+        "keyword",
+        "type",
+        "function",
+        "constant",
+        "operator"
+      ],
+      "confusion": [
+        [
+          179917,
+          3220,
+          29105,
+          686,
+          19263,
+          4808,
+          830,
+          480,
+          16957
+        ],
+        [
+          7119,
+          16460,
+          2720,
+          71,
+          1509,
+          559,
+          66,
+          36,
+          999
+        ],
+        [
+          19803,
+          780,
+          298771,
+          276,
+          2711,
+          515,
+          73,
+          97,
+          4743
+        ],
+        [
+          892,
+          104,
+          745,
+          3664,
+          39,
+          47,
+          0,
+          31,
+          77
+        ],
+        [
+          10762,
+          151,
+          1093,
+          115,
+          23060,
+          925,
+          67,
+          52,
+          578
+        ],
+        [
+          3593,
+          48,
+          1765,
+          4,
+          600,
+          10933,
+          126,
+          77,
+          10
+        ],
+        [
+          8363,
+          16,
+          356,
+          2,
+          581,
+          538,
+          7134,
+          14,
+          56
+        ],
+        [
+          2169,
+          105,
+          114,
+          306,
+          114,
+          191,
+          20,
+          3358,
+          31
+        ],
+        [
+          11773,
+          254,
+          3594,
+          20,
+          272,
+          7,
+          2,
+          7,
+          38501
+        ]
+      ],
+      "total": 750030,
+      "accuracy": 0.7756996386811195,
+      "confidenceThreshold": 0.75,
+      "coverage": 0.6674319693878912,
+      "coveredAccuracy": 0.8457892024275161
+    },
+    "evaluation": {
+      "unit": "supervised code points",
+      "labels": [
+        "plain",
+        "comment",
+        "string",
+        "number",
+        "keyword",
+        "type",
+        "function",
+        "constant",
+        "operator"
+      ],
+      "confusion": [
+        [
+          355491,
+          2578,
+          16315,
+          770,
+          11365,
+          21605,
+          4416,
+          1839,
+          16511
+        ],
+        [
+          17246,
+          338646,
+          14809,
+          437,
+          4178,
+          695,
+          597,
+          170,
+          2247
+        ],
+        [
+          23131,
+          2784,
+          201636,
+          551,
+          2669,
+          2114,
+          222,
+          538,
+          3813
+        ],
+        [
+          510,
+          37,
+          225,
+          9926,
+          32,
+          120,
+          75,
+          29,
+          147
+        ],
+        [
+          14618,
+          891,
+          1352,
+          160,
+          103389,
+          7960,
+          943,
+          517,
+          1792
+        ],
+        [
+          9927,
+          26,
+          394,
+          22,
+          1929,
+          39273,
+          1009,
+          517,
+          26
+        ],
+        [
+          23197,
+          54,
+          1287,
+          0,
+          3600,
+          3765,
+          52689,
+          21,
+          512
+        ],
+        [
+          7133,
+          24,
+          1640,
+          27,
+          142,
+          461,
+          114,
+          9362,
+          158
+        ],
+        [
+          12292,
+          208,
+          1681,
+          57,
+          1475,
+          277,
+          131,
+          21,
+          82816
+        ]
+      ],
+      "total": 1446363,
+      "accuracy": 0.8249851524133291,
+      "confidenceThreshold": 0.75,
+      "coverage": 0.7708341543582075,
+      "coveredAccuracy": 0.9082290345553795
+    }
+  },
+  "optimizerMs": 889082.97175,
+  "trainingMs": 901029.7392500001,
+  "notes": "Checkpoint selection uses validation label agreement. Export gates use complete parser accuracy and artifact size. Diagnostic code-point agreement is not parser acceptance. Confidence is uncalibrated."
+}

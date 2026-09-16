@@ -1,0 +1,12 @@
+{
+  "experiment": "06-recurrent-040",
+  "packages": {
+    "matchbox-ai": "0.4.0",
+    "@matchbox-ai/core": "0.4.0",
+    "@matchbox-ai/train": "0.4.0"
+  },
+  "status": "failed",
+  "stage": "workbench smoke test after all five engine measurements",
+  "reason": "Runtime selector had no exact accessible label; selectOption timed out. No completed browser report was written.",
+  "headless": false
+}

@@ -1,3 +1,4 @@
+import preview from "../.matchbox/lexer/model";
 import { mkdir } from "node:fs/promises";
 import { loadArtifact } from "@matchbox-ai/train/project";
 import type { Span } from "../matchbox/lexer/labels";
@@ -16,10 +17,15 @@ await verifyDataset();
 const { parser, inspect } = await loadArtifact("matchbox/lexer");
 const byLanguage: Record<
   string,
-  { application: ReturnType<typeof createMetrics>; diagnostic: ReturnType<typeof createMetrics> }
+  {
+    application: ReturnType<typeof createMetrics>;
+    diagnostic: ReturnType<typeof createMetrics>;
+    partial: ReturnType<typeof createMetrics>;
+  }
 > = {};
 const application = createMetrics();
 const diagnostic = createMetrics();
+const partial = createMetrics();
 const rows = (await Bun.file(`${dataRoot}/test.jsonl`).text())
   .trim()
   .split("\n")
@@ -30,26 +36,35 @@ try {
   for (const [index, row] of rows.entries()) {
     const result = await parser.parse(row.input);
     const detail = await inspect(row.input);
+    const candidate = await preview.parse(row.input, { allowPartial: true });
     if (!("candidate" in detail)) {
       throw new Error("Expected token diagnostic output");
     }
     const raw = detail.candidate as Span[] | null;
     const value = result.value as Span[] | null;
     const language = sources[index].language;
-    byLanguage[language] ??= { application: createMetrics(), diagnostic: createMetrics() };
+    byLanguage[language] ??= {
+      application: createMetrics(),
+      diagnostic: createMetrics(),
+      partial: createMetrics(),
+    };
     application.add(row.input, row.output, value);
+    partial.add(row.input, row.output, candidate.value);
+    byLanguage[language].partial.add(row.input, row.output, candidate.value);
     diagnostic.add(row.input, row.output, raw);
     byLanguage[language].application.add(row.input, row.output, value);
     byLanguage[language].diagnostic.add(row.input, row.output, raw);
     examples.push({
       source: sources[index],
       status: result.status,
+      partialStatus: candidate.status,
       confidence: result.confidence,
       reason: result.status === "uncertain" ? result.reason : null,
     });
   }
 } finally {
   parser.dispose();
+  preview.dispose();
 }
 await mkdir("benchmarks/results", { recursive: true });
 const training = await Bun.file(".matchbox/lexer/report.json").json();
@@ -75,14 +90,23 @@ const result = {
       "datasetSha256",
       "supervisionSha256",
       "loss",
+      "selectedEpoch",
+      "history",
     ].map((key) => [key, training[key]]),
   ),
   application: application.report(),
   diagnostic: diagnostic.report(),
+  partial: partial.report(),
+  partialPolicy:
+    "Partial metrics count non-null candidates as accepted for compatibility with older reports. Candidates include uncertain ranges and are not accepted complete outputs.",
   byLanguage: Object.fromEntries(
     Object.entries(byLanguage).map(([language, metrics]) => [
       language,
-      { application: metrics.application.report(), diagnostic: metrics.diagnostic.report() },
+      {
+        application: metrics.application.report(),
+        diagnostic: metrics.diagnostic.report(),
+        partial: metrics.partial.report(),
+      },
     ]),
   ),
   examples,
@@ -101,6 +125,8 @@ await Bun.write(
       parameters: training.parameters,
       trainingMs: training.trainingMs,
       diagnosticAgreement: result.diagnostic.agreement,
+      partialAgreement: result.partial.agreement,
+      partialCoverage: result.partial.characterCoverage,
       applicationAgreement: result.application.agreement,
       abstentionRate: result.application.abstentionRate,
       testExamples: result.application.snippets,
@@ -110,5 +136,9 @@ await Bun.write(
   ) + "\n",
 );
 console.log(
-  JSON.stringify({ application: result.application, diagnostic: result.diagnostic }, null, 2),
+  JSON.stringify(
+    { application: result.application, partial: result.partial, diagnostic: result.diagnostic },
+    null,
+    2,
+  ),
 );

@@ -1,14 +1,13 @@
 # Known limitations
 
-The consumer uses Matchbox 0.3.0 with character tokenization and a nine-character context window. The decoder only merges adjacent labels and validates span coverage.
+The consumer uses Matchbox 0.4.0 with explicit text-part encoding and a recurrent token classifier. The application decoder only merges adjacent labels and validates span coverage.
 
-- Character keys are lowercased before training and inference, so capitalization is unavailable to the model.
-- Each prediction sees the current character and four characters on either side. Distant opening quotes and comment markers are outside that context.
-- The public parser limits inputs to 512 UTF-16 units and abstains when any relevant token has insufficient confidence. Longer source inputs are excluded by that limit.
-- Unknown vocabulary produces uncertainty. Confidence scores are not calibrated probabilities of correctness.
-- The full-corpus model has 58.17% diagnostic label agreement and 46.51% styled macro F1. The public parser accepts 74 of 1,915 inputs, covering only 135 of 1,446,363 scored characters. Training on the full corpus has not made this model useful for general source-code highlighting.
+- Strict parsing abstains if a relevant prediction fails the confidence threshold. Partial parsing can return a schema-valid candidate with uncertain ranges, which does not guarantee correct highlighting.
+- Confidence scores are not calibrated probabilities. Candidate coverage includes uncertain labels and must not be described as confident coverage.
+- WebGPU is opt-in and requires a supported browser adapter. Its runtime is downloaded separately and a failed GPU request does not silently fall back to CPU.
+- Model artifact size excludes shared WASM and JavaScript runtime downloads. Browser results report those dependencies separately.
 - The pilot includes mid-file slices whose teacher labels retained context outside the slice. Its quality measurements cannot be compared with the full-corpus series.
 
-The browser reference requires an explicit language hint for Shiki. Matchbox receives source text only. The gpu-lexer npm reference is pinned to 0.0.2 and is not assumed equivalent to upstream's latest checkpoint.
+The browser reference requires an explicit language hint for Shiki. Matchbox receives source text only. The gpu-lexer npm reference is pinned to 0.0.2 and is not assumed equivalent to upstream's latest checkpoint. Its training history differs from this experiment.
 
-See the [measurement contract](../benchmarks/methodology.md) for scoring definitions and timing limitations.
+See the [current results](../README.md) and [measurement contract](../benchmarks/methodology.md) for measured quality, scoring definitions and timing limitations.

@@ -5,7 +5,7 @@ import { performance } from "node:perf_hooks";
 import { packageVersions } from "./package-versions";
 
 const packages = await packageVersions();
-const experiment = process.env.EXPERIMENT ?? "05-context-four";
+const experiment = process.env.EXPERIMENT ?? "06-recurrent-040";
 const corpus = process.env.CORPUS ?? "full-clean-v1";
 if (!/^[a-z0-9-]+$/.test(experiment)) {
   throw new Error("Use a lowercase experiment ID with letters, numbers and hyphens.");

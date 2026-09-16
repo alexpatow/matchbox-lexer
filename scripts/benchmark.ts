@@ -26,9 +26,30 @@ const sources = await Bun.file(`${dataRoot}/test-sources.json`).json();
 const inputs = rows.map((row, index) => ({ input: row.input, language: sources[index].language }));
 const results: unknown[] = [];
 try {
-  for (const engine of ["matchbox", "gpu-lexer", "shiki"] as const) {
+  for (const engine of [
+    "matchbox",
+    "matchbox-partial",
+    "matchbox-gpu",
+    "gpu-lexer",
+    "shiki",
+  ] as const) {
     const context = await browser.newContext();
     const page = await context.newPage();
+    const downloaded: Promise<{ name: string; bytes: number; gzip: number; sha256: string }>[] = [];
+    page.on("response", (response) => {
+      const name = new URL(response.url()).pathname;
+      if (!/\.(js|wasm)$/.test(name)) {
+        return;
+      }
+      downloaded.push(
+        response.body().then((bytes) => ({
+          name,
+          bytes: bytes.length,
+          gzip: gzipSync(bytes).length,
+          sha256: hash(bytes),
+        })),
+      );
+    });
     await page.goto("http://127.0.0.1:4317/benchmark.html");
     await page.waitForFunction(() => "runBenchmark" in window);
     try {
@@ -41,7 +62,14 @@ try {
       result.outputs.forEach((output, index) =>
         metrics.add(rows[index].input, rows[index].output, output.value),
       );
-      results.push({ ...result, outputs: undefined, quality: metrics.report() });
+      const fetchedAssets = await Promise.all(downloaded);
+      results.push({
+        ...result,
+        outputs: undefined,
+        quality: metrics.report(),
+        fetchedAssets,
+        downloadGzipBytes: fetchedAssets.reduce((sum, asset) => sum + asset.gzip, 0),
+      });
       console.log(
         `${engine}: ${result.initializationMs.toFixed(1)}ms initialization, ${(metrics.report().agreement ?? 0).toFixed(3)} agreement`,
       );
@@ -49,7 +77,12 @@ try {
       // A missing WebGPU adapter is a result, not a fabricated CPU comparison.
       results.push({ engine, status: "unavailable", reason: String(error) });
       console.log(`${engine}: ${String(error).slice(0, 200)}`);
-      if (engine !== "gpu-lexer") {
+      const gpuEngine = engine === "gpu-lexer" || engine === "matchbox-gpu";
+      const unavailable =
+        /WebGPU.*(not supported|unavailable)|no.*GPU.*adapter|failed to.*adapter/i.test(
+          String(error),
+        );
+      if (!gpuEngine || !unavailable) {
         throw error;
       }
     } finally {
@@ -60,9 +93,14 @@ try {
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("http://127.0.0.1:4317");
-  await page.getByText(/Abstained ·|Accepted ·/).waitFor();
+  await page.getByText(/Abstained ·|Accepted ·|Partial ·/).waitFor();
   await page.getByRole("button", { name: "Run reference" }).click();
   await page.getByText("Reference only. Never used as a fallback.", { exact: true }).waitFor();
+  if (process.env.HEADED === "1") {
+    await page.getByLabel("Runtime", { exact: true }).selectOption("gpu");
+    await page.getByText("Running…", { exact: true }).waitFor();
+    await page.getByText(/Abstained ·|Accepted ·|Partial ·/).waitFor();
+  }
   await page.screenshot({ path: "data/generated/workbench.png", fullPage: true });
   await page.setViewportSize({ width: 390, height: 844 });
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth > innerWidth);
@@ -74,6 +112,7 @@ try {
     const bytes = await Bun.file(`dist/assets/${name}`).arrayBuffer();
     assets.push({
       name,
+      sha256: hash(new Uint8Array(bytes)),
       bytes: bytes.byteLength,
       gzip: gzipSync(bytes).byteLength,
       brotli: brotliCompressSync(bytes).byteLength,
@@ -97,6 +136,16 @@ try {
     `benchmarks/results/${report.experiment}-browser.json`,
     JSON.stringify(report, null, 2) + "\n",
   );
+} catch (error) {
+  await Bun.write(
+    reportPath,
+    JSON.stringify(
+      { experiment, packages, status: "failed", reason: String(error), results },
+      null,
+      2,
+    ) + "\n",
+  );
+  throw error;
 } finally {
   await browser.close();
   await new Promise<void>((resolve, reject) =>

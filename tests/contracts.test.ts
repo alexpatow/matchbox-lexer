@@ -1,7 +1,6 @@
 import { expect, test } from "bun:test";
 import { tokenize } from "@matchbox-ai/train";
 import decode from "../matchbox/lexer/decode";
-import recipe from "../matchbox/lexer/recipe";
 import { createMetrics } from "../scripts/metrics";
 test("UTF-16 spans preserve whitespace and surrogate pairs", () => {
   const input = "Hi 🦀\r\n";
@@ -12,7 +11,6 @@ test("UTF-16 spans preserve whitespace and surrogate pairs", () => {
   }));
   const output = [{ type: "plain" as const, start: 0, end: input.length }];
   expect(decode(tokens, input)).toEqual(output);
-  expect(recipe.annotate({ input, output }, tokens)).toEqual(tokens.map(() => "plain"));
   expect(decode(tokens.slice(1), input)).toBeNull();
 });
 test("abstentions remain errors in overall agreement", () => {
