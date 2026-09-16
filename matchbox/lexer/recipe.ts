@@ -2,6 +2,7 @@ import type { SequenceRecipe } from "@matchbox-ai/train";
 import { labels, type Span } from "./labels.ts";
 export default {
   tokenizer: "characters",
+  casing: "lowercase",
   readout: "all",
   labels,
   annotate(example, tokens) {

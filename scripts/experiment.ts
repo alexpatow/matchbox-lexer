@@ -1,5 +1,5 @@
 import { hash } from "./corpus";
-export const experiment = process.env.EXPERIMENT ?? "04-full-clean";
+export const experiment = process.env.EXPERIMENT ?? "05-context-four";
 export const corpus = process.env.CORPUS ?? "full-clean-v1";
 export const dataRoot = `data/generated/${corpus}`;
 export async function verifyDataset() {

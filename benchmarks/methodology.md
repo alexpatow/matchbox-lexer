@@ -14,6 +14,8 @@ Count Unicode code points excluding whitespace. Report overall label agreement, 
 
 Application results come from `parser.parse`. Diagnostic results come from the documented `loadArtifact().inspect` API, bypassing acceptance for measurement only. Diagnostic results are never shown as accepted application output. Recognition scores are uncalibrated.
 
+The 0.3.0 pipeline explicitly uses lowercase character keys and `contextRadius: 4`, a nine-character window. The 0.2.2 reference used a three-character window. Corpus selection, supervision, decoding, scoring, and acceptance thresholds are unchanged. The wider configuration was chosen using framework validation measurements before this published-package reproduction.
+
 The research export gate permits zero exact accuracy and a 2 MB artifact. This allows measuring failed models and is not a production acceptance policy. The published inference threshold is unchanged. Test data is used only for final reporting, not tuning.
 
 ## Runtime

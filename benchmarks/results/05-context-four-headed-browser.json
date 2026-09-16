@@ -1,0 +1,18 @@
+{
+  "experiment": "05-context-four-headed",
+  "packages": {
+    "matchbox-ai": "0.3.0",
+    "@matchbox-ai/core": "0.3.0",
+    "@matchbox-ai/train": "0.3.0"
+  },
+  "finishedAt": "2026-09-16T12:15:33.989053+00:00",
+  "headless": false,
+  "status": "failed",
+  "modelSha256": "a952e55ca392ecefbcf6b3efce5d218463ec6a59cb10187240bf4cd87010404e",
+  "testSha256": "cf1be2b37a22d581552f43e114b1dd958311e820e233f982234365f0968b46cd",
+  "error": "Target page, context or browser has been closed",
+  "phase": "The browser closed during the gpu-lexer comparison; the subsequent Shiki evaluation could not run.",
+  "cause": "Not determined.",
+  "measurement": "The complete benchmark and UI smoke checks did not finish. No completed timing result is claimed.",
+  "evidence": "Captured benchmark process output; no browser report was produced before failure."
+}

@@ -63,6 +63,9 @@ const result = {
   training: Object.fromEntries(
     [
       "architecture",
+      "encoding",
+      "contextRadius",
+      "exportParity",
       "backend",
       "seed",
       "bytes",

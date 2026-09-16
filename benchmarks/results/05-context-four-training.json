@@ -1,0 +1,23 @@
+{
+  "experiment": "05-context-four",
+  "corpus": "full-clean-v1",
+  "matchbox": "0.3.0",
+  "packages": {
+    "matchbox-ai": "0.3.0",
+    "@matchbox-ai/core": "0.3.0",
+    "@matchbox-ai/train": "0.3.0"
+  },
+  "finishedAt": "2026-09-16T12:13:06.842Z",
+  "exitCode": 0,
+  "wallMs": 605847.247166,
+  "peakResidentBytes": 1446330368,
+  "heapLimitMiB": 3072,
+  "machine": {
+    "platform": "darwin",
+    "arch": "arm64",
+    "cpu": "Apple M2",
+    "memoryBytes": 8589934592
+  },
+  "log": "data/generated/logs/05-context-four-train.log",
+  "timing": "data/generated/logs/05-context-four-resources.log"
+}
