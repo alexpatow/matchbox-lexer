@@ -1,11 +1,13 @@
 {
-  "experiment": "04-full-clean",
-  "matchbox": "0.2.2",
-  "modelBytes": 77516,
-  "parameters": 12625,
-  "trainingMs": 506474.289708,
-  "diagnosticAgreement": 0.4489066714234255,
-  "applicationAgreement": 0.00007397866234133479,
-  "abstentionRate": 0.9399477806788512,
+  "experiment": "06-recurrent-040",
+  "matchbox": "0.4.0",
+  "modelBytes": 194886,
+  "parameters": 36233,
+  "trainingMs": 901029.7392500001,
+  "diagnosticAgreement": 0.8249851524133291,
+  "partialAgreement": 0.8247694389306143,
+  "partialCoverage": 0.9994773096380369,
+  "applicationAgreement": 0.00615889648725804,
+  "abstentionRate": 0.8203655352480418,
   "testExamples": 1915
 }

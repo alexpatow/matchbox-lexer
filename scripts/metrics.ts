@@ -60,6 +60,7 @@ export function createMetrics() {
         exactAccuracy: snippets ? exact / snippets : null,
         characters: count,
         agreement: count ? correct / count : null,
+        characterCoverage: count ? (count - abstained) / count : null,
         acceptedCharacterAgreement: count > abstained ? correct / (count - abstained) : null,
         styledMacroF1: styled.length
           ? styled.reduce((sum, row) => sum + (row.f1 ?? 0), 0) / styled.length

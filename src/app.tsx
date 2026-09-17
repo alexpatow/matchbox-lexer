@@ -1,48 +1,21 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import type { Span } from "../matchbox/lexer/labels";
 import { CodePane, Measurements } from "./components";
+import { useLexer } from "./hooks";
 import experiment from "../benchmarks/results/active.json";
 
 const initial =
   "export function greet(name: string) {\n  // The model receives no language hint.\n  return `Hello, ${name}!`;\n}\n";
 export function App() {
   const [input, setInput] = useState(initial);
-  const [prediction, setPrediction] = useState<Span[] | null>(null);
-  const [status, setStatus] = useState("Loading model…");
+  const [gpu, setGpu] = useState(false);
+  const { spans: prediction, ranges, status } = useLexer(input, gpu);
   const [reference, setReference] = useState<Span[] | null>(null);
   const [referenceStatus, setReferenceStatus] = useState("Reference is not loaded.");
   const [language, setLanguage] = useState("typescript");
   const [referenceKind, setReferenceKind] = useState("shiki");
   const referenceRevision = useRef(0);
-  useEffect(() => {
-    let active = true;
-    const timer = setTimeout(async () => {
-      try {
-        const { default: lexer } = await import("../.matchbox/lexer/model");
-        await lexer.load();
-        const started = performance.now();
-        const result = await lexer.parse(input);
-        const elapsed = performance.now() - started;
-        if (!active) {
-          return;
-        }
-        setPrediction(result.value);
-        if (result.status === "uncertain") {
-          setStatus(`Abstained · ${elapsed.toFixed(2)} ms · ${result.reason}`);
-        } else {
-          setStatus(`Accepted · ${elapsed.toFixed(2)} ms · score ${result.confidence.toFixed(2)}`);
-        }
-      } catch (error) {
-        if (active) {
-          setStatus(String(error));
-        }
-      }
-    }, 150);
-    return () => {
-      active = false;
-      clearTimeout(timer);
-    };
-  }, [input]);
+
   function invalidateReference() {
     referenceRevision.current++;
     setReference(null);
@@ -93,6 +66,18 @@ export function App() {
         </h1>
         <p>One learned highlighter. No language hint. Built with the published Matchbox API.</p>
       </section>
+      <div className="runtime-controls">
+        <label htmlFor="runtime">Runtime</label>
+        <select
+          id="runtime"
+          value={gpu ? "gpu" : "cpu"}
+          onChange={(event) => setGpu(event.target.value === "gpu")}
+        >
+          <option value="cpu">Burn WASM CPU</option>
+          <option value="gpu">Burn WebGPU</option>
+        </select>
+        <span>Parse timing includes any lazy initialization.</span>
+      </div>
       <section className="editor">
         <div className="editor-heading">
           <label htmlFor="source">Source code</label>
@@ -104,14 +89,12 @@ export function App() {
           value={input}
           onChange={(event) => {
             setInput(event.target.value);
-            setPrediction(null);
-            setStatus("Running…");
             invalidateReference();
           }}
         />
       </section>
       <div className="comparison">
-        <CodePane title="Matchbox" input={input} spans={prediction} note={status} />
+        <CodePane title="Matchbox" input={input} spans={prediction} ranges={ranges} note={status} />
         <CodePane title="Reference" input={input} spans={reference} note={referenceStatus} />
       </div>
       <div className="reference-controls">
@@ -147,11 +130,13 @@ export function App() {
       <aside>
         <h2>Abstention is a result.</h2>
         <p>
-          If Matchbox declines, the source stays unstyled. This experiment keeps the published
-          confidence threshold and records diagnostic accuracy separately. It does not turn
-          uncertain predictions into accepted highlights.
+          Partial results show candidate highlights with uncertain ranges underlined. If the model
+          abstains completely, the source stays unstyled. Confidence is uncalibrated. GPU requests
+          fail explicitly when unavailable; they never silently switch to CPU.
         </p>
-        <a href="https://github.com/alexpatow/matchbox-lexer#evolution">Read the evolution log</a>
+        <a href="https://github.com/alexpatow/matchbox-lexer#earlier-published-measurements">
+          Read the measured results
+        </a>
       </aside>
       <Measurements />
       <footer>

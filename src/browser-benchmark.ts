@@ -1,20 +1,22 @@
 import type { Span } from "../matchbox/lexer/labels";
 type Input = { input: string; language: string };
-type Engine = "matchbox" | "gpu-lexer" | "shiki";
+type Engine = "matchbox" | "matchbox-partial" | "matchbox-gpu" | "gpu-lexer" | "shiki";
 export async function runBenchmark(engine: Engine, inputs: Input[]) {
   performance.clearResourceTimings();
   const started = performance.now();
   let dispose = () => {};
   let parse: (row: Input) => Promise<{ value: Span[] | null; status: string }>;
-  if (engine === "matchbox") {
+  if (engine === "matchbox" || engine === "matchbox-partial" || engine === "matchbox-gpu") {
     const { default: lexer } = await import("../.matchbox/lexer/model");
-    await lexer.load();
     dispose = () => lexer.dispose();
-    parse = async (row) => lexer.parse(row.input);
+    parse = async (row) => {
+      if (engine === "matchbox") {
+        return lexer.parse(row.input);
+      }
+      return lexer.parse(row.input, { allowPartial: true, gpu: engine === "matchbox-gpu" });
+    };
   } else if (engine === "gpu-lexer") {
     const lexer = await import("gpu-lexer");
-    // gpu-lexer initializes lazily inside parse; include it in cold initialization.
-    await lexer.parse("const value = 1;");
     parse = async (row) => ({ value: await lexer.parse(row.input), status: "ok" });
   } else {
     const { createTeacher } = await import("../scripts/teacher/label-source");
@@ -22,6 +24,7 @@ export async function runBenchmark(engine: Engine, inputs: Input[]) {
     dispose = () => teacher.dispose();
     parse = async (row) => ({ value: teacher.label(row.input, row.language), status: "ok" });
   }
+  await parse({ input: "const value = 1;", language: "typescript" });
   const initializationMs = performance.now() - started;
   const resources = performance.getEntriesByType("resource").map((entry) => ({
     url: entry.name,
@@ -29,9 +32,19 @@ export async function runBenchmark(engine: Engine, inputs: Input[]) {
   }));
   try {
     const outputs = [];
-    for (const row of inputs) {
-      outputs.push(await parse(row));
+    const fullTimings: number[] = [];
+    const statuses: Record<string, number> = {};
+    for (const row of inputs.slice(0, 20)) {
+      await parse(row);
     }
+    for (const row of inputs) {
+      const tick = performance.now();
+      const result = await parse(row);
+      fullTimings.push(performance.now() - tick);
+      statuses[result.status] = (statuses[result.status] ?? 0) + 1;
+      outputs.push({ value: result.value, status: result.status });
+    }
+    fullTimings.sort((a, b) => a - b);
     const timings = [];
     for (const units of [128, 512, 1024]) {
       const row = { ...inputs[0], input: inputs[0].input.slice(0, units) };
@@ -58,6 +71,12 @@ export async function runBenchmark(engine: Engine, inputs: Input[]) {
     return {
       engine,
       initializationMs,
+      fullDocuments: {
+        samples: inputs.length,
+        p50: fullTimings[Math.floor((inputs.length - 1) * 0.5)],
+        p95: fullTimings[Math.floor((inputs.length - 1) * 0.95)],
+        statuses,
+      },
       resources,
       outputs,
       timings,

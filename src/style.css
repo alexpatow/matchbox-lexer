@@ -291,3 +291,18 @@ footer {
     min-width: 160px;
   }
 }
+.runtime-controls {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 18px;
+  font-size: 12px;
+}
+.runtime-controls span {
+  color: #62685b;
+}
+.syntax-uncertain {
+  text-decoration: underline dotted #92713c;
+  text-underline-offset: 4px;
+}
