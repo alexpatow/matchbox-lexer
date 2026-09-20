@@ -3,13 +3,9 @@ import { platform, arch, cpus, totalmem } from "node:os";
 import { performance } from "node:perf_hooks";
 
 import { packageVersions } from "./package-versions";
+import { experiment, corpus } from "./experiment";
 
 const packages = await packageVersions();
-const experiment = process.env.EXPERIMENT ?? "06-recurrent-040";
-const corpus = process.env.CORPUS ?? "full-clean-v1";
-if (!/^[a-z0-9-]+$/.test(experiment)) {
-  throw new Error("Use a lowercase experiment ID with letters, numbers and hyphens.");
-}
 await mkdir("benchmarks/results", { recursive: true });
 await mkdir("data/generated/logs", { recursive: true });
 const log = `data/generated/logs/${experiment}-train.log`;

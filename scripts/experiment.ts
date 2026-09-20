@@ -1,5 +1,8 @@
 import { hash } from "./corpus";
-export const experiment = process.env.EXPERIMENT ?? "06-recurrent-040";
+export const experiment = process.env.EXPERIMENT ?? "";
+if (!/^[a-z0-9-]+$/.test(experiment)) {
+  throw new Error("Set EXPERIMENT to a new run ID using lowercase letters, numbers and hyphens.");
+}
 export const corpus = process.env.CORPUS ?? "full-clean-v1";
 export const dataRoot = `data/generated/${corpus}`;
 export async function verifyDataset() {

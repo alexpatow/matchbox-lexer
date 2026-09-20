@@ -6,6 +6,7 @@
   "scripts": {
     "data": "bun scripts/prepare-full.ts",
     "data:full": "bun scripts/prepare-full.ts",
+    "data:clean": "bun scripts/clean-full.ts",
     "data:pilot": "bun scripts/prepare-data.ts",
     "train": "bun scripts/train.ts",
     "evaluate": "bun scripts/evaluate.ts",

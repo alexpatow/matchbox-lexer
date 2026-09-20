@@ -1,7 +1,6 @@
-import { useRef, useState } from "react";
-import type { Span } from "../matchbox/lexer/labels";
-import { CodePane, Measurements } from "./components";
-import { useLexer } from "./hooks";
+import { useState } from "react";
+import { CodePane, Measurements, ReferenceControls } from "./components";
+import { useLexer, useReference } from "./hooks";
 import experiment from "../benchmarks/results/active.json";
 
 const initial =
@@ -10,61 +9,26 @@ export function App() {
   const [input, setInput] = useState(initial);
   const [gpu, setGpu] = useState(false);
   const { spans: prediction, ranges, status } = useLexer(input, gpu);
-  const [reference, setReference] = useState<Span[] | null>(null);
-  const [referenceStatus, setReferenceStatus] = useState("Reference is not loaded.");
   const [language, setLanguage] = useState("typescript");
   const [referenceKind, setReferenceKind] = useState("shiki");
-  const referenceRevision = useRef(0);
-
-  function invalidateReference() {
-    referenceRevision.current++;
-    setReference(null);
-    setReferenceStatus("Reference is not loaded.");
-  }
-  async function compare() {
-    const revision = ++referenceRevision.current;
-    setReferenceStatus("Loading reference…");
-    try {
-      let spans: Span[];
-      if (referenceKind === "gpu-lexer") {
-        const { parse } = await import("gpu-lexer");
-        spans = await parse(input);
-      } else {
-        const { createTeacher } = await import("../scripts/teacher/label-source");
-        const teacher = await createTeacher();
-        try {
-          spans = teacher.label(input, language);
-        } finally {
-          teacher.dispose();
-        }
-      }
-      if (revision !== referenceRevision.current) {
-        return;
-      }
-      setReference(spans);
-      setReferenceStatus("Reference only. Never used as a fallback.");
-    } catch (error) {
-      if (revision === referenceRevision.current) {
-        setReferenceStatus(String(error));
-      }
-    }
-  }
+  const { reference, referenceStatus, invalidateReference, compare } = useReference(
+    input,
+    language,
+    referenceKind,
+  );
   return (
     <main>
       <nav>
         <a href="https://github.com/alexpatow/matchbox-lexer">Matchbox / Lexer</a>
-        <span>
-          {experiment.experiment} · npm {experiment.matchbox}
-        </span>
+        <span>Matchbox {experiment.matchbox}</span>
       </nav>
       <section className="intro">
-        <p className="eyebrow">A consumer experiment</p>
         <h1>
           Syntax highlighting,
           <br />
           learned.
         </h1>
-        <p>One learned highlighter. No language hint. Built with the published Matchbox API.</p>
+        <p>A small model that highlights source code in your browser, without a language hint.</p>
       </section>
       <div className="runtime-controls">
         <label htmlFor="runtime">Runtime</label>
@@ -97,44 +61,26 @@ export function App() {
         <CodePane title="Matchbox" input={input} spans={prediction} ranges={ranges} note={status} />
         <CodePane title="Reference" input={input} spans={reference} note={referenceStatus} />
       </div>
-      <div className="reference-controls">
-        <label>
-          Reference{" "}
-          <select
-            value={referenceKind}
-            onChange={(event) => {
-              setReferenceKind(event.target.value);
-              invalidateReference();
-            }}
-          >
-            <option value="shiki">Shiki 4.4.3</option>
-            <option value="gpu-lexer">gpu-lexer 0.0.2 · WebGPU</option>
-          </select>
-        </label>
-        <label>
-          Shiki language{" "}
-          <select
-            value={language}
-            onChange={(event) => {
-              setLanguage(event.target.value);
-              invalidateReference();
-            }}
-          >
-            {["typescript", "javascript", "python", "rust"].map((value) => (
-              <option key={value}>{value}</option>
-            ))}
-          </select>
-        </label>
-        <button onClick={() => void compare()}>Run reference</button>
-      </div>
+      <ReferenceControls
+        referenceKind={referenceKind}
+        language={language}
+        onReferenceChange={(value) => {
+          setReferenceKind(value);
+          invalidateReference();
+        }}
+        onLanguageChange={(value) => {
+          setLanguage(value);
+          invalidateReference();
+        }}
+        onRun={() => void compare()}
+      />
       <aside>
-        <h2>Abstention is a result.</h2>
+        <h2>Prediction uncertainty</h2>
         <p>
-          Partial results show candidate highlights with uncertain ranges underlined. If the model
-          abstains completely, the source stays unstyled. Confidence is uncalibrated. GPU requests
-          fail explicitly when unavailable; they never silently switch to CPU.
+          Dotted underlines mark uncertain predictions. Fully uncertain inputs stay unstyled.
+          Confidence is uncalibrated.
         </p>
-        <a href="https://github.com/alexpatow/matchbox-lexer#earlier-published-measurements">
+        <a href="https://github.com/alexpatow/matchbox-lexer/blob/main/benchmarks/results.md">
           Read the measured results
         </a>
       </aside>
