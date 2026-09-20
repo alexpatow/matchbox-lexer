@@ -1,13 +1,13 @@
 {
-  "experiment": "06-recurrent-040",
+  "experiment": "08-snippets-lr15-040",
   "matchbox": "0.4.0",
   "modelBytes": 194886,
   "parameters": 36233,
-  "trainingMs": 901029.7392500001,
-  "diagnosticAgreement": 0.8249851524133291,
-  "partialAgreement": 0.8247694389306143,
-  "partialCoverage": 0.9994773096380369,
-  "applicationAgreement": 0.00615889648725804,
-  "abstentionRate": 0.8203655352480418,
+  "trainingMs": 1149606.2152500001,
+  "diagnosticAgreement": 0.8438455629741635,
+  "partialAgreement": 0.8437743498692929,
+  "partialCoverage": 0.9997600878894164,
+  "applicationAgreement": 0.014422382209721902,
+  "abstentionRate": 0.7268929503916449,
   "testExamples": 1915
 }

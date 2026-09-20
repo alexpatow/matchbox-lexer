@@ -2,11 +2,13 @@
 
 Experiment 00 is a wiring pilot. It is not comparable to the full-corpus series.
 
-The full series uses the unchanged gpu-lexer corpus builder at commit `1e514fd681e31d6b19296f985fb01d8fdc0ae74f`. All prepared training records are used. The upstream mining split serves as validation, and the entire verification split serves as test. Language is teacher metadata only. It is never an input feature. Full upstream training means the prepared training shard, not the promoted model's accumulated warm-start and replay history.
+The original full series uses the unchanged gpu-lexer corpus builder at commit `1e514fd681e31d6b19296f985fb01d8fdc0ae74f`. All prepared training records are used. The upstream mining split serves as validation, and the entire verification split serves as test. Language is teacher metadata only. It is never an input feature. Full upstream training means the prepared training shard, not the promoted model's accumulated warm-start and replay history.
 
 Preparation streams archives, retaining all recognized-language files eligible for upstream's 65,536-byte source limit and license notices. It omits unrelated assets and archives to reduce disk usage. Selection, quotas, minification, Shiki labeling and deduplication remain upstream code. Source provenance, package versions and dataset hashes identify each run. Full records retain their complete prepared source; the pilot's mid-file slices could lack opening lexical context and are explicitly excluded from the evolution comparison.
 
 Shiki labels are mapped through upstream's nine-class taxonomy. Uncovered line separators receive plain labels. Malformed or missing labels fail preparation. The decoder only merges adjacent equal predicted labels and checks complete UTF-16 coverage. It contains no syntax rules. No test examples, teacher labels or language IDs participate in inference.
+
+The `full-snippets-v1` series adds independently labeled line windows and Markdown fences from the original training and validation splits. It preserves the entire test split byte-for-byte and excludes website evaluation samples from added training data. Its selection policy and frozen hashes are documented in [snippet training](../docs/snippet-training.md). Comparisons with the original model use the same test inputs and scorer; training and validation hashes intentionally differ.
 
 ## Quality
 
@@ -14,7 +16,7 @@ Count Unicode code points excluding whitespace. Report overall label agreement, 
 
 Application results come from `parser.parse`. Diagnostic results come from the documented `loadArtifact().inspect` API, bypassing acceptance for measurement only. Diagnostic results are never shown as accepted application output. Partial results come from `parse(input, { allowPartial: true })`. Their scores include every returned candidate label, including uncertain ranges, and must not be described as confident coverage. In the shared report format, `accepted` counts non-null outputs, including partial candidates. Character coverage measures non-whitespace code points with returned labels. Recognition scores are uncalibrated.
 
-The 0.4.0 pipeline uses the published recurrent classifier with explicit text-part encoding, text features and span supervision. It uses the released defaults without test-set tuning. The 0.3.0 pipeline used lowercase character keys and `contextRadius: 4`, a nine-character window. The 0.2.2 reference used a three-character window. Corpus selection, supervision, decoding, scoring, and acceptance thresholds are unchanged. The wider configuration was chosen using framework validation measurements before this published-package reproduction.
+The original 0.4.0 pipeline uses the published recurrent classifier with explicit text-part encoding, text features and span supervision. It uses the released defaults without test-set tuning. The snippet-trained pipeline uses the same primitives and a learning rate of 0.0015; validation selects the exported epoch. The 0.3.0 pipeline used lowercase character keys and `contextRadius: 4`, a nine-character window. The 0.2.2 reference used a three-character window. For the original full-corpus comparisons, corpus selection, supervision, decoding, scoring, and acceptance thresholds are unchanged. The wider configuration was chosen using framework validation measurements before this published-package reproduction.
 
 The research export gate permits zero exact accuracy and a 2 MB artifact. This allows measuring failed models and is not a production acceptance policy. The published inference threshold is unchanged. Test data is used only for final reporting, not tuning.
 

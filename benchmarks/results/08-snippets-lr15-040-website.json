@@ -1,0 +1,6609 @@
+{
+  "corpus": {
+    "purpose": "Website regression evaluation. Never consumed by training. Not an unseen generalization benchmark.",
+    "repository": "https://github.com/alexpatow/matchbox",
+    "sourceCommit": "972e7d96f461dcfcd323d1dc950a91d3731b27c2",
+    "model": {
+      "url": "https://github.com/alexpatow/matchbox/releases/download/lexer-demo-0.4.0/lexer.matchbox",
+      "sha256": "eb98becfc0e7094b92b3e3858544034dffe7c92e493aea38255ccf12bda7791f",
+      "bytes": 194886,
+      "parameters": 36233,
+      "matchbox": "0.4.0"
+    },
+    "teacher": {
+      "shiki": "4.4.3",
+      "mappingSha256": "d28215b2b1dfd76eeb363db0348841f1c2dba92a8e6023eddf439fe61f62f58b"
+    },
+    "samples": 78,
+    "uniqueInputs": 78,
+    "corpusSha256": "d4d8fde17522bca4dadd6a5fa2cfdea03ad475319ca80f9221fde1477968d349"
+  },
+  "websiteCommit": "972e7d96f461dcfcd323d1dc950a91d3731b27c2",
+  "runtimeVersion": "0.4.1",
+  "model": {
+    "sha256": "998c87a3e5e187cb8651e19c7adf81f613267c8fbef5540dc668872950a7f81c",
+    "bytes": 194886,
+    "source": "local-candidate"
+  },
+  "browser": "153.0.8010.12",
+  "createdAt": "2026-09-20T20:32:57.787Z",
+  "policy": "CPU/WASM, allowPartial:true, identical to ModelCode. Shiki is an offline reference, not semantic truth. Metrics exclude whitespace. Displayed scores include uncertain candidates and plain-text fallback; confident scores exclude uncertain ranges. The legacy accepted count means non-null output, not whole-input acceptance. No latency claims from the development server.",
+  "overall": {
+    "statuses": {
+      "partial": 70,
+      "ok": 7,
+      "uncertain": 1
+    },
+    "candidate": {
+      "snippets": 78,
+      "accepted": 77,
+      "abstentionRate": 0.012820512820512775,
+      "exactAccuracy": 0,
+      "characters": 16028,
+      "agreement": 0.9378587471924132,
+      "characterCoverage": 0.9984402295982031,
+      "acceptedCharacterAgreement": 0.939323876773105,
+      "styledMacroF1": 0.9232774343651149,
+      "classes": [
+        {
+          "label": "plain",
+          "support": 4422,
+          "precision": 0.8840488215488216,
+          "recall": 0.9500226142017186,
+          "f1": 0.9158491388707216
+        },
+        {
+          "label": "comment",
+          "support": 1176,
+          "precision": 0.9949109414758269,
+          "recall": 0.9974489795918368,
+          "f1": 0.9961783439490446
+        },
+        {
+          "label": "string",
+          "support": 5121,
+          "precision": 0.9657997132910097,
+          "recall": 0.9209138840070299,
+          "f1": 0.9428228708516594
+        },
+        {
+          "label": "number",
+          "support": 80,
+          "precision": 0.9090909090909091,
+          "recall": 1,
+          "f1": 0.9523809523809523
+        },
+        {
+          "label": "keyword",
+          "support": 1594,
+          "precision": 0.9912170639899623,
+          "recall": 0.9912170639899623,
+          "f1": 0.9912170639899623
+        },
+        {
+          "label": "type",
+          "support": 681,
+          "precision": 0.945631067961165,
+          "recall": 0.7151248164464024,
+          "f1": 0.81438127090301
+        },
+        {
+          "label": "function",
+          "support": 1514,
+          "precision": 0.9603891591382905,
+          "recall": 0.9128137384412153,
+          "f1": 0.9359972908906197
+        },
+        {
+          "label": "constant",
+          "support": 45,
+          "precision": 0.6716417910447762,
+          "recall": 1,
+          "f1": 0.8035714285714286
+        },
+        {
+          "label": "operator",
+          "support": 1395,
+          "precision": 0.9205921938088829,
+          "recall": 0.9806451612903225,
+          "f1": 0.9496702533842416
+        }
+      ],
+      "confusion": [
+        [
+          4201,
+          0,
+          92,
+          0,
+          3,
+          28,
+          4,
+          0,
+          94,
+          0
+        ],
+        [
+          0,
+          1173,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          3,
+          0
+        ],
+        [
+          303,
+          2,
+          4716,
+          8,
+          4,
+          0,
+          43,
+          5,
+          19,
+          21
+        ],
+        [
+          0,
+          0,
+          0,
+          80,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          12,
+          0,
+          0,
+          0,
+          1580,
+          0,
+          0,
+          0,
+          2,
+          0
+        ],
+        [
+          166,
+          0,
+          0,
+          0,
+          1,
+          487,
+          10,
+          17,
+          0,
+          0
+        ],
+        [
+          52,
+          0,
+          70,
+          0,
+          6,
+          0,
+          1382,
+          0,
+          0,
+          4
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          45,
+          0,
+          0
+        ],
+        [
+          18,
+          4,
+          5,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1368,
+          0
+        ]
+      ],
+      "confusionColumns": [
+        "plain",
+        "comment",
+        "string",
+        "number",
+        "keyword",
+        "type",
+        "function",
+        "constant",
+        "operator",
+        "abstain"
+      ]
+    },
+    "displayed": {
+      "snippets": 78,
+      "accepted": 78,
+      "abstentionRate": 0,
+      "exactAccuracy": 0,
+      "characters": 16028,
+      "agreement": 0.9378587471924132,
+      "characterCoverage": 1,
+      "acceptedCharacterAgreement": 0.9378587471924132,
+      "styledMacroF1": 0.9232774343651149,
+      "classes": [
+        {
+          "label": "plain",
+          "support": 4422,
+          "precision": 0.8794222315260624,
+          "recall": 0.9500226142017186,
+          "f1": 0.9133601478421568
+        },
+        {
+          "label": "comment",
+          "support": 1176,
+          "precision": 0.9949109414758269,
+          "recall": 0.9974489795918368,
+          "f1": 0.9961783439490446
+        },
+        {
+          "label": "string",
+          "support": 5121,
+          "precision": 0.9657997132910097,
+          "recall": 0.9209138840070299,
+          "f1": 0.9428228708516594
+        },
+        {
+          "label": "number",
+          "support": 80,
+          "precision": 0.9090909090909091,
+          "recall": 1,
+          "f1": 0.9523809523809523
+        },
+        {
+          "label": "keyword",
+          "support": 1594,
+          "precision": 0.9912170639899623,
+          "recall": 0.9912170639899623,
+          "f1": 0.9912170639899623
+        },
+        {
+          "label": "type",
+          "support": 681,
+          "precision": 0.945631067961165,
+          "recall": 0.7151248164464024,
+          "f1": 0.81438127090301
+        },
+        {
+          "label": "function",
+          "support": 1514,
+          "precision": 0.9603891591382905,
+          "recall": 0.9128137384412153,
+          "f1": 0.9359972908906197
+        },
+        {
+          "label": "constant",
+          "support": 45,
+          "precision": 0.6716417910447762,
+          "recall": 1,
+          "f1": 0.8035714285714286
+        },
+        {
+          "label": "operator",
+          "support": 1395,
+          "precision": 0.9205921938088829,
+          "recall": 0.9806451612903225,
+          "f1": 0.9496702533842416
+        }
+      ],
+      "confusion": [
+        [
+          4201,
+          0,
+          92,
+          0,
+          3,
+          28,
+          4,
+          0,
+          94,
+          0
+        ],
+        [
+          0,
+          1173,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          3,
+          0
+        ],
+        [
+          324,
+          2,
+          4716,
+          8,
+          4,
+          0,
+          43,
+          5,
+          19,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          80,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          12,
+          0,
+          0,
+          0,
+          1580,
+          0,
+          0,
+          0,
+          2,
+          0
+        ],
+        [
+          166,
+          0,
+          0,
+          0,
+          1,
+          487,
+          10,
+          17,
+          0,
+          0
+        ],
+        [
+          56,
+          0,
+          70,
+          0,
+          6,
+          0,
+          1382,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          45,
+          0,
+          0
+        ],
+        [
+          18,
+          4,
+          5,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1368,
+          0
+        ]
+      ],
+      "confusionColumns": [
+        "plain",
+        "comment",
+        "string",
+        "number",
+        "keyword",
+        "type",
+        "function",
+        "constant",
+        "operator",
+        "abstain"
+      ]
+    },
+    "confident": {
+      "snippets": 78,
+      "accepted": 77,
+      "abstentionRate": 0.012820512820512775,
+      "exactAccuracy": 0,
+      "characters": 16028,
+      "agreement": 0.8612428250561517,
+      "characterCoverage": 0.8776516096830547,
+      "acceptedCharacterAgreement": 0.981303760574394,
+      "styledMacroF1": 0.9071409512033235,
+      "classes": [
+        {
+          "label": "plain",
+          "support": 4422,
+          "precision": 0.975556098753361,
+          "recall": 0.9025327905924921,
+          "f1": 0.9376248091154704
+        },
+        {
+          "label": "comment",
+          "support": 1176,
+          "precision": 1,
+          "recall": 0.9863945578231292,
+          "f1": 0.9931506849315068
+        },
+        {
+          "label": "string",
+          "support": 5121,
+          "precision": 0.9790575916230366,
+          "recall": 0.8033587190001953,
+          "f1": 0.8825485358790089
+        },
+        {
+          "label": "number",
+          "support": 80,
+          "precision": 1,
+          "recall": 0.9375,
+          "f1": 0.967741935483871
+        },
+        {
+          "label": "keyword",
+          "support": 1594,
+          "precision": 0.9960886571056062,
+          "recall": 0.958594730238394,
+          "f1": 0.9769820971867008
+        },
+        {
+          "label": "type",
+          "support": 681,
+          "precision": 0.9435483870967742,
+          "recall": 0.5154185022026432,
+          "f1": 0.6666666666666666
+        },
+        {
+          "label": "function",
+          "support": 1514,
+          "precision": 0.9865612648221344,
+          "recall": 0.8243064729194187,
+          "f1": 0.8981648074847067
+        },
+        {
+          "label": "constant",
+          "support": 45,
+          "precision": 0.8490566037735849,
+          "recall": 1,
+          "f1": 0.9183673469387755
+        },
+        {
+          "label": "operator",
+          "support": 1395,
+          "precision": 0.9825095057034221,
+          "recall": 0.9261648745519713,
+          "f1": 0.9535055350553505
+        }
+      ],
+      "confusion": [
+        [
+          3991,
+          0,
+          51,
+          0,
+          0,
+          21,
+          0,
+          0,
+          18,
+          341
+        ],
+        [
+          0,
+          1160,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          16
+        ],
+        [
+          0,
+          0,
+          4114,
+          0,
+          0,
+          0,
+          17,
+          0,
+          4,
+          986
+        ],
+        [
+          0,
+          0,
+          0,
+          75,
+          0,
+          0,
+          0,
+          0,
+          0,
+          5
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1528,
+          0,
+          0,
+          0,
+          1,
+          65
+        ],
+        [
+          73,
+          0,
+          0,
+          0,
+          0,
+          351,
+          0,
+          8,
+          0,
+          249
+        ],
+        [
+          24,
+          0,
+          35,
+          0,
+          6,
+          0,
+          1248,
+          0,
+          0,
+          201
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          45,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1292,
+          98
+        ]
+      ],
+      "confusionColumns": [
+        "plain",
+        "comment",
+        "string",
+        "number",
+        "keyword",
+        "type",
+        "function",
+        "constant",
+        "operator",
+        "abstain"
+      ]
+    }
+  },
+  "unique": {
+    "statuses": {
+      "partial": 70,
+      "ok": 7,
+      "uncertain": 1
+    },
+    "candidate": {
+      "snippets": 78,
+      "accepted": 77,
+      "abstentionRate": 0.012820512820512775,
+      "exactAccuracy": 0,
+      "characters": 16028,
+      "agreement": 0.9378587471924132,
+      "characterCoverage": 0.9984402295982031,
+      "acceptedCharacterAgreement": 0.939323876773105,
+      "styledMacroF1": 0.9232774343651149,
+      "classes": [
+        {
+          "label": "plain",
+          "support": 4422,
+          "precision": 0.8840488215488216,
+          "recall": 0.9500226142017186,
+          "f1": 0.9158491388707216
+        },
+        {
+          "label": "comment",
+          "support": 1176,
+          "precision": 0.9949109414758269,
+          "recall": 0.9974489795918368,
+          "f1": 0.9961783439490446
+        },
+        {
+          "label": "string",
+          "support": 5121,
+          "precision": 0.9657997132910097,
+          "recall": 0.9209138840070299,
+          "f1": 0.9428228708516594
+        },
+        {
+          "label": "number",
+          "support": 80,
+          "precision": 0.9090909090909091,
+          "recall": 1,
+          "f1": 0.9523809523809523
+        },
+        {
+          "label": "keyword",
+          "support": 1594,
+          "precision": 0.9912170639899623,
+          "recall": 0.9912170639899623,
+          "f1": 0.9912170639899623
+        },
+        {
+          "label": "type",
+          "support": 681,
+          "precision": 0.945631067961165,
+          "recall": 0.7151248164464024,
+          "f1": 0.81438127090301
+        },
+        {
+          "label": "function",
+          "support": 1514,
+          "precision": 0.9603891591382905,
+          "recall": 0.9128137384412153,
+          "f1": 0.9359972908906197
+        },
+        {
+          "label": "constant",
+          "support": 45,
+          "precision": 0.6716417910447762,
+          "recall": 1,
+          "f1": 0.8035714285714286
+        },
+        {
+          "label": "operator",
+          "support": 1395,
+          "precision": 0.9205921938088829,
+          "recall": 0.9806451612903225,
+          "f1": 0.9496702533842416
+        }
+      ],
+      "confusion": [
+        [
+          4201,
+          0,
+          92,
+          0,
+          3,
+          28,
+          4,
+          0,
+          94,
+          0
+        ],
+        [
+          0,
+          1173,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          3,
+          0
+        ],
+        [
+          303,
+          2,
+          4716,
+          8,
+          4,
+          0,
+          43,
+          5,
+          19,
+          21
+        ],
+        [
+          0,
+          0,
+          0,
+          80,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          12,
+          0,
+          0,
+          0,
+          1580,
+          0,
+          0,
+          0,
+          2,
+          0
+        ],
+        [
+          166,
+          0,
+          0,
+          0,
+          1,
+          487,
+          10,
+          17,
+          0,
+          0
+        ],
+        [
+          52,
+          0,
+          70,
+          0,
+          6,
+          0,
+          1382,
+          0,
+          0,
+          4
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          45,
+          0,
+          0
+        ],
+        [
+          18,
+          4,
+          5,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1368,
+          0
+        ]
+      ],
+      "confusionColumns": [
+        "plain",
+        "comment",
+        "string",
+        "number",
+        "keyword",
+        "type",
+        "function",
+        "constant",
+        "operator",
+        "abstain"
+      ]
+    },
+    "displayed": {
+      "snippets": 78,
+      "accepted": 78,
+      "abstentionRate": 0,
+      "exactAccuracy": 0,
+      "characters": 16028,
+      "agreement": 0.9378587471924132,
+      "characterCoverage": 1,
+      "acceptedCharacterAgreement": 0.9378587471924132,
+      "styledMacroF1": 0.9232774343651149,
+      "classes": [
+        {
+          "label": "plain",
+          "support": 4422,
+          "precision": 0.8794222315260624,
+          "recall": 0.9500226142017186,
+          "f1": 0.9133601478421568
+        },
+        {
+          "label": "comment",
+          "support": 1176,
+          "precision": 0.9949109414758269,
+          "recall": 0.9974489795918368,
+          "f1": 0.9961783439490446
+        },
+        {
+          "label": "string",
+          "support": 5121,
+          "precision": 0.9657997132910097,
+          "recall": 0.9209138840070299,
+          "f1": 0.9428228708516594
+        },
+        {
+          "label": "number",
+          "support": 80,
+          "precision": 0.9090909090909091,
+          "recall": 1,
+          "f1": 0.9523809523809523
+        },
+        {
+          "label": "keyword",
+          "support": 1594,
+          "precision": 0.9912170639899623,
+          "recall": 0.9912170639899623,
+          "f1": 0.9912170639899623
+        },
+        {
+          "label": "type",
+          "support": 681,
+          "precision": 0.945631067961165,
+          "recall": 0.7151248164464024,
+          "f1": 0.81438127090301
+        },
+        {
+          "label": "function",
+          "support": 1514,
+          "precision": 0.9603891591382905,
+          "recall": 0.9128137384412153,
+          "f1": 0.9359972908906197
+        },
+        {
+          "label": "constant",
+          "support": 45,
+          "precision": 0.6716417910447762,
+          "recall": 1,
+          "f1": 0.8035714285714286
+        },
+        {
+          "label": "operator",
+          "support": 1395,
+          "precision": 0.9205921938088829,
+          "recall": 0.9806451612903225,
+          "f1": 0.9496702533842416
+        }
+      ],
+      "confusion": [
+        [
+          4201,
+          0,
+          92,
+          0,
+          3,
+          28,
+          4,
+          0,
+          94,
+          0
+        ],
+        [
+          0,
+          1173,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          3,
+          0
+        ],
+        [
+          324,
+          2,
+          4716,
+          8,
+          4,
+          0,
+          43,
+          5,
+          19,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          80,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          12,
+          0,
+          0,
+          0,
+          1580,
+          0,
+          0,
+          0,
+          2,
+          0
+        ],
+        [
+          166,
+          0,
+          0,
+          0,
+          1,
+          487,
+          10,
+          17,
+          0,
+          0
+        ],
+        [
+          56,
+          0,
+          70,
+          0,
+          6,
+          0,
+          1382,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          45,
+          0,
+          0
+        ],
+        [
+          18,
+          4,
+          5,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1368,
+          0
+        ]
+      ],
+      "confusionColumns": [
+        "plain",
+        "comment",
+        "string",
+        "number",
+        "keyword",
+        "type",
+        "function",
+        "constant",
+        "operator",
+        "abstain"
+      ]
+    },
+    "confident": {
+      "snippets": 78,
+      "accepted": 77,
+      "abstentionRate": 0.012820512820512775,
+      "exactAccuracy": 0,
+      "characters": 16028,
+      "agreement": 0.8612428250561517,
+      "characterCoverage": 0.8776516096830547,
+      "acceptedCharacterAgreement": 0.981303760574394,
+      "styledMacroF1": 0.9071409512033235,
+      "classes": [
+        {
+          "label": "plain",
+          "support": 4422,
+          "precision": 0.975556098753361,
+          "recall": 0.9025327905924921,
+          "f1": 0.9376248091154704
+        },
+        {
+          "label": "comment",
+          "support": 1176,
+          "precision": 1,
+          "recall": 0.9863945578231292,
+          "f1": 0.9931506849315068
+        },
+        {
+          "label": "string",
+          "support": 5121,
+          "precision": 0.9790575916230366,
+          "recall": 0.8033587190001953,
+          "f1": 0.8825485358790089
+        },
+        {
+          "label": "number",
+          "support": 80,
+          "precision": 1,
+          "recall": 0.9375,
+          "f1": 0.967741935483871
+        },
+        {
+          "label": "keyword",
+          "support": 1594,
+          "precision": 0.9960886571056062,
+          "recall": 0.958594730238394,
+          "f1": 0.9769820971867008
+        },
+        {
+          "label": "type",
+          "support": 681,
+          "precision": 0.9435483870967742,
+          "recall": 0.5154185022026432,
+          "f1": 0.6666666666666666
+        },
+        {
+          "label": "function",
+          "support": 1514,
+          "precision": 0.9865612648221344,
+          "recall": 0.8243064729194187,
+          "f1": 0.8981648074847067
+        },
+        {
+          "label": "constant",
+          "support": 45,
+          "precision": 0.8490566037735849,
+          "recall": 1,
+          "f1": 0.9183673469387755
+        },
+        {
+          "label": "operator",
+          "support": 1395,
+          "precision": 0.9825095057034221,
+          "recall": 0.9261648745519713,
+          "f1": 0.9535055350553505
+        }
+      ],
+      "confusion": [
+        [
+          3991,
+          0,
+          51,
+          0,
+          0,
+          21,
+          0,
+          0,
+          18,
+          341
+        ],
+        [
+          0,
+          1160,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          16
+        ],
+        [
+          0,
+          0,
+          4114,
+          0,
+          0,
+          0,
+          17,
+          0,
+          4,
+          986
+        ],
+        [
+          0,
+          0,
+          0,
+          75,
+          0,
+          0,
+          0,
+          0,
+          0,
+          5
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          1528,
+          0,
+          0,
+          0,
+          1,
+          65
+        ],
+        [
+          73,
+          0,
+          0,
+          0,
+          0,
+          351,
+          0,
+          8,
+          0,
+          249
+        ],
+        [
+          24,
+          0,
+          35,
+          0,
+          6,
+          0,
+          1248,
+          0,
+          0,
+          201
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          45,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1292,
+          98
+        ]
+      ],
+      "confusionColumns": [
+        "plain",
+        "comment",
+        "string",
+        "number",
+        "keyword",
+        "type",
+        "function",
+        "constant",
+        "operator",
+        "abstain"
+      ]
+    }
+  },
+  "byLanguage": {
+    "typescript": {
+      "statuses": {
+        "partial": 39,
+        "ok": 6
+      },
+      "candidate": {
+        "snippets": 45,
+        "accepted": 45,
+        "abstentionRate": 0,
+        "exactAccuracy": 0,
+        "characters": 11461,
+        "agreement": 0.968763633190821,
+        "characterCoverage": 1,
+        "acceptedCharacterAgreement": 0.968763633190821,
+        "styledMacroF1": 0.9396571272474061,
+        "classes": [
+          {
+            "label": "plain",
+            "support": 3993,
+            "precision": 0.951117661508229,
+            "recall": 0.9696969696969697,
+            "f1": 0.9603174603174603
+          },
+          {
+            "label": "comment",
+            "support": 969,
+            "precision": 0.9958762886597938,
+            "recall": 0.9969040247678018,
+            "f1": 0.9963898916967509
+          },
+          {
+            "label": "string",
+            "support": 1950,
+            "precision": 0.9954034729315628,
+            "recall": 0.9994871794871795,
+            "f1": 0.9974411463664279
+          },
+          {
+            "label": "number",
+            "support": 78,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          {
+            "label": "keyword",
+            "support": 1425,
+            "precision": 0.9971771347918137,
+            "recall": 0.991578947368421,
+            "f1": 0.9943701618578465
+          },
+          {
+            "label": "type",
+            "support": 675,
+            "precision": 0.9449901768172888,
+            "recall": 0.7125925925925926,
+            "f1": 0.8125
+          },
+          {
+            "label": "function",
+            "support": 1128,
+            "precision": 0.9876760563380281,
+            "recall": 0.9946808510638298,
+            "f1": 0.991166077738516
+          },
+          {
+            "label": "constant",
+            "support": 28,
+            "precision": 0.6222222222222222,
+            "recall": 1,
+            "f1": 0.7671232876712328
+          },
+          {
+            "label": "operator",
+            "support": 1215,
+            "precision": 0.9350039154267815,
+            "recall": 0.9827160493827161,
+            "f1": 0.9582664526484751
+          }
+        ],
+        "confusion": [
+          [
+            3872,
+            0,
+            7,
+            0,
+            3,
+            28,
+            4,
+            0,
+            79,
+            0
+          ],
+          [
+            0,
+            966,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            3,
+            0
+          ],
+          [
+            0,
+            0,
+            1949,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            78,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            12,
+            0,
+            0,
+            0,
+            1413,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            166,
+            0,
+            0,
+            0,
+            1,
+            481,
+            10,
+            17,
+            0,
+            0
+          ],
+          [
+            6,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1122,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            28,
+            0,
+            0
+          ],
+          [
+            15,
+            4,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1194,
+            0
+          ]
+        ],
+        "confusionColumns": [
+          "plain",
+          "comment",
+          "string",
+          "number",
+          "keyword",
+          "type",
+          "function",
+          "constant",
+          "operator",
+          "abstain"
+        ]
+      },
+      "displayed": {
+        "snippets": 45,
+        "accepted": 45,
+        "abstentionRate": 0,
+        "exactAccuracy": 0,
+        "characters": 11461,
+        "agreement": 0.968763633190821,
+        "characterCoverage": 1,
+        "acceptedCharacterAgreement": 0.968763633190821,
+        "styledMacroF1": 0.9396571272474061,
+        "classes": [
+          {
+            "label": "plain",
+            "support": 3993,
+            "precision": 0.951117661508229,
+            "recall": 0.9696969696969697,
+            "f1": 0.9603174603174603
+          },
+          {
+            "label": "comment",
+            "support": 969,
+            "precision": 0.9958762886597938,
+            "recall": 0.9969040247678018,
+            "f1": 0.9963898916967509
+          },
+          {
+            "label": "string",
+            "support": 1950,
+            "precision": 0.9954034729315628,
+            "recall": 0.9994871794871795,
+            "f1": 0.9974411463664279
+          },
+          {
+            "label": "number",
+            "support": 78,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          {
+            "label": "keyword",
+            "support": 1425,
+            "precision": 0.9971771347918137,
+            "recall": 0.991578947368421,
+            "f1": 0.9943701618578465
+          },
+          {
+            "label": "type",
+            "support": 675,
+            "precision": 0.9449901768172888,
+            "recall": 0.7125925925925926,
+            "f1": 0.8125
+          },
+          {
+            "label": "function",
+            "support": 1128,
+            "precision": 0.9876760563380281,
+            "recall": 0.9946808510638298,
+            "f1": 0.991166077738516
+          },
+          {
+            "label": "constant",
+            "support": 28,
+            "precision": 0.6222222222222222,
+            "recall": 1,
+            "f1": 0.7671232876712328
+          },
+          {
+            "label": "operator",
+            "support": 1215,
+            "precision": 0.9350039154267815,
+            "recall": 0.9827160493827161,
+            "f1": 0.9582664526484751
+          }
+        ],
+        "confusion": [
+          [
+            3872,
+            0,
+            7,
+            0,
+            3,
+            28,
+            4,
+            0,
+            79,
+            0
+          ],
+          [
+            0,
+            966,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            3,
+            0
+          ],
+          [
+            0,
+            0,
+            1949,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            78,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            12,
+            0,
+            0,
+            0,
+            1413,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            166,
+            0,
+            0,
+            0,
+            1,
+            481,
+            10,
+            17,
+            0,
+            0
+          ],
+          [
+            6,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1122,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            28,
+            0,
+            0
+          ],
+          [
+            15,
+            4,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1194,
+            0
+          ]
+        ],
+        "confusionColumns": [
+          "plain",
+          "comment",
+          "string",
+          "number",
+          "keyword",
+          "type",
+          "function",
+          "constant",
+          "operator",
+          "abstain"
+        ]
+      },
+      "confident": {
+        "snippets": 45,
+        "accepted": 45,
+        "abstentionRate": 0,
+        "exactAccuracy": 0,
+        "characters": 11461,
+        "agreement": 0.9281912573073903,
+        "characterCoverage": 0.9393595672279905,
+        "acceptedCharacterAgreement": 0.9881107189299647,
+        "styledMacroF1": 0.9280688903796269,
+        "classes": [
+          {
+            "label": "plain",
+            "support": 3993,
+            "precision": 0.9784746213127824,
+            "recall": 0.922113698973203,
+            "f1": 0.9494584837545126
+          },
+          {
+            "label": "comment",
+            "support": 969,
+            "precision": 1,
+            "recall": 0.9834881320949432,
+            "f1": 0.991675338189386
+          },
+          {
+            "label": "string",
+            "support": 1950,
+            "precision": 1,
+            "recall": 0.9989743589743589,
+            "f1": 0.9994869163673679
+          },
+          {
+            "label": "number",
+            "support": 78,
+            "precision": 1,
+            "recall": 0.9358974358974359,
+            "f1": 0.9668874172185431
+          },
+          {
+            "label": "keyword",
+            "support": 1425,
+            "precision": 1,
+            "recall": 0.9550877192982457,
+            "f1": 0.9770279971284996
+          },
+          {
+            "label": "type",
+            "support": 675,
+            "precision": 0.9426229508196722,
+            "recall": 0.5111111111111111,
+            "f1": 0.6628242074927954
+          },
+          {
+            "label": "function",
+            "support": 1128,
+            "precision": 1,
+            "recall": 0.9716312056737588,
+            "f1": 0.9856115107913669
+          },
+          {
+            "label": "constant",
+            "support": 28,
+            "precision": 0.7777777777777778,
+            "recall": 1,
+            "f1": 0.875
+          },
+          {
+            "label": "operator",
+            "support": 1215,
+            "precision": 0.9846153846153847,
+            "recall": 0.9481481481481482,
+            "f1": 0.9660377358490566
+          }
+        ],
+        "confusion": [
+          [
+            3682,
+            0,
+            0,
+            0,
+            0,
+            21,
+            0,
+            0,
+            18,
+            272
+          ],
+          [
+            0,
+            953,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            16
+          ],
+          [
+            0,
+            0,
+            1948,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            2
+          ],
+          [
+            0,
+            0,
+            0,
+            73,
+            0,
+            0,
+            0,
+            0,
+            0,
+            5
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            1361,
+            0,
+            0,
+            0,
+            0,
+            64
+          ],
+          [
+            73,
+            0,
+            0,
+            0,
+            0,
+            345,
+            0,
+            8,
+            0,
+            249
+          ],
+          [
+            6,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1096,
+            0,
+            0,
+            26
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            28,
+            0,
+            0
+          ],
+          [
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1152,
+            61
+          ]
+        ],
+        "confusionColumns": [
+          "plain",
+          "comment",
+          "string",
+          "number",
+          "keyword",
+          "type",
+          "function",
+          "constant",
+          "operator",
+          "abstain"
+        ]
+      }
+    },
+    "json": {
+      "statuses": {
+        "partial": 3,
+        "ok": 1
+      },
+      "candidate": {
+        "snippets": 4,
+        "accepted": 4,
+        "abstentionRate": 0,
+        "exactAccuracy": 0,
+        "characters": 276,
+        "agreement": 0.9891304347826086,
+        "characterCoverage": 1,
+        "acceptedCharacterAgreement": 0.9891304347826086,
+        "styledMacroF1": 0.9901814566244096,
+        "classes": [
+          {
+            "label": "plain",
+            "support": 0,
+            "precision": 0,
+            "recall": null,
+            "f1": 0
+          },
+          {
+            "label": "comment",
+            "support": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null
+          },
+          {
+            "label": "string",
+            "support": 223,
+            "precision": 0.9955357142857143,
+            "recall": 1,
+            "f1": 0.9977628635346756
+          },
+          {
+            "label": "number",
+            "support": 2,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          {
+            "label": "keyword",
+            "support": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null
+          },
+          {
+            "label": "type",
+            "support": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null
+          },
+          {
+            "label": "function",
+            "support": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null
+          },
+          {
+            "label": "constant",
+            "support": 9,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          {
+            "label": "operator",
+            "support": 42,
+            "precision": 1,
+            "recall": 0.9285714285714286,
+            "f1": 0.9629629629629629
+          }
+        ],
+        "confusion": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            223,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            9,
+            0,
+            0
+          ],
+          [
+            2,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            39,
+            0
+          ]
+        ],
+        "confusionColumns": [
+          "plain",
+          "comment",
+          "string",
+          "number",
+          "keyword",
+          "type",
+          "function",
+          "constant",
+          "operator",
+          "abstain"
+        ]
+      },
+      "displayed": {
+        "snippets": 4,
+        "accepted": 4,
+        "abstentionRate": 0,
+        "exactAccuracy": 0,
+        "characters": 276,
+        "agreement": 0.9891304347826086,
+        "characterCoverage": 1,
+        "acceptedCharacterAgreement": 0.9891304347826086,
+        "styledMacroF1": 0.9901814566244096,
+        "classes": [
+          {
+            "label": "plain",
+            "support": 0,
+            "precision": 0,
+            "recall": null,
+            "f1": 0
+          },
+          {
+            "label": "comment",
+            "support": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null
+          },
+          {
+            "label": "string",
+            "support": 223,
+            "precision": 0.9955357142857143,
+            "recall": 1,
+            "f1": 0.9977628635346756
+          },
+          {
+            "label": "number",
+            "support": 2,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          {
+            "label": "keyword",
+            "support": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null
+          },
+          {
+            "label": "type",
+            "support": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null
+          },
+          {
+            "label": "function",
+            "support": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null
+          },
+          {
+            "label": "constant",
+            "support": 9,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          {
+            "label": "operator",
+            "support": 42,
+            "precision": 1,
+            "recall": 0.9285714285714286,
+            "f1": 0.9629629629629629
+          }
+        ],
+        "confusion": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            223,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            9,
+            0,
+            0
+          ],
+          [
+            2,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            39,
+            0
+          ]
+        ],
+        "confusionColumns": [
+          "plain",
+          "comment",
+          "string",
+          "number",
+          "keyword",
+          "type",
+          "function",
+          "constant",
+          "operator",
+          "abstain"
+        ]
+      },
+      "confident": {
+        "snippets": 4,
+        "accepted": 4,
+        "abstentionRate": 0,
+        "exactAccuracy": 0,
+        "characters": 276,
+        "agreement": 0.9384057971014492,
+        "characterCoverage": 0.9420289855072463,
+        "acceptedCharacterAgreement": 0.9961538461538462,
+        "styledMacroF1": 0.9406146728354263,
+        "classes": [
+          {
+            "label": "plain",
+            "support": 0,
+            "precision": 0,
+            "recall": null,
+            "f1": 0
+          },
+          {
+            "label": "comment",
+            "support": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null
+          },
+          {
+            "label": "string",
+            "support": 223,
+            "precision": 1,
+            "recall": 0.9955156950672646,
+            "f1": 0.9977528089887641
+          },
+          {
+            "label": "number",
+            "support": 2,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          {
+            "label": "keyword",
+            "support": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null
+          },
+          {
+            "label": "type",
+            "support": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null
+          },
+          {
+            "label": "function",
+            "support": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null
+          },
+          {
+            "label": "constant",
+            "support": 9,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          {
+            "label": "operator",
+            "support": 42,
+            "precision": 1,
+            "recall": 0.6190476190476191,
+            "f1": 0.7647058823529411
+          }
+        ],
+        "confusion": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            222,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            0,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            9,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            26,
+            15
+          ]
+        ],
+        "confusionColumns": [
+          "plain",
+          "comment",
+          "string",
+          "number",
+          "keyword",
+          "type",
+          "function",
+          "constant",
+          "operator",
+          "abstain"
+        ]
+      }
+    },
+    "shellscript": {
+      "statuses": {
+        "partial": 26,
+        "uncertain": 1
+      },
+      "candidate": {
+        "snippets": 27,
+        "accepted": 26,
+        "abstentionRate": 0.03703703703703709,
+        "exactAccuracy": 0,
+        "characters": 3182,
+        "agreement": 0.8098680075424262,
+        "characterCoverage": 0.9921433060967945,
+        "acceptedCharacterAgreement": 0.8162812796959138,
+        "styledMacroF1": 0.5549392462956638,
+        "classes": [
+          {
+            "label": "plain",
+            "support": 117,
+            "precision": 0.0676056338028169,
+            "recall": 0.20512820512820512,
+            "f1": 0.1016949152542373
+          },
+          {
+            "label": "comment",
+            "support": 0,
+            "precision": 0,
+            "recall": null,
+            "f1": 0
+          },
+          {
+            "label": "string",
+            "support": 2781,
+            "precision": 0.938783570300158,
+            "recall": 0.8547285149226896,
+            "f1": 0.8947863730472426
+          },
+          {
+            "label": "number",
+            "support": 0,
+            "precision": 0,
+            "recall": null,
+            "f1": 0
+          },
+          {
+            "label": "keyword",
+            "support": 0,
+            "precision": 0,
+            "recall": null,
+            "f1": 0
+          },
+          {
+            "label": "type",
+            "support": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null
+          },
+          {
+            "label": "function",
+            "support": 283,
+            "precision": 0.8027522935779816,
+            "recall": 0.6183745583038869,
+            "f1": 0.6986027944111777
+          },
+          {
+            "label": "constant",
+            "support": 0,
+            "precision": 0,
+            "recall": null,
+            "f1": 0
+          },
+          {
+            "label": "operator",
+            "support": 1,
+            "precision": 0.037037037037037035,
+            "recall": 1,
+            "f1": 0.07142857142857142
+          }
+        ],
+        "confusion": [
+          [
+            24,
+            0,
+            85,
+            0,
+            0,
+            0,
+            0,
+            0,
+            8,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            303,
+            2,
+            2377,
+            8,
+            4,
+            0,
+            43,
+            5,
+            18,
+            21
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            28,
+            0,
+            70,
+            0,
+            6,
+            0,
+            175,
+            0,
+            0,
+            4
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ]
+        ],
+        "confusionColumns": [
+          "plain",
+          "comment",
+          "string",
+          "number",
+          "keyword",
+          "type",
+          "function",
+          "constant",
+          "operator",
+          "abstain"
+        ]
+      },
+      "displayed": {
+        "snippets": 27,
+        "accepted": 27,
+        "abstentionRate": 0,
+        "exactAccuracy": 0,
+        "characters": 3182,
+        "agreement": 0.8098680075424262,
+        "characterCoverage": 1,
+        "acceptedCharacterAgreement": 0.8098680075424262,
+        "styledMacroF1": 0.5549392462956638,
+        "classes": [
+          {
+            "label": "plain",
+            "support": 117,
+            "precision": 0.06315789473684211,
+            "recall": 0.20512820512820512,
+            "f1": 0.096579476861167
+          },
+          {
+            "label": "comment",
+            "support": 0,
+            "precision": 0,
+            "recall": null,
+            "f1": 0
+          },
+          {
+            "label": "string",
+            "support": 2781,
+            "precision": 0.938783570300158,
+            "recall": 0.8547285149226896,
+            "f1": 0.8947863730472426
+          },
+          {
+            "label": "number",
+            "support": 0,
+            "precision": 0,
+            "recall": null,
+            "f1": 0
+          },
+          {
+            "label": "keyword",
+            "support": 0,
+            "precision": 0,
+            "recall": null,
+            "f1": 0
+          },
+          {
+            "label": "type",
+            "support": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null
+          },
+          {
+            "label": "function",
+            "support": 283,
+            "precision": 0.8027522935779816,
+            "recall": 0.6183745583038869,
+            "f1": 0.6986027944111777
+          },
+          {
+            "label": "constant",
+            "support": 0,
+            "precision": 0,
+            "recall": null,
+            "f1": 0
+          },
+          {
+            "label": "operator",
+            "support": 1,
+            "precision": 0.037037037037037035,
+            "recall": 1,
+            "f1": 0.07142857142857142
+          }
+        ],
+        "confusion": [
+          [
+            24,
+            0,
+            85,
+            0,
+            0,
+            0,
+            0,
+            0,
+            8,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            324,
+            2,
+            2377,
+            8,
+            4,
+            0,
+            43,
+            5,
+            18,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            32,
+            0,
+            70,
+            0,
+            6,
+            0,
+            175,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ]
+        ],
+        "confusionColumns": [
+          "plain",
+          "comment",
+          "string",
+          "number",
+          "keyword",
+          "type",
+          "function",
+          "constant",
+          "operator",
+          "abstain"
+        ]
+      },
+      "confident": {
+        "snippets": 27,
+        "accepted": 26,
+        "abstentionRate": 0.03703703703703709,
+        "exactAccuracy": 0,
+        "characters": 3182,
+        "agreement": 0.5864236329352609,
+        "characterCoverage": 0.6219358893777498,
+        "acceptedCharacterAgreement": 0.942900454775139,
+        "styledMacroF1": 0.48818053193030103,
+        "classes": [
+          {
+            "label": "plain",
+            "support": 117,
+            "precision": 1,
+            "recall": 0.15384615384615385,
+            "f1": 0.26666666666666666
+          },
+          {
+            "label": "comment",
+            "support": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null
+          },
+          {
+            "label": "string",
+            "support": 2781,
+            "precision": 0.9539121114683816,
+            "recall": 0.6400575332614168,
+            "f1": 0.7660856466537551
+          },
+          {
+            "label": "number",
+            "support": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null
+          },
+          {
+            "label": "keyword",
+            "support": 0,
+            "precision": 0,
+            "recall": null,
+            "f1": 0
+          },
+          {
+            "label": "type",
+            "support": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null
+          },
+          {
+            "label": "function",
+            "support": 283,
+            "precision": 0.7976190476190477,
+            "recall": 0.23674911660777384,
+            "f1": 0.3651226158038147
+          },
+          {
+            "label": "constant",
+            "support": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null
+          },
+          {
+            "label": "operator",
+            "support": 1,
+            "precision": 0.2,
+            "recall": 1,
+            "f1": 0.3333333333333333
+          }
+        ],
+        "confusion": [
+          [
+            18,
+            0,
+            51,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            48
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1780,
+            0,
+            0,
+            0,
+            17,
+            0,
+            4,
+            980
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            35,
+            0,
+            6,
+            0,
+            67,
+            0,
+            0,
+            175
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ]
+        ],
+        "confusionColumns": [
+          "plain",
+          "comment",
+          "string",
+          "number",
+          "keyword",
+          "type",
+          "function",
+          "constant",
+          "operator",
+          "abstain"
+        ]
+      }
+    },
+    "tsx": {
+      "statuses": {
+        "partial": 2
+      },
+      "candidate": {
+        "snippets": 2,
+        "accepted": 2,
+        "abstentionRate": 0,
+        "exactAccuracy": 0,
+        "characters": 1109,
+        "agreement": 0.9729486023444545,
+        "characterCoverage": 1,
+        "acceptedCharacterAgreement": 0.9729486023444545,
+        "styledMacroF1": 0.9784990591981474,
+        "classes": [
+          {
+            "label": "plain",
+            "support": 312,
+            "precision": 0.941358024691358,
+            "recall": 0.9775641025641025,
+            "f1": 0.9591194968553459
+          },
+          {
+            "label": "comment",
+            "support": 207,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          {
+            "label": "string",
+            "support": 167,
+            "precision": 0.9881656804733728,
+            "recall": 1,
+            "f1": 0.9940476190476191
+          },
+          {
+            "label": "number",
+            "support": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null
+          },
+          {
+            "label": "keyword",
+            "support": 169,
+            "precision": 1,
+            "recall": 0.9881656804733728,
+            "f1": 0.9940476190476191
+          },
+          {
+            "label": "type",
+            "support": 6,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          {
+            "label": "function",
+            "support": 103,
+            "precision": 1,
+            "recall": 0.8252427184466019,
+            "f1": 0.9042553191489362
+          },
+          {
+            "label": "constant",
+            "support": 8,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          {
+            "label": "operator",
+            "support": 137,
+            "precision": 0.9370629370629371,
+            "recall": 0.9781021897810219,
+            "f1": 0.9571428571428572
+          }
+        ],
+        "confusion": [
+          [
+            305,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            7,
+            0
+          ],
+          [
+            0,
+            207,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            167,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            167,
+            0,
+            0,
+            0,
+            2,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            6,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            18,
+            0,
+            0,
+            0,
+            0,
+            0,
+            85,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            8,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            134,
+            0
+          ]
+        ],
+        "confusionColumns": [
+          "plain",
+          "comment",
+          "string",
+          "number",
+          "keyword",
+          "type",
+          "function",
+          "constant",
+          "operator",
+          "abstain"
+        ]
+      },
+      "displayed": {
+        "snippets": 2,
+        "accepted": 2,
+        "abstentionRate": 0,
+        "exactAccuracy": 0,
+        "characters": 1109,
+        "agreement": 0.9729486023444545,
+        "characterCoverage": 1,
+        "acceptedCharacterAgreement": 0.9729486023444545,
+        "styledMacroF1": 0.9784990591981474,
+        "classes": [
+          {
+            "label": "plain",
+            "support": 312,
+            "precision": 0.941358024691358,
+            "recall": 0.9775641025641025,
+            "f1": 0.9591194968553459
+          },
+          {
+            "label": "comment",
+            "support": 207,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          {
+            "label": "string",
+            "support": 167,
+            "precision": 0.9881656804733728,
+            "recall": 1,
+            "f1": 0.9940476190476191
+          },
+          {
+            "label": "number",
+            "support": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null
+          },
+          {
+            "label": "keyword",
+            "support": 169,
+            "precision": 1,
+            "recall": 0.9881656804733728,
+            "f1": 0.9940476190476191
+          },
+          {
+            "label": "type",
+            "support": 6,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          {
+            "label": "function",
+            "support": 103,
+            "precision": 1,
+            "recall": 0.8252427184466019,
+            "f1": 0.9042553191489362
+          },
+          {
+            "label": "constant",
+            "support": 8,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          {
+            "label": "operator",
+            "support": 137,
+            "precision": 0.9370629370629371,
+            "recall": 0.9781021897810219,
+            "f1": 0.9571428571428572
+          }
+        ],
+        "confusion": [
+          [
+            305,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            7,
+            0
+          ],
+          [
+            0,
+            207,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            167,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            167,
+            0,
+            0,
+            0,
+            2,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            6,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            18,
+            0,
+            0,
+            0,
+            0,
+            0,
+            85,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            8,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            134,
+            0
+          ]
+        ],
+        "confusionColumns": [
+          "plain",
+          "comment",
+          "string",
+          "number",
+          "keyword",
+          "type",
+          "function",
+          "constant",
+          "operator",
+          "abstain"
+        ]
+      },
+      "confident": {
+        "snippets": 2,
+        "accepted": 2,
+        "abstentionRate": 0,
+        "exactAccuracy": 0,
+        "characters": 1109,
+        "agreement": 0.9386834986474302,
+        "characterCoverage": 0.957619477006312,
+        "acceptedCharacterAgreement": 0.980225988700565,
+        "styledMacroF1": 0.9690980470794346,
+        "classes": [
+          {
+            "label": "plain",
+            "support": 312,
+            "precision": 0.941747572815534,
+            "recall": 0.9326923076923077,
+            "f1": 0.9371980676328503
+          },
+          {
+            "label": "comment",
+            "support": 207,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          {
+            "label": "string",
+            "support": 167,
+            "precision": 0.9879518072289156,
+            "recall": 0.9820359281437125,
+            "f1": 0.984984984984985
+          },
+          {
+            "label": "number",
+            "support": 0,
+            "precision": null,
+            "recall": null,
+            "f1": null
+          },
+          {
+            "label": "keyword",
+            "support": 169,
+            "precision": 1,
+            "recall": 0.9881656804733728,
+            "f1": 0.9940476190476191
+          },
+          {
+            "label": "type",
+            "support": 6,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          {
+            "label": "function",
+            "support": 103,
+            "precision": 1,
+            "recall": 0.8252427184466019,
+            "f1": 0.9042553191489362
+          },
+          {
+            "label": "constant",
+            "support": 8,
+            "precision": 1,
+            "recall": 1,
+            "f1": 1
+          },
+          {
+            "label": "operator",
+            "support": 137,
+            "precision": 0.9912280701754386,
+            "recall": 0.8248175182481752,
+            "f1": 0.900398406374502
+          }
+        ],
+        "confusion": [
+          [
+            291,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            21
+          ],
+          [
+            0,
+            207,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            164,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            3
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            167,
+            0,
+            0,
+            0,
+            1,
+            1
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            6,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            18,
+            0,
+            0,
+            0,
+            0,
+            0,
+            85,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            8,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            113,
+            22
+          ]
+        ],
+        "confusionColumns": [
+          "plain",
+          "comment",
+          "string",
+          "number",
+          "keyword",
+          "type",
+          "function",
+          "constant",
+          "operator",
+          "abstain"
+        ]
+      }
+    }
+  },
+  "samples": [
+    {
+      "id": "homepage/app.ts",
+      "sha256": "4a2ac760d45737df5d96cb134790f12eee8f56e6797983a4c21596420915fda6",
+      "language": "typescript",
+      "status": "partial",
+      "displayedAgreement": 0.9949238578680203,
+      "confidentCoverage": 0.9949238578680203,
+      "confidentAgreement": 1,
+      "mistakes": [
+        {
+          "start": 154,
+          "end": 155,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": ")"
+        }
+      ]
+    },
+    {
+      "id": "homepage/parser.ts",
+      "sha256": "054a0b9e8d8d2eda60d5a3833d07c9b246dfd4c6d255ac8f38f376f6ba14bbf3",
+      "language": "typescript",
+      "status": "partial",
+      "displayedAgreement": 0.95,
+      "confidentCoverage": 0.9163265306122449,
+      "confidentAgreement": 0.9899777282850779,
+      "mistakes": [
+        {
+          "start": 206,
+          "end": 207,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "("
+        },
+        {
+          "start": 251,
+          "end": 253,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "])"
+        },
+        {
+          "start": 273,
+          "end": 274,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "["
+        },
+        {
+          "start": 354,
+          "end": 355,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "("
+        },
+        {
+          "start": 364,
+          "end": 365,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": ")"
+        },
+        {
+          "start": 388,
+          "end": 389,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "["
+        },
+        {
+          "start": 400,
+          "end": 402,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "])"
+        },
+        {
+          "start": 434,
+          "end": 435,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": ")"
+        },
+        {
+          "start": 488,
+          "end": 489,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": ")"
+        },
+        {
+          "start": 543,
+          "end": 545,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "])"
+        },
+        {
+          "start": 580,
+          "end": 581,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "("
+        },
+        {
+          "start": 755,
+          "end": 757,
+          "expected": "plain",
+          "predicted": "type",
+          "uncertain": true,
+          "text": "or"
+        },
+        {
+          "start": 782,
+          "end": 783,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": false,
+          "text": "["
+        },
+        {
+          "start": 909,
+          "end": 910,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "("
+        },
+        {
+          "start": 1071,
+          "end": 1072,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "]"
+        },
+        {
+          "start": 1097,
+          "end": 1103,
+          "expected": "type",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "Filter"
+        },
+        {
+          "start": 1106,
+          "end": 1107,
+          "expected": "type",
+          "predicted": "plain",
+          "uncertain": false,
+          "text": "z"
+        },
+        {
+          "start": 1108,
+          "end": 1113,
+          "expected": "type",
+          "predicted": "function",
+          "uncertain": true,
+          "text": "infer"
+        },
+        {
+          "start": 1121,
+          "end": 1127,
+          "expected": "plain",
+          "predicted": "type",
+          "uncertain": false,
+          "text": "output"
+        },
+        {
+          "start": 1142,
+          "end": 1148,
+          "expected": "type",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "Clause"
+        },
+        {
+          "start": 1151,
+          "end": 1152,
+          "expected": "type",
+          "predicted": "plain",
+          "uncertain": false,
+          "text": "z"
+        },
+        {
+          "start": 1153,
+          "end": 1158,
+          "expected": "type",
+          "predicted": "function",
+          "uncertain": true,
+          "text": "infer"
+        }
+      ]
+    },
+    {
+      "id": "homepage/pipeline.ts",
+      "sha256": "55f6fdbbc8feca3d7fff70c8742f884642fc930de36ec97fb25c76bc2b9c0e9b",
+      "language": "typescript",
+      "status": "partial",
+      "displayedAgreement": 1,
+      "confidentCoverage": 0.9822485207100592,
+      "confidentAgreement": 1,
+      "mistakes": []
+    },
+    {
+      "id": "homepage/recipe.ts",
+      "sha256": "fee2be48c405af33e651ba23b3ee474e5c1f21e20b7b7da8645d8c719ab86983",
+      "language": "typescript",
+      "status": "partial",
+      "displayedAgreement": 0.9841269841269841,
+      "confidentCoverage": 0.9565580618212197,
+      "confidentAgreement": 0.993886462882096,
+      "mistakes": [
+        {
+          "start": 474,
+          "end": 475,
+          "expected": "string",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "="
+        },
+        {
+          "start": 860,
+          "end": 862,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": false,
+          "text": " ["
+        },
+        {
+          "start": 891,
+          "end": 894,
+          "expected": "operator",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "new"
+        },
+        {
+          "start": 898,
+          "end": 899,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "("
+        },
+        {
+          "start": 919,
+          "end": 921,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "))"
+        },
+        {
+          "start": 934,
+          "end": 935,
+          "expected": "operator",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "("
+        },
+        {
+          "start": 1039,
+          "end": 1041,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": false,
+          "text": " ("
+        },
+        {
+          "start": 1047,
+          "end": 1048,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": false,
+          "text": "["
+        },
+        {
+          "start": 1057,
+          "end": 1059,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": false,
+          "text": "] "
+        },
+        {
+          "start": 1065,
+          "end": 1066,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": ")"
+        },
+        {
+          "start": 1182,
+          "end": 1183,
+          "expected": "operator",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "("
+        },
+        {
+          "start": 1206,
+          "end": 1207,
+          "expected": "operator",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": ")"
+        },
+        {
+          "start": 1221,
+          "end": 1222,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": false,
+          "text": "("
+        },
+        {
+          "start": 1262,
+          "end": 1264,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": false,
+          "text": ") "
+        },
+        {
+          "start": 1311,
+          "end": 1312,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "["
+        },
+        {
+          "start": 1340,
+          "end": 1341,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": ")"
+        }
+      ]
+    },
+    {
+      "id": "homepage/data/train.jsonl",
+      "sha256": "767f2e77641592a977ea09dca3348132eadd56ac1b2d1e6065812103205ae051",
+      "language": "json",
+      "status": "partial",
+      "displayedAgreement": 0.9873417721518988,
+      "confidentCoverage": 0.9113924050632911,
+      "confidentAgreement": 1,
+      "mistakes": [
+        {
+          "start": 27,
+          "end": 28,
+          "expected": "operator",
+          "predicted": "string",
+          "uncertain": true,
+          "text": "{"
+        }
+      ]
+    },
+    {
+      "id": "homepage/decode/decode.ts",
+      "sha256": "24da5e3c58183d9fc9cc610fa43e27e732ebd7bd4ac43e3e41452f3cfc9a78cb",
+      "language": "typescript",
+      "status": "partial",
+      "displayedAgreement": 0.9665327978580991,
+      "confidentCoverage": 0.9531459170013387,
+      "confidentAgreement": 0.9901685393258427,
+      "mistakes": [
+        {
+          "start": 178,
+          "end": 184,
+          "expected": "function",
+          "predicted": "plain",
+          "uncertain": false,
+          "text": "decode"
+        },
+        {
+          "start": 186,
+          "end": 201,
+          "expected": "type",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "SequenceDecoder"
+        },
+        {
+          "start": 334,
+          "end": 335,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": ")"
+        },
+        {
+          "start": 365,
+          "end": 366,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": false,
+          "text": ")"
+        },
+        {
+          "start": 402,
+          "end": 403,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": ")"
+        },
+        {
+          "start": 548,
+          "end": 549,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": ")"
+        }
+      ]
+    },
+    {
+      "id": "docs/agents.md:5",
+      "sha256": "a77ccc87f81f19308c0690778c66d3cc04043d034a5951036eae3767a3ef50ee",
+      "language": "shellscript",
+      "status": "partial",
+      "displayedAgreement": 0.4,
+      "confidentCoverage": 0.4888888888888889,
+      "confidentAgreement": 0.09090909090909091,
+      "mistakes": [
+        {
+          "start": 0,
+          "end": 3,
+          "expected": "function",
+          "predicted": "keyword",
+          "uncertain": false,
+          "text": "npx"
+        },
+        {
+          "start": 4,
+          "end": 10,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "skills"
+        },
+        {
+          "start": 15,
+          "end": 24,
+          "expected": "string",
+          "predicted": "function",
+          "uncertain": false,
+          "text": "alexpatow"
+        },
+        {
+          "start": 24,
+          "end": 25,
+          "expected": "string",
+          "predicted": "comment",
+          "uncertain": true,
+          "text": "/"
+        },
+        {
+          "start": 25,
+          "end": 33,
+          "expected": "string",
+          "predicted": "function",
+          "uncertain": false,
+          "text": "matchbox"
+        }
+      ]
+    },
+    {
+      "id": "docs/agents.md:33",
+      "sha256": "793116d5273605b2f213e493f75a4644754ba5504c62068c98dabed655e990c3",
+      "language": "shellscript",
+      "status": "partial",
+      "displayedAgreement": 0.8305084745762712,
+      "confidentCoverage": 0.6101694915254238,
+      "confidentAgreement": 0.9166666666666666,
+      "mistakes": [
+        {
+          "start": 0,
+          "end": 3,
+          "expected": "function",
+          "predicted": "keyword",
+          "uncertain": false,
+          "text": "npx"
+        },
+        {
+          "start": 4,
+          "end": 10,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "skills"
+        },
+        {
+          "start": 29,
+          "end": 30,
+          "expected": "string",
+          "predicted": "comment",
+          "uncertain": true,
+          "text": "/"
+        }
+      ]
+    },
+    {
+      "id": "docs/cli.md:28",
+      "sha256": "fce8e284aba914e0f7642f5d31589f432caa29c9cc544c537475caf26e8c3951",
+      "language": "shellscript",
+      "status": "partial",
+      "displayedAgreement": 0.6464646464646465,
+      "confidentCoverage": 0.5555555555555556,
+      "confidentAgreement": 0.8181818181818182,
+      "mistakes": [
+        {
+          "start": 5,
+          "end": 13,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "matchbox"
+        },
+        {
+          "start": 14,
+          "end": 16,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "ai"
+        },
+        {
+          "start": 17,
+          "end": 21,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "init"
+        },
+        {
+          "start": 22,
+          "end": 46,
+          "expected": "plain",
+          "predicted": "string",
+          "uncertain": true,
+          "text": "[name] --template money\n"
+        }
+      ]
+    },
+    {
+      "id": "docs/cli.md:49",
+      "sha256": "696cd6c644181c19285e13e27adfb14cbaa2c450235e03be253bd708f4e0ac9b",
+      "language": "shellscript",
+      "status": "partial",
+      "displayedAgreement": 0.11627906976744186,
+      "confidentCoverage": 0.3488372093023256,
+      "confidentAgreement": 0,
+      "mistakes": [
+        {
+          "start": 5,
+          "end": 13,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "matchbox"
+        },
+        {
+          "start": 14,
+          "end": 16,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "ai"
+        },
+        {
+          "start": 17,
+          "end": 20,
+          "expected": "string",
+          "predicted": "number",
+          "uncertain": true,
+          "text": "dev"
+        },
+        {
+          "start": 21,
+          "end": 22,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "["
+        },
+        {
+          "start": 22,
+          "end": 26,
+          "expected": "plain",
+          "predicted": "string",
+          "uncertain": true,
+          "text": "task"
+        },
+        {
+          "start": 26,
+          "end": 28,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "] "
+        },
+        {
+          "start": 28,
+          "end": 50,
+          "expected": "plain",
+          "predicted": "string",
+          "uncertain": true,
+          "text": "--port 4190 --no-open\n"
+        }
+      ]
+    },
+    {
+      "id": "docs/cli.md:59",
+      "sha256": "a809a369567c7038c2e1444c20e7c16d7ff2f58eb47b84d381afcfcbaa6f8e78",
+      "language": "shellscript",
+      "status": "partial",
+      "displayedAgreement": 0.12195121951219512,
+      "confidentCoverage": 0.34146341463414637,
+      "confidentAgreement": 0,
+      "mistakes": [
+        {
+          "start": 5,
+          "end": 13,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "matchbox"
+        },
+        {
+          "start": 14,
+          "end": 16,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "ai"
+        },
+        {
+          "start": 17,
+          "end": 22,
+          "expected": "string",
+          "predicted": "number",
+          "uncertain": true,
+          "text": "train"
+        },
+        {
+          "start": 23,
+          "end": 24,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "["
+        },
+        {
+          "start": 24,
+          "end": 28,
+          "expected": "plain",
+          "predicted": "string",
+          "uncertain": true,
+          "text": "task"
+        },
+        {
+          "start": 28,
+          "end": 30,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "] "
+        },
+        {
+          "start": 30,
+          "end": 47,
+          "expected": "plain",
+          "predicted": "string",
+          "uncertain": true,
+          "text": "--verbose --json\n"
+        }
+      ]
+    },
+    {
+      "id": "docs/cli.md:69",
+      "sha256": "07e19c74db01299050b21ea4aed07fa39175654e4b8e865f4c4dc6a5e88e6e44",
+      "language": "shellscript",
+      "status": "partial",
+      "displayedAgreement": 0.16129032258064516,
+      "confidentCoverage": 0.1935483870967742,
+      "confidentAgreement": 0,
+      "mistakes": [
+        {
+          "start": 5,
+          "end": 13,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "matchbox"
+        },
+        {
+          "start": 14,
+          "end": 16,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "ai"
+        },
+        {
+          "start": 17,
+          "end": 21,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "eval"
+        },
+        {
+          "start": 22,
+          "end": 23,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "["
+        },
+        {
+          "start": 23,
+          "end": 27,
+          "expected": "plain",
+          "predicted": "string",
+          "uncertain": true,
+          "text": "task"
+        },
+        {
+          "start": 27,
+          "end": 29,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "] "
+        },
+        {
+          "start": 29,
+          "end": 36,
+          "expected": "plain",
+          "predicted": "string",
+          "uncertain": false,
+          "text": "--json\n"
+        }
+      ]
+    },
+    {
+      "id": "docs/cli.md:77",
+      "sha256": "42477111dbabf188c611eaa547ad0ae9041efa187a9ab48f58175a910c8f6c01",
+      "language": "shellscript",
+      "status": "partial",
+      "displayedAgreement": 0.5652173913043478,
+      "confidentCoverage": 0.45652173913043476,
+      "confidentAgreement": 1,
+      "mistakes": [
+        {
+          "start": 5,
+          "end": 13,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "matchbox"
+        },
+        {
+          "start": 14,
+          "end": 16,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "ai"
+        },
+        {
+          "start": 17,
+          "end": 22,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "parse"
+        },
+        {
+          "start": 23,
+          "end": 28,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "money"
+        }
+      ]
+    },
+    {
+      "id": "docs/cli.md:85",
+      "sha256": "89b9cc931f05ca92d5f80bc1df7c4343e6ea1dac6522b988dac9a8051a7bd84f",
+      "language": "shellscript",
+      "status": "partial",
+      "displayedAgreement": 0.5,
+      "confidentCoverage": 0.41304347826086957,
+      "confidentAgreement": 1,
+      "mistakes": [
+        {
+          "start": 5,
+          "end": 16,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "matchbox-ai"
+        },
+        {
+          "start": 17,
+          "end": 24,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "inspect"
+        },
+        {
+          "start": 25,
+          "end": 30,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "money"
+        }
+      ]
+    },
+    {
+      "id": "docs/cli.md:93",
+      "sha256": "eac76d7373ea5ad33bc1e12bd4111aa9984a836fa8020e8b4da45e632ab6a20c",
+      "language": "shellscript",
+      "status": "partial",
+      "displayedAgreement": 0.16129032258064516,
+      "confidentCoverage": 0.1935483870967742,
+      "confidentAgreement": 0,
+      "mistakes": [
+        {
+          "start": 5,
+          "end": 13,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "matchbox"
+        },
+        {
+          "start": 14,
+          "end": 16,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "ai"
+        },
+        {
+          "start": 17,
+          "end": 21,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "info"
+        },
+        {
+          "start": 22,
+          "end": 23,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "["
+        },
+        {
+          "start": 23,
+          "end": 27,
+          "expected": "plain",
+          "predicted": "string",
+          "uncertain": true,
+          "text": "task"
+        },
+        {
+          "start": 27,
+          "end": 29,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "] "
+        },
+        {
+          "start": 29,
+          "end": 36,
+          "expected": "plain",
+          "predicted": "string",
+          "uncertain": false,
+          "text": "--json\n"
+        }
+      ]
+    },
+    {
+      "id": "docs/cli.md:101",
+      "sha256": "6477778a9cae13b55b0f3bbd309dc5f9601ab1defd7465478ecb372238a046bd",
+      "language": "shellscript",
+      "status": "partial",
+      "displayedAgreement": 0.7524752475247525,
+      "confidentCoverage": 0.6435643564356436,
+      "confidentAgreement": 0.9846153846153847,
+      "mistakes": [
+        {
+          "start": 5,
+          "end": 13,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "matchbox"
+        },
+        {
+          "start": 14,
+          "end": 16,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "ai"
+        },
+        {
+          "start": 17,
+          "end": 21,
+          "expected": "string",
+          "predicted": "keyword",
+          "uncertain": true,
+          "text": "save"
+        },
+        {
+          "start": 60,
+          "end": 61,
+          "expected": "string",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": ":"
+        },
+        {
+          "start": 63,
+          "end": 64,
+          "expected": "string",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": ","
+        },
+        {
+          "start": 74,
+          "end": 75,
+          "expected": "string",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": ":"
+        },
+        {
+          "start": 80,
+          "end": 81,
+          "expected": "string",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": ","
+        },
+        {
+          "start": 94,
+          "end": 95,
+          "expected": "string",
+          "predicted": "operator",
+          "uncertain": false,
+          "text": ":"
+        },
+        {
+          "start": 95,
+          "end": 100,
+          "expected": "string",
+          "predicted": "constant",
+          "uncertain": true,
+          "text": "false"
+        },
+        {
+          "start": 100,
+          "end": 101,
+          "expected": "string",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "}"
+        }
+      ]
+    },
+    {
+      "id": "docs/contributing.md:30",
+      "sha256": "7a9ea12a4eb7b98baa7f05baf55eed8dc782dcfd9dc0213b21dd2f24f309b614",
+      "language": "shellscript",
+      "status": "partial",
+      "displayedAgreement": 0.9663865546218487,
+      "confidentCoverage": 0.8403361344537815,
+      "confidentAgreement": 0.97,
+      "mistakes": [
+        {
+          "start": 20,
+          "end": 21,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "-"
+        },
+        {
+          "start": 95,
+          "end": 98,
+          "expected": "function",
+          "predicted": "string",
+          "uncertain": false,
+          "text": "bun"
+        }
+      ]
+    },
+    {
+      "id": "docs/contributing.md:49",
+      "sha256": "b514d1db15ba9b9ad8cd6e52a586d6cfd7ef76ef251c7ec560f4ef76146ca5b0",
+      "language": "shellscript",
+      "status": "partial",
+      "displayedAgreement": 0.8992805755395683,
+      "confidentCoverage": 0.3597122302158273,
+      "confidentAgreement": 1,
+      "mistakes": [
+        {
+          "start": 36,
+          "end": 37,
+          "expected": "string",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "."
+        },
+        {
+          "start": 37,
+          "end": 39,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "ts"
+        },
+        {
+          "start": 45,
+          "end": 49,
+          "expected": "string",
+          "predicted": "function",
+          "uncertain": true,
+          "text": "path"
+        },
+        {
+          "start": 70,
+          "end": 74,
+          "expected": "string",
+          "predicted": "function",
+          "uncertain": true,
+          "text": "path"
+        },
+        {
+          "start": 103,
+          "end": 108,
+          "expected": "plain",
+          "predicted": "string",
+          "uncertain": true,
+          "text": " \\\n  "
+        },
+        {
+          "start": 124,
+          "end": 129,
+          "expected": "plain",
+          "predicted": "string",
+          "uncertain": true,
+          "text": " \\\n  "
+        },
+        {
+          "start": 129,
+          "end": 130,
+          "expected": "string",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "."
+        }
+      ]
+    },
+    {
+      "id": "docs/contributing.md:63",
+      "sha256": "7ee1d6fa215d388e7fb808479cb3962002016a971516e2f22a8675271a10c33c",
+      "language": "shellscript",
+      "status": "partial",
+      "displayedAgreement": 0.919732441471572,
+      "confidentCoverage": 0.8494983277591973,
+      "confidentAgreement": 1,
+      "mistakes": [
+        {
+          "start": 30,
+          "end": 35,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "train"
+        },
+        {
+          "start": 35,
+          "end": 36,
+          "expected": "string",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "."
+        },
+        {
+          "start": 36,
+          "end": 38,
+          "expected": "string",
+          "predicted": "function",
+          "uncertain": true,
+          "text": "ts"
+        },
+        {
+          "start": 68,
+          "end": 76,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "preserve"
+        },
+        {
+          "start": 233,
+          "end": 240,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "browser"
+        },
+        {
+          "start": 240,
+          "end": 241,
+          "expected": "string",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "."
+        }
+      ]
+    },
+    {
+      "id": "docs/dataset-format.md:5",
+      "sha256": "05bb75e32be65c04e791c15ebaeb42336f81f9400d2225257feee49e3a370342",
+      "language": "json",
+      "status": "partial",
+      "displayedAgreement": 1,
+      "confidentCoverage": 0.9252336448598131,
+      "confidentAgreement": 1,
+      "mistakes": []
+    },
+    {
+      "id": "docs/dataset-format.md:22",
+      "sha256": "2a347f823a86202128104144c3468373681659c3d90c51e93cf84d64b9aad8f6",
+      "language": "typescript",
+      "status": "partial",
+      "displayedAgreement": 0.9892037786774629,
+      "confidentCoverage": 0.9554655870445344,
+      "confidentAgreement": 0.998587570621469,
+      "mistakes": [
+        {
+          "start": 202,
+          "end": 203,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": ")"
+        },
+        {
+          "start": 398,
+          "end": 399,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "("
+        },
+        {
+          "start": 412,
+          "end": 413,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": ")"
+        },
+        {
+          "start": 418,
+          "end": 420,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "()"
+        },
+        {
+          "start": 477,
+          "end": 478,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": false,
+          "text": "("
+        },
+        {
+          "start": 498,
+          "end": 499,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": ")"
+        },
+        {
+          "start": 671,
+          "end": 672,
+          "expected": "comment",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "|"
+        }
+      ]
+    },
+    {
+      "id": "docs/evaluation.md:5",
+      "sha256": "7da548724a6e56c50c85c2c146989ef51a05d91c2ce6b897632cb663fb5d8690",
+      "language": "shellscript",
+      "status": "partial",
+      "displayedAgreement": 0.7592592592592593,
+      "confidentCoverage": 0.12962962962962962,
+      "confidentAgreement": 1,
+      "mistakes": [
+        {
+          "start": 5,
+          "end": 13,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "matchbox"
+        },
+        {
+          "start": 22,
+          "end": 27,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "money"
+        }
+      ]
+    },
+    {
+      "id": "docs/evaluation.md:30",
+      "sha256": "ff5ea6d749a71c5bcfc4cb9ba123f038d1770333fa784bcbfde03fd2104d3755",
+      "language": "json",
+      "status": "partial",
+      "displayedAgreement": 0.95,
+      "confidentCoverage": 0.975,
+      "confidentAgreement": 0.9743589743589743,
+      "mistakes": [
+        {
+          "start": 0,
+          "end": 1,
+          "expected": "operator",
+          "predicted": "plain",
+          "uncertain": false,
+          "text": "["
+        },
+        {
+          "start": 45,
+          "end": 46,
+          "expected": "operator",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "]"
+        }
+      ]
+    },
+    {
+      "id": "docs/example-evaluation.md:39",
+      "sha256": "9f36949c57bcd0b143e08d6d01c98baab9e96a7a858095662b5b51effa1d1bb9",
+      "language": "shellscript",
+      "status": "partial",
+      "displayedAgreement": 0.96,
+      "confidentCoverage": 0.816,
+      "confidentAgreement": 1,
+      "mistakes": [
+        {
+          "start": 8,
+          "end": 13,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "train"
+        }
+      ]
+    },
+    {
+      "id": "docs/examples/lexer.md:17",
+      "sha256": "b81422b459ca36b12470a12092a8f7e7b1a5ca47c34ab509f905cc749ea59c8b",
+      "language": "shellscript",
+      "status": "partial",
+      "displayedAgreement": 0.5918367346938775,
+      "confidentCoverage": 0.12244897959183673,
+      "confidentAgreement": 1,
+      "mistakes": [
+        {
+          "start": 5,
+          "end": 13,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "matchbox"
+        },
+        {
+          "start": 14,
+          "end": 16,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "ai"
+        },
+        {
+          "start": 17,
+          "end": 22,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "train"
+        },
+        {
+          "start": 23,
+          "end": 28,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "lexer"
+        }
+      ]
+    },
+    {
+      "id": "docs/examples/lexer.md:28",
+      "sha256": "ab5d8e6ceeb60a21c6a50bbb28d3437aeef083a1a09aa7eb4231d7b057d39d92",
+      "language": "typescript",
+      "status": "partial",
+      "displayedAgreement": 1,
+      "confidentCoverage": 0.990909090909091,
+      "confidentAgreement": 1,
+      "mistakes": []
+    },
+    {
+      "id": "docs/examples/money.md:5",
+      "sha256": "4ca72a6e7919c91aad9b1cfa7a15948043cebb32897eaa16dc7fc5ff939bf946",
+      "language": "shellscript",
+      "status": "partial",
+      "displayedAgreement": 0.9080459770114943,
+      "confidentCoverage": 0.27586206896551724,
+      "confidentAgreement": 1,
+      "mistakes": [
+        {
+          "start": 5,
+          "end": 13,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "matchbox"
+        }
+      ]
+    },
+    {
+      "id": "docs/examples/time.md:15",
+      "sha256": "41996952f322a3e7591bb82bea54bf3f0529eccf8e7d4e1fc2469685498329a6",
+      "language": "shellscript",
+      "status": "partial",
+      "displayedAgreement": 1,
+      "confidentCoverage": 0.8292682926829268,
+      "confidentAgreement": 1,
+      "mistakes": []
+    },
+    {
+      "id": "docs/getting-started.md:9",
+      "sha256": "a5a69000bdd11fae9684c01f90d66eee94de083d9b518966444c3e07f609a0a7",
+      "language": "shellscript",
+      "status": "partial",
+      "displayedAgreement": 0.7948717948717948,
+      "confidentCoverage": 0.05128205128205128,
+      "confidentAgreement": 1,
+      "mistakes": [
+        {
+          "start": 5,
+          "end": 13,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "matchbox"
+        }
+      ]
+    },
+    {
+      "id": "docs/getting-started.md:19",
+      "sha256": "a055a9ad9f092edd2367a728423615f2747100220f979d87f7b359f844b37aa0",
+      "language": "shellscript",
+      "status": "partial",
+      "displayedAgreement": 0.8352941176470589,
+      "confidentCoverage": 0.43529411764705883,
+      "confidentAgreement": 1,
+      "mistakes": [
+        {
+          "start": 46,
+          "end": 51,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "parse"
+        },
+        {
+          "start": 52,
+          "end": 57,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "money"
+        },
+        {
+          "start": 71,
+          "end": 75,
+          "expected": "function",
+          "predicted": "string",
+          "uncertain": true,
+          "text": "bunx"
+        }
+      ]
+    },
+    {
+      "id": "docs/getting-started.md:27",
+      "sha256": "7ce0af8d51faa39a86e71f369731f7344469c9aac4c7a896fc069c0a3fb07537",
+      "language": "json",
+      "status": "ok",
+      "displayedAgreement": 1,
+      "confidentCoverage": 1,
+      "confidentAgreement": 1,
+      "mistakes": []
+    },
+    {
+      "id": "docs/getting-started.md:37",
+      "sha256": "dce528d87f41e21a4faa32dc357604a8ecddd12af1926ef6e4c7843fc3949d44",
+      "language": "typescript",
+      "status": "partial",
+      "displayedAgreement": 0.994413407821229,
+      "confidentCoverage": 0.9888268156424581,
+      "confidentAgreement": 1,
+      "mistakes": [
+        {
+          "start": 124,
+          "end": 125,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": ")"
+        }
+      ]
+    },
+    {
+      "id": "docs/getting-started.md:56",
+      "sha256": "fc8db4a7ef4271de8579fdf9a3609213f657ac3e7cbe31c9ea8ee7119f0ee57a",
+      "language": "shellscript",
+      "status": "partial",
+      "displayedAgreement": 0.5,
+      "confidentCoverage": 0.05,
+      "confidentAgreement": 1,
+      "mistakes": [
+        {
+          "start": 5,
+          "end": 13,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "matchbox"
+        },
+        {
+          "start": 14,
+          "end": 16,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "ai"
+        },
+        {
+          "start": 17,
+          "end": 21,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "init"
+        },
+        {
+          "start": 22,
+          "end": 28,
+          "expected": "string",
+          "predicted": "function",
+          "uncertain": true,
+          "text": "intent"
+        }
+      ]
+    },
+    {
+      "id": "docs/getting-started.md:66",
+      "sha256": "c0380514c95974524b21fa5e4ea4dc30d77c04d199a75ce542a314bbe55f745b",
+      "language": "shellscript",
+      "status": "partial",
+      "displayedAgreement": 1,
+      "confidentCoverage": 0.3055555555555556,
+      "confidentAgreement": 1,
+      "mistakes": []
+    },
+    {
+      "id": "docs/parser-api.md:5",
+      "sha256": "031c97e9b7a41989a9962fc052ff613c31faacf180ac4798f7912d110d332c0f",
+      "language": "typescript",
+      "status": "partial",
+      "displayedAgreement": 0.9767441860465116,
+      "confidentCoverage": 0.9138166894664843,
+      "confidentAgreement": 0.9985029940119761,
+      "mistakes": [
+        {
+          "start": 145,
+          "end": 146,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "("
+        },
+        {
+          "start": 206,
+          "end": 207,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "["
+        },
+        {
+          "start": 217,
+          "end": 218,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "]"
+        },
+        {
+          "start": 242,
+          "end": 244,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "()"
+        },
+        {
+          "start": 256,
+          "end": 257,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": false,
+          "text": "("
+        },
+        {
+          "start": 290,
+          "end": 291,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "("
+        },
+        {
+          "start": 301,
+          "end": 302,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "("
+        },
+        {
+          "start": 375,
+          "end": 376,
+          "expected": "comment",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "|"
+        },
+        {
+          "start": 381,
+          "end": 382,
+          "expected": "comment",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": ";"
+        },
+        {
+          "start": 469,
+          "end": 470,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "("
+        },
+        {
+          "start": 614,
+          "end": 620,
+          "expected": "type",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "Output"
+        }
+      ]
+    },
+    {
+      "id": "docs/parser-api.md:73",
+      "sha256": "ba21643456c8630e38f1d458018d060c41132216505879c19d2cd759b0fc544d",
+      "language": "typescript",
+      "status": "partial",
+      "displayedAgreement": 0.9646017699115044,
+      "confidentCoverage": 0.8761061946902655,
+      "confidentAgreement": 1,
+      "mistakes": [
+        {
+          "start": 83,
+          "end": 85,
+          "expected": "operator",
+          "predicted": "comment",
+          "uncertain": true,
+          "text": "},"
+        },
+        {
+          "start": 130,
+          "end": 132,
+          "expected": "operator",
+          "predicted": "comment",
+          "uncertain": true,
+          "text": "},"
+        }
+      ]
+    },
+    {
+      "id": "docs/pipelines.md:13",
+      "sha256": "502ff1bf8be088aeab08df0e64a5ec1322d8dd733cfbc24012d07825de7cec5e",
+      "language": "typescript",
+      "status": "partial",
+      "displayedAgreement": 0.9935064935064936,
+      "confidentCoverage": 0.987012987012987,
+      "confidentAgreement": 1,
+      "mistakes": [
+        {
+          "start": 132,
+          "end": 133,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "("
+        }
+      ]
+    },
+    {
+      "id": "docs/pipelines.md:26",
+      "sha256": "1742104e6189141357ab20df63841a513fc1dec269ac1d66beb6010ee78b84ae",
+      "language": "typescript",
+      "status": "partial",
+      "displayedAgreement": 1,
+      "confidentCoverage": 0.9869281045751634,
+      "confidentAgreement": 1,
+      "mistakes": []
+    },
+    {
+      "id": "docs/primitives/recurrent-token-classifier.md:9",
+      "sha256": "8426594ec28b564f337d014b27daa278be317bc342fde0c8114b2e0911b139e2",
+      "language": "typescript",
+      "status": "partial",
+      "displayedAgreement": 0.9929328621908127,
+      "confidentCoverage": 0.8798586572438163,
+      "confidentAgreement": 1,
+      "mistakes": [
+        {
+          "start": 172,
+          "end": 174,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "(\n"
+        },
+        {
+          "start": 288,
+          "end": 289,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "("
+        }
+      ]
+    },
+    {
+      "id": "docs/primitives/recurrent-token-classifier.md:26",
+      "sha256": "56edd94318295d6c22b4d43657ac861807a8460a086c7f8003c3c6fac9420969",
+      "language": "typescript",
+      "status": "partial",
+      "displayedAgreement": 0.9953917050691244,
+      "confidentCoverage": 0.9861751152073732,
+      "confidentAgreement": 1,
+      "mistakes": [
+        {
+          "start": 180,
+          "end": 181,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "("
+        }
+      ]
+    },
+    {
+      "id": "docs/primitives/recurrent-token-classifier.md:38",
+      "sha256": "a0a8324db047adad2f46602e14e63e4102f17b9d666e488ce591e17677304d9e",
+      "language": "typescript",
+      "status": "partial",
+      "displayedAgreement": 0.9136690647482014,
+      "confidentCoverage": 0.8705035971223022,
+      "confidentAgreement": 1,
+      "mistakes": [
+        {
+          "start": 74,
+          "end": 78,
+          "expected": "keyword",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "type"
+        },
+        {
+          "start": 164,
+          "end": 165,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "("
+        },
+        {
+          "start": 192,
+          "end": 193,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "("
+        },
+        {
+          "start": 205,
+          "end": 207,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": " ["
+        },
+        {
+          "start": 260,
+          "end": 261,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "("
+        },
+        {
+          "start": 287,
+          "end": 288,
+          "expected": "operator",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": ","
+        },
+        {
+          "start": 301,
+          "end": 316,
+          "expected": "type",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "RecurrentRecipe"
+        }
+      ]
+    },
+    {
+      "id": "docs/primitives/recurrent-token-classifier.md:62",
+      "sha256": "e223f6b0695201f043105ea9a912e3e035120f6a953be618d47b3b48e12a2daa",
+      "language": "typescript",
+      "status": "partial",
+      "displayedAgreement": 0.8983050847457628,
+      "confidentCoverage": 0.9364406779661016,
+      "confidentAgreement": 0.9276018099547512,
+      "mistakes": [
+        {
+          "start": 35,
+          "end": 39,
+          "expected": "keyword",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "type"
+        },
+        {
+          "start": 109,
+          "end": 111,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": " ("
+        },
+        {
+          "start": 183,
+          "end": 185,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": false,
+          "text": ")\n"
+        },
+        {
+          "start": 193,
+          "end": 194,
+          "expected": "plain",
+          "predicted": "function",
+          "uncertain": true,
+          "text": "("
+        },
+        {
+          "start": 216,
+          "end": 217,
+          "expected": "operator",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": ")"
+        },
+        {
+          "start": 251,
+          "end": 253,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": ") "
+        },
+        {
+          "start": 263,
+          "end": 278,
+          "expected": "type",
+          "predicted": "plain",
+          "uncertain": false,
+          "text": "SequenceDecoder"
+        }
+      ]
+    },
+    {
+      "id": "docs/primitives/recurrent-token-classifier.md:78",
+      "sha256": "252bcbc7aa48581e448e7530f5e70098c17a485cefe90b175047e48819af60f2",
+      "language": "shellscript",
+      "status": "partial",
+      "displayedAgreement": 1,
+      "confidentCoverage": 0.5128205128205128,
+      "confidentAgreement": 1,
+      "mistakes": []
+    },
+    {
+      "id": "docs/primitives/recurrent-token-classifier.md:104",
+      "sha256": "99e426a5c98f02c87550555278e7bf1c062b6e8ead5391ae81e3b26f80cc1255",
+      "language": "typescript",
+      "status": "ok",
+      "displayedAgreement": 1,
+      "confidentCoverage": 1,
+      "confidentAgreement": 1,
+      "mistakes": []
+    },
+    {
+      "id": "docs/primitives/recurrent-token-classifier.md:114",
+      "sha256": "04dde261f0acbd1da02e397e4d4881d866d452ace5ab2af2130759e7e4385f85",
+      "language": "typescript",
+      "status": "partial",
+      "displayedAgreement": 0.9929078014184397,
+      "confidentCoverage": 0.9787234042553191,
+      "confidentAgreement": 1,
+      "mistakes": [
+        {
+          "start": 98,
+          "end": 99,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": ")"
+        }
+      ]
+    },
+    {
+      "id": "docs/project-structure.md:41",
+      "sha256": "14bbbc568ec5202a127cf8dffe22df7c99e3b6b72c51f321449d34841e2ba6f9",
+      "language": "typescript",
+      "status": "partial",
+      "displayedAgreement": 0.9151785714285714,
+      "confidentCoverage": 0.9776785714285714,
+      "confidentAgreement": 0.9360730593607306,
+      "mistakes": [
+        {
+          "start": 78,
+          "end": 83,
+          "expected": "plain",
+          "predicted": "type",
+          "uncertain": true,
+          "text": "train"
+        },
+        {
+          "start": 234,
+          "end": 248,
+          "expected": "type",
+          "predicted": "plain",
+          "uncertain": false,
+          "text": "TrainingConfig"
+        }
+      ]
+    },
+    {
+      "id": "docs/react.md:5",
+      "sha256": "459613554bc63b6f7c74e257273652de4a1c8bfdd7d93a9672477a3fb237d639",
+      "language": "tsx",
+      "status": "partial",
+      "displayedAgreement": 0.9713804713804713,
+      "confidentCoverage": 0.9494949494949495,
+      "confidentAgreement": 0.9804964539007093,
+      "mistakes": [
+        {
+          "start": 111,
+          "end": 120,
+          "expected": "function",
+          "predicted": "plain",
+          "uncertain": false,
+          "text": "loadMoney"
+        },
+        {
+          "start": 127,
+          "end": 128,
+          "expected": "keyword",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": ">"
+        },
+        {
+          "start": 135,
+          "end": 136,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "("
+        },
+        {
+          "start": 283,
+          "end": 284,
+          "expected": "operator",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "]"
+        },
+        {
+          "start": 298,
+          "end": 299,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": ")"
+        },
+        {
+          "start": 310,
+          "end": 313,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": " (\n"
+        },
+        {
+          "start": 559,
+          "end": 560,
+          "expected": "operator",
+          "predicted": "string",
+          "uncertain": false,
+          "text": "`"
+        },
+        {
+          "start": 607,
+          "end": 608,
+          "expected": "operator",
+          "predicted": "string",
+          "uncertain": false,
+          "text": "`"
+        },
+        {
+          "start": 674,
+          "end": 676,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": " ("
+        }
+      ]
+    },
+    {
+      "id": "docs/react.md:64",
+      "sha256": "0ae363486974223cd8bcdf8541057592a986282208d03022d709228b1dd3f6a1",
+      "language": "tsx",
+      "status": "partial",
+      "displayedAgreement": 0.974757281553398,
+      "confidentCoverage": 0.9669902912621359,
+      "confidentAgreement": 0.9799196787148594,
+      "mistakes": [
+        {
+          "start": 62,
+          "end": 71,
+          "expected": "function",
+          "predicted": "plain",
+          "uncertain": false,
+          "text": "loadLexer"
+        },
+        {
+          "start": 78,
+          "end": 79,
+          "expected": "keyword",
+          "predicted": "operator",
+          "uncertain": false,
+          "text": ">"
+        },
+        {
+          "start": 86,
+          "end": 87,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "("
+        },
+        {
+          "start": 336,
+          "end": 337,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": ")"
+        },
+        {
+          "start": 450,
+          "end": 451,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": ")"
+        }
+      ]
+    },
+    {
+      "id": "docs/reference/configuration.md:5",
+      "sha256": "1941ad32e50b970ed0d04f0ff0e1b8675ce9ff71f610d3b88cfdad7f7eb84e73",
+      "language": "typescript",
+      "status": "partial",
+      "displayedAgreement": 0.9320388349514563,
+      "confidentCoverage": 0.9757281553398058,
+      "confidentAgreement": 0.9303482587064676,
+      "mistakes": [
+        {
+          "start": 215,
+          "end": 229,
+          "expected": "type",
+          "predicted": "plain",
+          "uncertain": false,
+          "text": "TrainingConfig"
+        }
+      ]
+    },
+    {
+      "id": "docs/reference/evaluation.md:3",
+      "sha256": "31fb8f51b163e8bc6aae74c1e1371d6efc8504cbf7f4ff6cf8365dd2c9ab89db",
+      "language": "typescript",
+      "status": "partial",
+      "displayedAgreement": 1,
+      "confidentCoverage": 0.9689922480620154,
+      "confidentAgreement": 1,
+      "mistakes": []
+    },
+    {
+      "id": "docs/reference/pipeline.md:3",
+      "sha256": "aee6fdb7b4f1c46f769a0670b78caa06264e4cc497f97bba57d603580ada34a8",
+      "language": "typescript",
+      "status": "ok",
+      "displayedAgreement": 1,
+      "confidentCoverage": 1,
+      "confidentAgreement": 1,
+      "mistakes": []
+    },
+    {
+      "id": "docs/reference/pipeline.md:28",
+      "sha256": "ed9a222238f8403392a21f0e4f1da9a355bbc08a0b0491265de2356c570a704e",
+      "language": "typescript",
+      "status": "partial",
+      "displayedAgreement": 0.989010989010989,
+      "confidentCoverage": 0.9560439560439561,
+      "confidentAgreement": 1,
+      "mistakes": [
+        {
+          "start": 61,
+          "end": 62,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "("
+        }
+      ]
+    },
+    {
+      "id": "docs/reference/pipeline.md:41",
+      "sha256": "f92e7c1507732c9dded7b5c12d2280aed4f285b116f59cc7fcb2b46be592b0c4",
+      "language": "typescript",
+      "status": "partial",
+      "displayedAgreement": 1,
+      "confidentCoverage": 0.9666666666666667,
+      "confidentAgreement": 1,
+      "mistakes": []
+    },
+    {
+      "id": "docs/reference/pipeline.md:54",
+      "sha256": "6c6ac1dce1d7f8920b4b59c8724b520a652bf939370d8a007b5359c983be14b3",
+      "language": "typescript",
+      "status": "partial",
+      "displayedAgreement": 0.9871794871794872,
+      "confidentCoverage": 0.9743589743589743,
+      "confidentAgreement": 1,
+      "mistakes": [
+        {
+          "start": 61,
+          "end": 62,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "("
+        }
+      ]
+    },
+    {
+      "id": "docs/reference/pipeline.md:64",
+      "sha256": "8d687b84de07fa0a2ac373c6e260bb6e8450156e8898e3402449ffde600c937c",
+      "language": "typescript",
+      "status": "partial",
+      "displayedAgreement": 0.9130434782608695,
+      "confidentCoverage": 0.9440993788819876,
+      "confidentAgreement": 0.9078947368421053,
+      "mistakes": [
+        {
+          "start": 177,
+          "end": 191,
+          "expected": "type",
+          "predicted": "plain",
+          "uncertain": false,
+          "text": "SequenceRecipe"
+        }
+      ]
+    },
+    {
+      "id": "docs/reference/runtime.md:5",
+      "sha256": "3dc43b936448d7107fa8a41d0176205782434de43dd026e80c96ed6b888855f5",
+      "language": "typescript",
+      "status": "partial",
+      "displayedAgreement": 0.9310344827586207,
+      "confidentCoverage": 0.9348659003831418,
+      "confidentAgreement": 0.9795081967213115,
+      "mistakes": [
+        {
+          "start": 98,
+          "end": 99,
+          "expected": "type",
+          "predicted": "constant",
+          "uncertain": true,
+          "text": "T"
+        },
+        {
+          "start": 113,
+          "end": 119,
+          "expected": "type",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "number"
+        },
+        {
+          "start": 156,
+          "end": 160,
+          "expected": "type",
+          "predicted": "constant",
+          "uncertain": false,
+          "text": "null"
+        },
+        {
+          "start": 174,
+          "end": 180,
+          "expected": "type",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "number"
+        },
+        {
+          "start": 264,
+          "end": 265,
+          "expected": "operator",
+          "predicted": "plain",
+          "uncertain": false,
+          "text": "("
+        }
+      ]
+    },
+    {
+      "id": "docs/reference/runtime.md:22",
+      "sha256": "8456cb9290ccdf394d6a4ff03cb447d069159b00151d8b04cf1823685e348d14",
+      "language": "typescript",
+      "status": "partial",
+      "displayedAgreement": 0.994475138121547,
+      "confidentCoverage": 0.9834254143646409,
+      "confidentAgreement": 1,
+      "mistakes": [
+        {
+          "start": 165,
+          "end": 166,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "("
+        }
+      ]
+    },
+    {
+      "id": "docs/reference/runtime.md:46",
+      "sha256": "0e87e3ef0395014e51444c7d029f2d3441e503495f2bb43472dd209dc75aeb08",
+      "language": "typescript",
+      "status": "partial",
+      "displayedAgreement": 0.8711656441717791,
+      "confidentCoverage": 0.7423312883435583,
+      "confidentAgreement": 0.9834710743801653,
+      "mistakes": [
+        {
+          "start": 123,
+          "end": 132,
+          "expected": "type",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "Predicate"
+        },
+        {
+          "start": 151,
+          "end": 152,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "["
+        },
+        {
+          "start": 163,
+          "end": 165,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": false,
+          "text": " ("
+        },
+        {
+          "start": 165,
+          "end": 174,
+          "expected": "type",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "Predicate"
+        },
+        {
+          "start": 193,
+          "end": 194,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": false,
+          "text": "["
+        }
+      ]
+    },
+    {
+      "id": "docs/reference/runtime.md:62",
+      "sha256": "11bbfc2a6c025bdc9b05d5d85342c586f389bec12221ee949a9d78eeea239c00",
+      "language": "typescript",
+      "status": "partial",
+      "displayedAgreement": 0.9422750424448217,
+      "confidentCoverage": 0.8115449915110357,
+      "confidentAgreement": 0.9602510460251046,
+      "mistakes": [
+        {
+          "start": 179,
+          "end": 186,
+          "expected": "type",
+          "predicted": "constant",
+          "uncertain": true,
+          "text": "boolean"
+        },
+        {
+          "start": 236,
+          "end": 239,
+          "expected": "plain",
+          "predicted": "keyword",
+          "uncertain": true,
+          "text": "end"
+        },
+        {
+          "start": 347,
+          "end": 362,
+          "expected": "plain",
+          "predicted": "type",
+          "uncertain": false,
+          "text": "supportsPartial"
+        },
+        {
+          "start": 364,
+          "end": 368,
+          "expected": "type",
+          "predicted": "constant",
+          "uncertain": false,
+          "text": "true"
+        },
+        {
+          "start": 377,
+          "end": 378,
+          "expected": "operator",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "("
+        },
+        {
+          "start": 463,
+          "end": 464,
+          "expected": "operator",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "("
+        },
+        {
+          "start": 580,
+          "end": 581,
+          "expected": "type",
+          "predicted": "keyword",
+          "uncertain": true,
+          "text": "T"
+        },
+        {
+          "start": 627,
+          "end": 628,
+          "expected": "type",
+          "predicted": "constant",
+          "uncertain": true,
+          "text": "T"
+        },
+        {
+          "start": 693,
+          "end": 694,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "["
+        }
+      ]
+    },
+    {
+      "id": "docs/reference/runtime.md:99",
+      "sha256": "a5d4e5e3974658a791d3d8b688e642951c04b6cf1d3721f5383845a08b801180",
+      "language": "typescript",
+      "status": "ok",
+      "displayedAgreement": 1,
+      "confidentCoverage": 1,
+      "confidentAgreement": 1,
+      "mistakes": []
+    },
+    {
+      "id": "docs/reference/supervision.md:11",
+      "sha256": "6ff42b7db02f43bce3cddc8977f9276d0178ace1683f06c2e48a2d5b7fa99ba4",
+      "language": "typescript",
+      "status": "ok",
+      "displayedAgreement": 1,
+      "confidentCoverage": 1,
+      "confidentAgreement": 1,
+      "mistakes": []
+    },
+    {
+      "id": "docs/reference/supervision.md:25",
+      "sha256": "c581a0e9efd231eb3de4a2c327c82684a32c12ab4934e060cec25c7140bc65b3",
+      "language": "typescript",
+      "status": "partial",
+      "displayedAgreement": 0.896,
+      "confidentCoverage": 0.912,
+      "confidentAgreement": 0.9342105263157895,
+      "mistakes": [
+        {
+          "start": 14,
+          "end": 28,
+          "expected": "type",
+          "predicted": "plain",
+          "uncertain": false,
+          "text": "SequenceRecipe"
+        },
+        {
+          "start": 82,
+          "end": 84,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": false,
+          "text": " ["
+        },
+        {
+          "start": 120,
+          "end": 121,
+          "expected": "operator",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "("
+        },
+        {
+          "start": 128,
+          "end": 129,
+          "expected": "operator",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": ")"
+        },
+        {
+          "start": 241,
+          "end": 243,
+          "expected": "operator",
+          "predicted": "string",
+          "uncertain": true,
+          "text": "${"
+        },
+        {
+          "start": 243,
+          "end": 250,
+          "expected": "plain",
+          "predicted": "string",
+          "uncertain": true,
+          "text": "example"
+        }
+      ]
+    },
+    {
+      "id": "docs/reference/supervision.md:45",
+      "sha256": "474178eb64311205ff5e20b0ee2e9047561a7b62ad6969292f224b0a77b8b79a",
+      "language": "typescript",
+      "status": "partial",
+      "displayedAgreement": 0.9883720930232558,
+      "confidentCoverage": 0.9767441860465116,
+      "confidentAgreement": 1,
+      "mistakes": [
+        {
+          "start": 70,
+          "end": 71,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "("
+        }
+      ]
+    },
+    {
+      "id": "docs/reference/supervision.md:52",
+      "sha256": "13a5d855999cc531d91a079b550c01a1562e33914952382aa7f35fe7e8db3b47",
+      "language": "typescript",
+      "status": "partial",
+      "displayedAgreement": 1,
+      "confidentCoverage": 0.9649122807017544,
+      "confidentAgreement": 1,
+      "mistakes": []
+    },
+    {
+      "id": "docs/reference/supervision.md:58",
+      "sha256": "782c1624ccac660f69028c97368788248714f78bb7170f9db0b4460f3bfc0aa1",
+      "language": "typescript",
+      "status": "partial",
+      "displayedAgreement": 0.9765625,
+      "confidentCoverage": 0.75,
+      "confidentAgreement": 1,
+      "mistakes": [
+        {
+          "start": 68,
+          "end": 71,
+          "expected": "plain",
+          "predicted": "function",
+          "uncertain": true,
+          "text": "end"
+        }
+      ]
+    },
+    {
+      "id": "docs/reference/supervision.md:75",
+      "sha256": "a3397b2526ce09b0268d6940966eae0a02eff1b44868db1785df641c935617c9",
+      "language": "typescript",
+      "status": "partial",
+      "displayedAgreement": 1,
+      "confidentCoverage": 0.967479674796748,
+      "confidentAgreement": 1,
+      "mistakes": []
+    },
+    {
+      "id": "docs/reference/supervision.md:102",
+      "sha256": "8c8e8a2abc5ce5f00bf92a3b6bee8a6cbcfc22c573f7453d7d9d2a5c1bc2fa47",
+      "language": "typescript",
+      "status": "ok",
+      "displayedAgreement": 1,
+      "confidentCoverage": 1,
+      "confidentAgreement": 1,
+      "mistakes": []
+    },
+    {
+      "id": "docs/reference/training.md:7",
+      "sha256": "b0b485807ed27cfb9299178861601e69f9c182e879081cdd1d19b7208f4cb872",
+      "language": "typescript",
+      "status": "partial",
+      "displayedAgreement": 0.9754098360655737,
+      "confidentCoverage": 0.9754098360655737,
+      "confidentAgreement": 0.9831932773109243,
+      "mistakes": [
+        {
+          "start": 70,
+          "end": 71,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": false,
+          "text": "("
+        },
+        {
+          "start": 94,
+          "end": 95,
+          "expected": "operator",
+          "predicted": "plain",
+          "uncertain": false,
+          "text": "("
+        },
+        {
+          "start": 106,
+          "end": 107,
+          "expected": "operator",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": ")"
+        }
+      ]
+    },
+    {
+      "id": "docs/reference/vite.md:5",
+      "sha256": "407cf31af5fd5397ac5986b84d805cda011dd4c356d6e196f158bae45b9ca81a",
+      "language": "typescript",
+      "status": "partial",
+      "displayedAgreement": 0.971830985915493,
+      "confidentCoverage": 0.9788732394366197,
+      "confidentAgreement": 0.9856115107913669,
+      "mistakes": [
+        {
+          "start": 145,
+          "end": 147,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": false,
+          "text": " ["
+        },
+        {
+          "start": 155,
+          "end": 158,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "()]"
+        }
+      ]
+    },
+    {
+      "id": "docs/reference/vite.md:15",
+      "sha256": "22e1c24b31de16148365d4f17178ef7e72db241d9fe7b46b5daf3ce93f41bb4e",
+      "language": "typescript",
+      "status": "partial",
+      "displayedAgreement": 1,
+      "confidentCoverage": 0.9895833333333334,
+      "confidentAgreement": 1,
+      "mistakes": []
+    },
+    {
+      "id": "docs/research/recurrent-runtime.md:56",
+      "sha256": "a8f5f991ee9661719d2c822757287ccbd2f6c800b2deaf6af5475ae51a46909d",
+      "language": "typescript",
+      "status": "partial",
+      "displayedAgreement": 1,
+      "confidentCoverage": 0.9921259842519685,
+      "confidentAgreement": 1,
+      "mistakes": []
+    },
+    {
+      "id": "docs/research/recurrent-runtime.md:66",
+      "sha256": "02ba6b600d98b516c7df42aa127bc659a2ae8e2df1ff16204307d29bc19e8533",
+      "language": "typescript",
+      "status": "partial",
+      "displayedAgreement": 0.9210526315789473,
+      "confidentCoverage": 0.8759398496240601,
+      "confidentAgreement": 1,
+      "mistakes": [
+        {
+          "start": 59,
+          "end": 63,
+          "expected": "keyword",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "type"
+        },
+        {
+          "start": 214,
+          "end": 215,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "("
+        },
+        {
+          "start": 250,
+          "end": 251,
+          "expected": "plain",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "("
+        },
+        {
+          "start": 291,
+          "end": 306,
+          "expected": "type",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "RecurrentRecipe"
+        }
+      ]
+    },
+    {
+      "id": "docs/research/recurrent-runtime.md:80",
+      "sha256": "7140a45a5e9e9e2c3574fc8bc9eeb7dc4e4abbde06934e0614d4f14f52bbdcd3",
+      "language": "shellscript",
+      "status": "partial",
+      "displayedAgreement": 0.9789029535864979,
+      "confidentCoverage": 0.7974683544303798,
+      "confidentAgreement": 0.9894179894179894,
+      "mistakes": [
+        {
+          "start": 92,
+          "end": 95,
+          "expected": "function",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "bun"
+        },
+        {
+          "start": 137,
+          "end": 138,
+          "expected": "string",
+          "predicted": "operator",
+          "uncertain": false,
+          "text": "."
+        },
+        {
+          "start": 218,
+          "end": 219,
+          "expected": "string",
+          "predicted": "operator",
+          "uncertain": false,
+          "text": "."
+        }
+      ]
+    },
+    {
+      "id": "docs/research/recurrent-webgpu.md:48",
+      "sha256": "12d120a791af7dfb84dd5e69df798ab36710a2882c7b9628e7a2dc12a0c6a907",
+      "language": "shellscript",
+      "status": "partial",
+      "displayedAgreement": 0.9014084507042254,
+      "confidentCoverage": 0.8098591549295775,
+      "confidentAgreement": 1,
+      "mistakes": [
+        {
+          "start": 0,
+          "end": 3,
+          "expected": "function",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "bun"
+        },
+        {
+          "start": 9,
+          "end": 19,
+          "expected": "string",
+          "predicted": "function",
+          "uncertain": true,
+          "text": "benchmarks"
+        },
+        {
+          "start": 107,
+          "end": 108,
+          "expected": "string",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "."
+        }
+      ]
+    },
+    {
+      "id": "docs/research/sequence-parts.md:86",
+      "sha256": "ec3698dcbc122e4b8d333ce1b917efa656cf4a61332ab34c3f04113163d434bf",
+      "language": "shellscript",
+      "status": "partial",
+      "displayedAgreement": 0.8353293413173652,
+      "confidentCoverage": 0.6976047904191617,
+      "confidentAgreement": 0.9527896995708155,
+      "mistakes": [
+        {
+          "start": 9,
+          "end": 10,
+          "expected": "string",
+          "predicted": "operator",
+          "uncertain": false,
+          "text": "."
+        },
+        {
+          "start": 10,
+          "end": 18,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "matchbox"
+        },
+        {
+          "start": 28,
+          "end": 31,
+          "expected": "function",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "bun"
+        },
+        {
+          "start": 64,
+          "end": 71,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "prepare"
+        },
+        {
+          "start": 71,
+          "end": 72,
+          "expected": "string",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "."
+        },
+        {
+          "start": 72,
+          "end": 74,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "ts"
+        },
+        {
+          "start": 97,
+          "end": 98,
+          "expected": "string",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "."
+        },
+        {
+          "start": 98,
+          "end": 106,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "matchbox"
+        },
+        {
+          "start": 436,
+          "end": 439,
+          "expected": "function",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "bun"
+        },
+        {
+          "start": 533,
+          "end": 536,
+          "expected": "function",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "bun"
+        },
+        {
+          "start": 639,
+          "end": 677,
+          "expected": "function",
+          "predicted": "string",
+          "uncertain": true,
+          "text": "target/release/examples/context-assess"
+        },
+        {
+          "start": 780,
+          "end": 786,
+          "expected": "function",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "target"
+        },
+        {
+          "start": 786,
+          "end": 794,
+          "expected": "function",
+          "predicted": "string",
+          "uncertain": true,
+          "text": "/release"
+        },
+        {
+          "start": 794,
+          "end": 795,
+          "expected": "function",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "/"
+        },
+        {
+          "start": 795,
+          "end": 812,
+          "expected": "function",
+          "predicted": "string",
+          "uncertain": true,
+          "text": "examples/context-"
+        },
+        {
+          "start": 812,
+          "end": 818,
+          "expected": "function",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "assess"
+        },
+        {
+          "start": 819,
+          "end": 820,
+          "expected": "string",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "."
+        },
+        {
+          "start": 820,
+          "end": 828,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "matchbox"
+        },
+        {
+          "start": 838,
+          "end": 847,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "recurrent"
+        },
+        {
+          "start": 849,
+          "end": 857,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "matchbox"
+        },
+        {
+          "start": 884,
+          "end": 885,
+          "expected": "string",
+          "predicted": "operator",
+          "uncertain": true,
+          "text": "."
+        },
+        {
+          "start": 885,
+          "end": 893,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "matchbox"
+        },
+        {
+          "start": 1022,
+          "end": 1031,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "recurrent"
+        },
+        {
+          "start": 1033,
+          "end": 1041,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "matchbox"
+        }
+      ]
+    },
+    {
+      "id": "docs/runtime-backends.md:5",
+      "sha256": "83d1872bf8e19f0f125bc44fbf83f7d14322885dc04c1715b36227828ef7f731",
+      "language": "typescript",
+      "status": "ok",
+      "displayedAgreement": 1,
+      "confidentCoverage": 1,
+      "confidentAgreement": 1,
+      "mistakes": []
+    },
+    {
+      "id": "docs/training.md:15",
+      "sha256": "53d64a8515fbee53698b36c599063fe1d47988859aee55c311ad0d69ca6d6c99",
+      "language": "shellscript",
+      "status": "uncertain",
+      "displayedAgreement": 0,
+      "confidentCoverage": 0,
+      "confidentAgreement": null,
+      "mistakes": [
+        {
+          "start": 0,
+          "end": 4,
+          "expected": "function",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "bunx"
+        },
+        {
+          "start": 5,
+          "end": 16,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "matchbox-ai"
+        },
+        {
+          "start": 17,
+          "end": 22,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "train"
+        },
+        {
+          "start": 23,
+          "end": 28,
+          "expected": "string",
+          "predicted": "plain",
+          "uncertain": true,
+          "text": "money"
+        }
+      ]
+    },
+    {
+      "id": "docs/training.md:31",
+      "sha256": "6277b6172f602edbd3784c4eafd328e94619def39e4a564d1c553ba004b699f2",
+      "language": "typescript",
+      "status": "partial",
+      "displayedAgreement": 1,
+      "confidentCoverage": 0.9821428571428571,
+      "confidentAgreement": 1,
+      "mistakes": []
+    }
+  ]
+}

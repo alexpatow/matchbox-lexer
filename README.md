@@ -12,13 +12,14 @@ You need Bun 1.4.2+, Node 24+, Git and an authenticated GitHub CLI. The training
 bun install --frozen-lockfile
 bun run data
 bun run data:clean
+bun run data:snippets
 export EXPERIMENT=local-full
 bun run train
 bun run evaluate
 bun run dev
 ```
 
-This prepares the full corpus and trains the model locally. Use a new `EXPERIMENT` ID for each run; existing reports are never overwritten. Keep the same ID for training, evaluation and benchmarking. The recorded full training run took about 16 minutes on an Apple M2 with 8 GiB RAM, excluding data preparation.
+This prepares the full corpus and trains the model locally. Use a new `EXPERIMENT` ID for each run; existing reports are never overwritten. Keep the same ID for training, evaluation and benchmarking. The recorded snippet-augmented run took about 20 minutes on an Apple M2 with 8 GiB RAM, excluding data preparation.
 
 For a smaller package-integration check, see [the pilot workflow](docs/pilot.md). Generated data, weights and build output stay out of Git.
 
@@ -44,9 +45,11 @@ The task lives in [`matchbox/lexer`](matchbox/lexer):
 
 ## Results
 
-The pinned Matchbox 0.4.0 model has 36,233 parameters and a 194,886-byte artifact, excluding shared runtimes. On 1,915 held-out documents, partial predictions achieve **82.48% label agreement** and **99.95% candidate character coverage**. Coverage includes uncertain predictions; strict parsing accepts only 344 documents. Confidence is uncalibrated.
+The snippet-trained Matchbox 0.4.0 model has 36,233 parameters and a 194,886-byte artifact, excluding shared runtimes. On 1,915 held-out documents, partial predictions achieve **84.38% label agreement** and **99.98% candidate character coverage**. Coverage includes uncertain predictions; strict parsing accepts 523 documents. Confidence is uncalibrated.
 
-Matchbox exceeds gpu-lexer 0.0.2's label agreement on this dataset, but downloads more code and has slower p95 latency. This is not overall parity. See [current and historical measurements](benchmarks/results.md), the [evaluation contract](benchmarks/methodology.md) and [known limitations](docs/limitations.md).
+On 78 frozen website examples, displayed agreement improved from **82.06% to 93.79%**, including shell commands from **40.29% to 80.99%**. The website examples never enter training. See the [training recipe and reproduction commands](docs/snippet-training.md) and [website evaluation](docs/website-evaluation.md).
+
+See [current and historical measurements](benchmarks/results.md), the [evaluation contract](benchmarks/methodology.md) and [known limitations](docs/limitations.md). The website's deployed asset is versioned separately; training this repository does not update it.
 
 ## Validate and benchmark
 

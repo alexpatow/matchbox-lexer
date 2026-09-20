@@ -1,0 +1,42 @@
+{
+  "dataset": "full-snippets-v1",
+  "parent": {
+    "train": "748fa197f1bb2133a83159c1e7f8a2985438e2ba92854ce7321ac4063e55e6d3",
+    "validation": "659c1b8997bbaf7b3057d318aa916e9e41c7af1f8bb11d4d4f44e2b26362c1ae",
+    "test": "cf1be2b37a22d581552f43e114b1dd958311e820e233f982234365f0968b46cd"
+  },
+  "files": {
+    "train": "9f4adb722627102c56c7a608f17bdba173c937faf8b0e847e0958a7760c86482",
+    "validation": "ab257e472c01282f9b0ca4c3899ce27fa58b5aee1bb5ae852001c462adc8c684",
+    "test": "cf1be2b37a22d581552f43e114b1dd958311e820e233f982234365f0968b46cd"
+  },
+  "teacher": "shiki@4.4.3",
+  "policy": "Retain original documents. Add independently relabeled line windows and Markdown fences from each source split. Reserve validation windows, exclude windows contained in normalized held-out documents and website snippet containment. Preserve full test bytes. No website sources are added.",
+  "additions": {
+    "validation": {
+      "added": 261,
+      "rejected": 359,
+      "byLanguage": {
+        "javascript": 127,
+        "typescript": 49,
+        "shellscript": 85
+      },
+      "examples": 597,
+      "units": 929688
+    },
+    "train": {
+      "added": 11788,
+      "rejected": 3073,
+      "byLanguage": {
+        "javascript": 4627,
+        "jsx": 35,
+        "typescript": 2562,
+        "tsx": 426,
+        "shellscript": 4131,
+        "json": 7
+      },
+      "examples": 15962,
+      "units": 14231139
+    }
+  }
+}

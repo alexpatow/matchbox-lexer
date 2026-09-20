@@ -18,7 +18,8 @@
     "format": "oxfmt .",
     "check": "oxfmt --check . && oxlint . && bun run typecheck && bun test tests && bun run build",
     "data:website": "bun scripts/website-evals/prepare.ts",
-    "eval:website": "bun scripts/website-evals/evaluate.ts"
+    "eval:website": "bun scripts/website-evals/evaluate.ts",
+    "data:snippets": "bun scripts/snippet-corpus/prepare.ts"
   },
   "dependencies": {
     "@fontsource-variable/geist": "5.3.0",

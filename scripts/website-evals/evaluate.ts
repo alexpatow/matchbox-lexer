@@ -5,10 +5,10 @@ import { openSite } from "./site";
 import type { LabeledSample } from "./corpus";
 import { createWebsiteMetrics, mistakes, type Prediction } from "./score";
 
-const [sitePath, corpusPath, output] = process.argv.slice(2);
+const [sitePath, corpusPath, output, artifactPath] = process.argv.slice(2);
 if (!sitePath || !corpusPath || !output) {
   throw new Error(
-    "Usage: bun run eval:website <matchbox-checkout> <corpus-directory> <new-report.json>",
+    "Usage: bun run eval:website <matchbox-checkout> <corpus-directory> <new-report.json> [candidate.matchbox]",
   );
 }
 if (await Bun.file(output).exists()) {
@@ -31,11 +31,28 @@ try {
   try {
     const page = await browser.newPage();
     await page.goto(new URL("/__lexer-eval", origin).href);
-    const modelResponse = await page.request.get(new URL("/models/lexer.matchbox", origin).href);
-    const model = await Bun.file(
+    let model = await Bun.file(
       resolve(root, "apps/playground/src/lexer/model-manifest.json"),
     ).json();
-    if (!modelResponse.ok() || hash(await modelResponse.body()) !== model.sha256) {
+    if (artifactPath) {
+      const bytes = await Bun.file(artifactPath).bytes();
+      const artifact = JSON.parse(new TextDecoder().decode(bytes));
+      if (artifact.kind !== "recurrent-parser") {
+        throw new Error("Expected an exported recurrent parser");
+      }
+      model = { sha256: hash(bytes), bytes: bytes.length, source: "local-candidate" };
+      await page.route("**/models/lexer.matchbox", (route) =>
+        route.fulfill({ contentType: "application/json", body: Buffer.from(bytes) }),
+      );
+    }
+    const served = await page.evaluate(async () => {
+      const response = await fetch("/models/lexer.matchbox");
+      if (!response.ok) {
+        throw new Error("Model request failed");
+      }
+      return Array.from(new Uint8Array(await response.arrayBuffer()));
+    });
+    if (hash(new Uint8Array(served)) !== model.sha256) {
       throw new Error("Served model checksum mismatch");
     }
     const overall = createWebsiteMetrics();

@@ -16,4 +16,4 @@ bun run dev
 
 Keep both environment variables set when running `bun run benchmark`. Choose a new experiment ID on subsequent runs; existing reports are not overwritten.
 
-To return to full-corpus training, unset `CORPUS`, prepare and clean the full dataset, and choose another experiment ID. The default corpus is `full-clean-v1`.
+To return to full-corpus training, unset `CORPUS`, prepare and clean the full dataset, then run `bun run data:snippets`, and choose another experiment ID. The default corpus is `full-snippets-v1`.
