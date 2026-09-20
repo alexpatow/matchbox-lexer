@@ -4,9 +4,9 @@ export function Measurements() {
     new Intl.NumberFormat("en", { style: "percent", maximumSignificantDigits: 3 }).format(value);
   return (
     <section className="measurements">
-      <h2>Recorded experiment</h2>
+      <h2>Held-out results</h2>
       <p>
-        {result.experiment} · Matchbox {result.matchbox} · {result.testExamples} test examples
+        Matchbox {result.matchbox} · {result.testExamples.toLocaleString()} test documents
       </p>
       <table>
         <thead>
