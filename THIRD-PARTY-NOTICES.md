@@ -7,3 +7,5 @@ Shiki 4.4.3 provides offline supervision and the optional browser reference. Its
 The source corpus retains original repository/package licenses. Pinning and declared licenses are recorded by upstream's corpus.json and each generated record. Downloaded source, generated JSONL, model weights and source-containing logs are ignored rather than redistributed. Metrics contain provenance and hashes, not source text. Licensing a framework does not relicense its training corpus.
 
 The gpu-lexer npm package is an optional benchmark reference. It is never used as Matchbox's inference implementation or fallback.
+
+The frozen website evaluation in `evals/website-v1` reproduces code samples from [Matchbox](https://github.com/alexpatow/matchbox), licensed under MIT, at the commit recorded in its manifest. The source license is retained in `evals/website-v1/LICENSE`. Its evaluation report includes excerpts from those samples. This exception does not redistribute the downloaded upstream training corpus.
