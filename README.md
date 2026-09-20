@@ -61,3 +61,7 @@ Run these after training and evaluation, with the same exported `EXPERIMENT` ID.
 Dataset preparation and evaluation tools live in `scripts/`. Source manifests and frozen dataset hashes live in `data/`; versioned reports live in `benchmarks/results/`.
 
 Source licenses and attribution are recorded in [third-party notices](THIRD-PARTY-NOTICES.md).
+
+## Website regressions
+
+The [website evaluation](docs/website-evaluation.md) runs 78 real homepage and documentation snippets through the website's pinned lexer in Chromium. It reports displayed highlighting quality, confident coverage and per-snippet mistakes. The frozen corpus stays separate from training.

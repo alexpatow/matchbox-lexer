@@ -1,0 +1,19 @@
+{
+  "purpose": "Website regression evaluation. Never consumed by training. Not an unseen generalization benchmark.",
+  "repository": "https://github.com/alexpatow/matchbox",
+  "sourceCommit": "972e7d96f461dcfcd323d1dc950a91d3731b27c2",
+  "model": {
+    "url": "https://github.com/alexpatow/matchbox/releases/download/lexer-demo-0.4.0/lexer.matchbox",
+    "sha256": "eb98becfc0e7094b92b3e3858544034dffe7c92e493aea38255ccf12bda7791f",
+    "bytes": 194886,
+    "parameters": 36233,
+    "matchbox": "0.4.0"
+  },
+  "teacher": {
+    "shiki": "4.4.3",
+    "mappingSha256": "d28215b2b1dfd76eeb363db0348841f1c2dba92a8e6023eddf439fe61f62f58b"
+  },
+  "samples": 78,
+  "uniqueInputs": 78,
+  "corpusSha256": "d4d8fde17522bca4dadd6a5fa2cfdea03ad475319ca80f9221fde1477968d349"
+}
