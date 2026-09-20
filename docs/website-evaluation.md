@@ -4,7 +4,7 @@ The website regression corpus contains all six homepage code tabs and 72 highlig
 
 These samples are never read by the training scripts. This is a public regression set for improving the website experience. It does not replace the independent full-corpus test split or establish unseen-code generalization.
 
-## Current result
+## Original deployed model
 
 The [recorded browser evaluation](../benchmarks/results/website-v1.json) uses the website's actual loader, its pinned 194,886-byte model, Matchbox 0.4.1 and CPU/WASM inference with `allowPartial: true`.
 
@@ -22,6 +22,22 @@ Shell commands account for the largest disagreement. For example, the model labe
 
 Shiki and the pinned gpu-lexer scope mapping supply reference labels. Agreement measures that labeling convention, not semantic correctness. In particular, Shiki classifies shell arguments as strings; many shell mismatches reflect missing color rather than incorrect syntax recognition. Manually review mismatches before changing supervision.
 
+## Snippet-trained candidate
+
+The [candidate evaluation](../benchmarks/results/08-snippets-lr15-040-website.json) uses the same frozen examples and browser runtime, substituting the newly trained artifact only in the test browser.
+
+| Language     | Original agreement | Candidate agreement |
+| ------------ | -----------------: | ------------------: |
+| TypeScript   |             92.06% |              96.88% |
+| TSX          |             95.31% |              97.29% |
+| JSON / JSONL |             95.29% |              98.91% |
+| Shell        |             40.29% |              80.99% |
+| Overall      |             82.06% |              93.79% |
+
+Confident coverage rises to 87.77%, with 98.13% agreement on confident characters. Seven samples are accepted, 70 are partial and one is fully uncertain. The homepage parser improves from 86.53% to 95.00%; its `z.union` and `z.enum` calls now receive function labels. The decoder sample regresses from 97.99% to 96.65%, so the candidate is not uniformly better.
+
+The artifact remains 194,886 bytes. See [training and broader held-out results](../benchmarks/results.md). This report does not imply the deployed website has switched models.
+
 ## Run against the website
 
 Use a clean Matchbox checkout with dependencies and packages built. Corpus extraction imports the actual homepage sample module through Vite and parses the documentation Markdown. It preserves snippet boundaries, whitespace and the trailing newline rendered by react-markdown. JSONL remains JSONL and uses Shiki's JSON grammar.
@@ -37,7 +53,7 @@ bunx playwright install chromium
 bun run eval:website ../matchbox evals/website-v1 benchmarks/results/website-v1-next.json
 ```
 
-The evaluator starts an isolated Vite server on an available loopback port and calls the website's `loadLexer()` in Chromium. It checks the served artifact checksum. It does not use this repository's locally trained weights. The website checkout's runtime and decoder are evaluated, so its commit and package version are recorded separately from the corpus source commit. This integration evaluation is separate from the published-package comparison benchmark.
+The evaluator starts an isolated Vite server on an available loopback port and calls the website's `loadLexer()` in Chromium. It checks the served artifact checksum. By default it does not use this repository's locally trained weights. To evaluate a candidate without changing the website, append its exported `.matchbox` path to the command. The test browser substitutes that artifact, verifies its checksum and records it as a local candidate. The website checkout's runtime and decoder are evaluated, so its commit and package version are recorded separately from the corpus source commit. This integration evaluation is separate from the published-package comparison benchmark.
 
 To capture changed documentation, commit the website changes and create a new corpus version:
 

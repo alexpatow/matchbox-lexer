@@ -1,0 +1,29 @@
+{
+  "experiment": "07-snippets-040",
+  "corpus": "full-snippets-v1",
+  "matchbox": "0.4.0",
+  "packages": {
+    "matchbox-ai": "0.4.0",
+    "@matchbox-ai/core": "0.4.0",
+    "@matchbox-ai/train": "0.4.0"
+  },
+  "finishedAt": "2026-09-20T20:11:56.170Z",
+  "exitCode": 1,
+  "wallMs": 1070888.5259580002,
+  "peakResidentBytes": 1028308992,
+  "heapLimitMiB": 3072,
+  "machine": {
+    "platform": "darwin",
+    "arch": "arm64",
+    "cpu": "Apple M2",
+    "memoryBytes": 8589934592
+  },
+  "log": "data/generated/logs/07-snippets-040-train.log",
+  "timing": "data/generated/logs/07-snippets-040-resources.log",
+  "failure": "Burn native and WASM predictions disagree: {\"tokens\":449619,\"maxConfidenceError\":0.0000013709068298339844,\"confidenceTolerance\":0.0001,\"labelDisagreements\":0,\"acceptanceDisagreements\":1}",
+  "trainingOptions": {
+    "epochs": 8,
+    "learningRate": 0.003,
+    "batchParts": 4096
+  }
+}

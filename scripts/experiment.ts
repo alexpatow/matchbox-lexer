@@ -3,7 +3,7 @@ export const experiment = process.env.EXPERIMENT ?? "";
 if (!/^[a-z0-9-]+$/.test(experiment)) {
   throw new Error("Set EXPERIMENT to a new run ID using lowercase letters, numbers and hyphens.");
 }
-export const corpus = process.env.CORPUS ?? "full-clean-v1";
+export const corpus = process.env.CORPUS ?? "full-snippets-v1";
 export const dataRoot = `data/generated/${corpus}`;
 export async function verifyDataset() {
   const report = await Bun.file(".matchbox/lexer/report.json").json();

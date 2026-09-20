@@ -1,6 +1,36 @@
 # Measured results
 
-The 0.4.0 run uses all 4,174 training documents, selects epoch 3 using the separate 336-document validation set, and evaluates all 1,915 test documents. Corpus hashes match the earlier full-corpus runs. There are no workspace links, local framework patches or adjusted confidence thresholds.
+## Snippet-trained candidate
+
+The [snippet corpus](../docs/snippet-training.md) retains all original training documents and adds 11,788 independently labeled snippets. Validation contains the original 336 documents plus 261 snippets. The 1,915-document test split is unchanged. The pipeline uses the published 0.4.0 packages, a learning rate of 0.0015, and the same model architecture and confidence threshold. Validation selects epoch 5 of 8.
+
+| Measurement                                | Original model | Snippet-trained model |
+| ------------------------------------------ | -------------: | --------------------: |
+| Website displayed agreement, 78 examples   |         82.06% |                93.79% |
+| Website confident character coverage       |         74.84% |                87.77% |
+| Website confident label agreement          |         92.74% |                98.13% |
+| Full-test partial agreement                |         82.48% |                84.38% |
+| Full-test styled macro F1                  |         76.90% |                78.11% |
+| Full-test candidate character coverage     |         99.95% |                99.98% |
+| Full-test strict exact structured accuracy |         10.39% |                13.52% |
+| Parameters                                 |         36,233 |                36,233 |
+| Artifact bytes                             |        194,886 |               194,886 |
+| Trainer duration                           |      901.030 s |           1,149.606 s |
+| Total CLI duration                         |      940.984 s |           1,194.714 s |
+
+Export verification covered 449,619 tokens across 613 inputs with zero native/WASM label or acceptance disagreements. The artifact SHA-256 is `998c87a3e5e187cb8651e19c7adf81f613267c8fbef5540dc668872950a7f81c`.
+
+The gains are not uniform. On independent validation, standalone snippet agreement rises from 49.22% to 52.05%, while original-document agreement declines from 77.57% to 77.29%. Validation shell fragments decline from 53.05% to 49.51%. On the website, the homepage decoder example declines from 97.99% to 96.65%. These limits remain visible in the reports; the overall website improvement is not evidence that every snippet improves.
+
+Sources: [training timing](results/08-snippets-lr15-040-training.json), [model and export checks](results/08-snippets-lr15-040-model.json), [full-test evaluation](results/08-snippets-lr15-040-evaluation.json), [website evaluation](results/08-snippets-lr15-040-website.json), and matched [original](results/07-snippets-baseline-validation.json) / [candidate](results/08-snippets-lr15-040-validation.json) validation.
+
+The [production browser run](results/08-snippets-lr15-040-browser.json) measured partial CPU inference at **0.8 ms p50 / 19.7 ms p95** across the full test documents. Desktop and mobile smoke checks passed with no page errors. WebGPU was unavailable in this headless browser, so this run makes no GPU performance comparison.
+
+A separate [run at learning rate 0.003](results/07-snippets-040-training.json) was rejected during export: all labels agreed, but one confidence crossed the acceptance threshold between native and WASM. No weights from that run were exported or evaluated. The parity guard was not changed.
+
+## Original recurrent model
+
+The original 0.4.0 run uses all 4,174 training documents, selects epoch 3 using the separate 336-document validation set, and evaluates all 1,915 test documents. Corpus hashes match the earlier full-corpus runs. There are no workspace links, local framework patches or adjusted confidence thresholds.
 
 | Measurement                                  |                                     Result |
 | -------------------------------------------- | -----------------------------------------: |

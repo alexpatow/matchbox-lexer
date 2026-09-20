@@ -1,0 +1,82 @@
+{
+  "formatVersion": 2,
+  "architecture": "bidirectional-affine",
+  "backend": "Burn native CPU",
+  "seed": 42,
+  "encoding": {
+    "tokenizer": {
+      "kind": "text-parts",
+      "version": 1
+    },
+    "features": {
+      "kind": "text-features",
+      "version": 1
+    },
+    "supervision": {
+      "kind": "span-labels",
+      "whitespace": "context"
+    }
+  },
+  "artifactSha256": "998c87a3e5e187cb8651e19c7adf81f613267c8fbef5540dc668872950a7f81c",
+  "bytes": 194886,
+  "parameters": 36233,
+  "datasetSha256": [
+    {
+      "source": "../../data/generated/full-snippets-v1/train.jsonl",
+      "sha256": "9f4adb722627102c56c7a608f17bdba173c937faf8b0e847e0958a7760c86482"
+    },
+    {
+      "source": "../../data/generated/full-snippets-v1/validation.jsonl",
+      "sha256": "ab257e472c01282f9b0ca4c3899ce27fa58b5aee1bb5ae852001c462adc8c684"
+    },
+    {
+      "source": "../../data/generated/full-snippets-v1/test.jsonl",
+      "sha256": "cf1be2b37a22d581552f43e114b1dd958311e820e233f982234365f0968b46cd"
+    }
+  ],
+  "examples": {
+    "train": 15962,
+    "validation": 597,
+    "eval": 1915
+  },
+  "parts": {
+    "train": 5352851,
+    "validation": 409746
+  },
+  "supervisionSha256": "5311f1a4be5f7496fbbc6a4fb2ae923c10bb20533db90f47934800eb4112e500",
+  "loss": [
+    0.7737445831298828,
+    0.467495322227478,
+    0.3836054801940918,
+    0.3355449140071869,
+    0.29830294847488403,
+    0.27068328857421875,
+    0.2454526126384735,
+    0.226475790143013
+  ],
+  "validationLabelAccuracy": [
+    0.6847011186470962,
+    0.7369851338006235,
+    0.7294373444143702,
+    0.744205755732674,
+    0.7490770497463547,
+    0.7371408703378638,
+    0.7041718075820755,
+    0.7383614101762358
+  ],
+  "selectedEpoch": 5,
+  "exportParity": {
+    "examples": 613,
+    "tokens": 449619,
+    "maxConfidenceError": 1.430511474609375e-06,
+    "confidenceTolerance": 0.0001,
+    "labelDisagreements": 0,
+    "acceptanceDisagreements": 0
+  },
+  "trainingMs": 1149606.2152500001,
+  "trainingOptions": {
+    "epochs": 8,
+    "learningRate": 0.0015,
+    "batchParts": 4096
+  }
+}
